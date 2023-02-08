@@ -92,6 +92,16 @@ export const getMenu =
           subResource: [
             {
               isMemu: 1,
+              resUrl: '/frame/process/card',
+              components: 'process/card',
+              resIcon: '',
+              resTitle: '卡片列表',
+              status: 0,
+              flag: true,
+              subResource: []
+            },
+            {
+              isMemu: 1,
               resUrl: '/frame/process/diagrams',
               components: 'process/diagrams',
               resIcon: '',
