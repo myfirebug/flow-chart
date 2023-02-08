@@ -1,0 +1,90 @@
+/* 设置滚动条的样式 */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* 滚动槽 */
+
+::-webkit-scrollbar-track {
+  border-radius: 6px;
+}
+
+/* 滚动条滑块 */
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+// 右击菜单样式
+@include b(content-menu) {
+  display: none;
+  position: fixed;
+  left: 300px;
+  top: 200px;
+  z-index: 99999;
+  width: 200px;
+  background-color: #666;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  @include e(item) {
+    display: flex;
+    padding: 0 10px;
+    line-height: 30px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.25s ease 0s;
+    &:hover {
+      color: #fff;
+      background-color: #444;
+    }
+    .app-icon {
+      padding-right: 10px;
+    }
+    .name {
+      flex: 1;
+    }
+    &:last-child {
+      border: none;
+    }
+    @include when(disabled) {
+      cursor: no-drop;
+      color: rgba(255, 255, 255, 0.4);
+      &:hover {
+        color: rgba(255, 255, 255, 0.4);
+        background-color: #666;
+      }
+    }
+    @include when(border) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+#js_loading {
+  position: fixed;
+  left: 50%;
+  top: 59%;
+  transform: translate(-50%, -100px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  .ant-spin {
+    color: #fff;
+  }
+  .ant-spin-dot-item {
+    background: #fff;
+  }
+}

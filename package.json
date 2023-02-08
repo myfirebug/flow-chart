@@ -17,9 +17,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "set PORT=6001 && cross-env REACT_APP_ENV=development react-app-rewired start",
+    "build:test": "cross-env REACT_APP_ENV=test react-app-rewired build",
+    "build:production": "cross-env REACT_APP_ENV=production react-app-rewired build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,5 +39,35 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.3.1",
+    "@types/jsoneditor": "^9.5.1",
+    "@types/react-color": "^3.0.6",
+    "@types/react-redux": "^7.1.23",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/redux-logger": "^3.0.9",
+    "@types/redux-thunk": "^2.1.0",
+    "antd": "^4.19.3",
+    "axios": "^0.26.1",
+    "cross-env": "^7.0.3",
+    "customize-cra": "^1.0.0",
+    "http-proxy-middleware": "^2.0.6",
+    "node-sass": "^7.0.1",
+    "react-app-rewired": "^2.2.1",
+    "react-redux": "^7.2.8",
+    "react-router-dom": "^5.3.0",
+    "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.1",
+    "sass-loader": "^12.6.0",
+    "sass-resources-loader": "^2.2.4",
+    "speed-measure-webpack-plugin": "^1.5.0",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "mockjs": "^1.1.0",
+    "@types/mockjs": "^1.0.7",
+    "webpack-bundle-analyzer": "^4.5.0"
+  },
+  "homepage": "."
 }
