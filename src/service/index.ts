@@ -31,19 +31,19 @@ const api: IApi = {
       servicePrefix: 'local'
     })
   },
-  // 简报列表
-  report(params: any) {
+  // 卡片列表
+  cardList(params: any) {
     return get({
-      url: `/report-list`,
+      url: `/card-list`,
       loading: true,
       data: params,
       servicePrefix: 'local'
     })
   },
-  // 简报删除
-  reportDelete(params: any) {
+  // 卡片删除
+  cardDelete(params: any) {
     return post({
-      url: `/report-delete`,
+      url: `/card-delete`,
       loading: true,
       data: params,
       servicePrefix: 'local'

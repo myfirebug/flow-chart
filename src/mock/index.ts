@@ -13,11 +13,11 @@ import * as login from './modules/login'
 // 模拟数据接口
 import * as configuration from './modules/configuration'
 // 简报数据接口
-import * as report from './modules/report'
+import * as card from './modules/card'
 
 create(login)
 create(configuration)
-create(report)
+create(card)
 /**
  * 根据模块创建接口
  * @param mod m模块

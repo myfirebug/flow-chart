@@ -15,7 +15,7 @@ import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 import store from './store/index'
-// import 'default-passive-events'
+import '@ant-design/pro-table/dist/table.css'
 // 国际化
 import zhCN from 'antd/lib/locale/zh_CN'
 import 'moment/locale/zh-cn'
