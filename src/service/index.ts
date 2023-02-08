@@ -48,6 +48,24 @@ const api: IApi = {
       data: params,
       servicePrefix: 'local'
     })
+  },
+  // 流程图列表
+  diagramsList(params: any) {
+    return get({
+      url: `/card-list`,
+      loading: true,
+      data: params,
+      servicePrefix: 'local'
+    })
+  },
+  // 流程图删除
+  diagramsDelete(params: any) {
+    return post({
+      url: `/card-delete`,
+      loading: true,
+      data: params,
+      servicePrefix: 'local'
+    })
   }
 }
 

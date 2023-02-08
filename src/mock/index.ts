@@ -3,8 +3,8 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-10-10 20:59:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-12 15:10:03
- * @FilePath: \bigscreen\src\mock\index.ts
+ * @LastEditTime: 2023-02-08 20:06:20
+ * @FilePath: \flow-chart\src\mock\index.ts
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
 import Mock from 'mockjs'
@@ -12,12 +12,15 @@ import Mock from 'mockjs'
 import * as login from './modules/login'
 // 模拟数据接口
 import * as configuration from './modules/configuration'
-// 简报数据接口
+// 卡片数据接口
 import * as card from './modules/card'
+// 流程图数据接口
+import * as diagrams from './modules/diagrams'
 
 create(login)
 create(configuration)
 create(card)
+create(diagrams)
 /**
  * 根据模块创建接口
  * @param mod m模块

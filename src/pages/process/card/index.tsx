@@ -20,13 +20,13 @@ interface TableItem extends IAnyObject {
   title: string
 }
 
-interface IBigScreenProps {
+interface ICardProps {
   strategy: IAnyObject
   getStrategy: (key: string) => void
   path: string
 }
 
-const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
+const Card: FC<ICardProps> = ({ strategy, getStrategy, path }) => {
   // 获取策略
   useEffect(() => {
     getStrategy(path)
@@ -92,8 +92,7 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
     },
     {
       title: '操作',
-      search: false,
-      render(dom, record, index, action, schema) {
+      render(dom, record) {
         return (
           <div className='app-table__operation'>
             <span
@@ -207,4 +206,4 @@ const mapDispatchToProps = {
   getStrategy
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BigScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(Card)
