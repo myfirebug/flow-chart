@@ -1,5 +1,7 @@
 @include b(screen-layout) {
   padding-top: 50px;
+  height: 100vh;
+  background: #f5f5f5;
   @include e(header) {
     position: fixed;
     left: 0;

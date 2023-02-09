@@ -97,7 +97,6 @@ const Diagrams: FC<IDiagramsProps> = ({ strategy, getStrategy, path }) => {
           <div className='app-table__operation'>
             <span
               onClick={() => {
-                console.log(record.pages, 'record.pages')
                 history.push(`/frame/configuration?id=${record.id}`)
               }}
               className='link'>
@@ -105,7 +104,7 @@ const Diagrams: FC<IDiagramsProps> = ({ strategy, getStrategy, path }) => {
             </span>
             <PopConfirm
               text='删除'
-              requestName='reportDelete'
+              requestName='diagramsDelete'
               params={{
                 ids: [record.id]
               }}

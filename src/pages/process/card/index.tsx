@@ -105,7 +105,7 @@ const Card: FC<ICardProps> = ({ strategy, getStrategy, path }) => {
             </span>
             <PopConfirm
               text='删除'
-              requestName='reportDelete'
+              requestName='cardDelete'
               params={{
                 ids: [record.id]
               }}
