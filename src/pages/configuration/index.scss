@@ -1,0 +1,55 @@
+@include b(configuration) {
+  width: 100vw;
+  height: 100vh;
+  background-color: #333;
+  .app-icon {
+    color: #999;
+    cursor: pointer;
+    transition: all 0.25s ease 0s;
+    &:hover {
+      color: #fff;
+    }
+  }
+  @include e(header) {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+    background-color: #535353;
+    border-bottom: 1px solid #333;
+    .left {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      width: 30px;
+      height: 30px;
+      margin-left: 10px;
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      font-size: 14px;
+      background-color: #1890ff;
+      border-radius: 5px;
+    }
+    .title {
+      margin: 0 10px;
+      color: #ccc;
+    }
+    .save {
+      font-size: 20px;
+    }
+  }
+  @include e(shortcutMenu) {
+    height: 40px;
+    background-color: #535353;
+    border-bottom: 1px solid #333;
+  }
+  @include e(container) {
+    height: calc(100vh - 102px);
+    background: url('../../assets/image/process/canvas-bg.png') repeat;
+  }
+  @include e(body) {
+  }
+  @include e(footer) {
+  }
+}
