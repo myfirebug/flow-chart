@@ -1,21 +1,20 @@
 @include b(configuration) {
   width: 100vw;
   height: 100vh;
-  background-color: #333;
   .app-icon {
     color: #999;
     cursor: pointer;
     transition: all 0.25s ease 0s;
     &:hover {
-      color: #fff;
+      color: #333;
     }
   }
   @include e(header) {
     display: flex;
     justify-content: space-between;
-    padding: 15px 10px;
-    background-color: #535353;
-    border-bottom: 1px solid #333;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
     .left {
       display: flex;
       align-items: center;
@@ -33,7 +32,7 @@
     }
     .title {
       margin: 0 10px;
-      color: #ccc;
+      color: #999;
     }
     .save {
       font-size: 20px;
@@ -41,12 +40,13 @@
   }
   @include e(shortcutMenu) {
     height: 40px;
-    background-color: #535353;
-    border-bottom: 1px solid #333;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
   }
   @include e(container) {
     height: calc(100vh - 102px);
-    background: url('../../assets/image/process/canvas-bg.png') repeat;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuXzAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgcng9IjEiIHJ5PSIxIiBmaWxsPSIjYWFhYWFhIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm5fMCkiLz48L3N2Zz4=')
+      repeat;
   }
   @include e(body) {
   }

@@ -17,3 +17,10 @@ export interface IDefaultConfig extends AxiosRequestConfig {
   loading?: boolean
   servicePrefix?: string
 }
+
+export interface Icard extends IAnyObject {
+  x: number
+  y: number
+  width: number
+  height: number
+}
