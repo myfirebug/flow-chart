@@ -2,7 +2,13 @@ import { FC, useState, useEffect } from 'react'
 import { Group, Rect, Text, Image as KonvaImage } from 'react-konva'
 import Konva from 'konva'
 import { Icard } from '@src/types'
-import { TITLE_HEIGHT, TITLE_FONTSIZE, CORNERRADIUS } from '../constant'
+import {
+  TITLE_HEIGHT,
+  TITLE_FONTSIZE,
+  CORNERRADIUS,
+  MARGIN_LEFT,
+  ICON_DIMENSION
+} from '../constant'
 
 interface ITitleProp {
   config: Icard
@@ -34,10 +40,10 @@ const Title: FC<ITitleProp> = ({ config }) => {
       fillLinearGradientColorStops: [0, '#ddd', 1, '#fff']
     })
     setTextConfig({
-      text: '初始化',
+      text: config.title,
       fontSize: TITLE_FONTSIZE,
       fill: '#666',
-      x: 36,
+      x: ICON_DIMENSION + MARGIN_LEFT * 2,
       fontStyle: 'bold',
       lineHeight: TITLE_HEIGHT / TITLE_FONTSIZE
     })
@@ -48,19 +54,17 @@ const Title: FC<ITitleProp> = ({ config }) => {
     imageObj.src = require('@src/assets/image/common/avatar.png')
     imageObj.onload = function () {
       setImageConfig({
-        x: 10,
+        x: MARGIN_LEFT,
         y: 12,
         image: imageObj,
-        width: 16,
-        height: 16
+        width: ICON_DIMENSION,
+        height: ICON_DIMENSION
       })
     }
   }, [])
 
-  console.log(bgConfig, 'bgConfig')
-
   return (
-    <Group x={config.x} y={config.y}>
+    <Group>
       <Rect {...bgConfig} />
       <Text {...textConfig} />
       {imageConfig ? <KonvaImage {...imageConfig} /> : null}

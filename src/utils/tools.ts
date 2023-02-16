@@ -646,3 +646,16 @@ export const contentMenuHandler = (e: any) => {
     }
   }, 0)
 }
+/**
+ * 设置样式cursor
+ * @param id domId
+ */
+export const modifyCursor = (
+  id: string,
+  value: 'default' | 'pointer' | 'move'
+) => {
+  const dom = document.getElementById(id)
+  if (dom) {
+    dom.style.cursor = value
+  }
+}

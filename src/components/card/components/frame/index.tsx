@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-15 21:38:06
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-16 13:51:12
+ * @LastEditTime: 2023-02-16 16:17:25
  * @FilePath: \flow-chart\src\components\card\components\frame\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -22,7 +22,10 @@ const Frame: FC<IFrameProps> = ({ config }) => {
   const [borderConfig, setBorderConfig] = useState<Konva.RectConfig>()
   useEffect(() => {
     setBgConfig({
-      ...config,
+      x: 0,
+      y: 0,
+      width: config.width,
+      height: config.height,
       fill: '#f9f9f9',
       shadowColor: 'rgba(0,0,0,.3)',
       cornerRadius: CORNERRADIUS,
@@ -40,7 +43,7 @@ const Frame: FC<IFrameProps> = ({ config }) => {
   }, [config])
   return (
     <Group>
-      <Rect {...borderConfig} />
+      {/* <Rect {...borderConfig} /> */}
       <Rect {...bgConfig} />
     </Group>
   )
