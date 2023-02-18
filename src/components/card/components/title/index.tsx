@@ -79,6 +79,7 @@ const Title: FC<ITitleProp> = ({ config }) => {
       {imageConfig ? <KonvaImage {...imageConfig} /> : null}
       <Rect {...lineConfig} />
       <Rect
+        type='title'
         width={bgConfig?.width}
         height={bgConfig?.height}
         onMouseEnter={onMouseEnter}

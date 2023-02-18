@@ -32,8 +32,8 @@ const Frame: FC<IFrameProps> = ({ config }) => {
       shadowBlur: 10
     })
     setBorderConfig({
-      x: config.x - PADDING,
-      y: config.y - PADDING,
+      x: -PADDING,
+      y: -PADDING,
       width: config.width + PADDING * 2,
       height: config.height + PADDING * 2,
       stroke: '#40a9ff',
@@ -43,7 +43,7 @@ const Frame: FC<IFrameProps> = ({ config }) => {
   }, [config])
   return (
     <Group>
-      {/* <Rect {...borderConfig} /> */}
+      <Rect {...borderConfig} />
       <Rect {...bgConfig} />
     </Group>
   )

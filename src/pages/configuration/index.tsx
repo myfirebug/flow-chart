@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-17 10:16:16
+ * @LastEditTime: 2023-02-18 16:14:12
  * @FilePath: \flow-chart\src\pages\configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -14,12 +14,22 @@ import './index.scss'
 import Card from '@src/components/card'
 import { Icard } from '@src/types'
 import Konva from 'konva'
+//  配置表单
+import ConfigurationForm from './components/configuration-form'
 // 头部
 import ConfigurationHeader from './components/header'
+export type IType = 'stage' | 'title' | 'port'
 
 interface IConfigurationProps {}
 
 const Iconfiguration: FC<IConfigurationProps> = () => {
+  // 舞台配置
+  const [stageConfig, setStageConfig] = useState<any>({
+    x: 0,
+    y: 0,
+    width: window.innerWidth,
+    height: window.innerHeight - 102
+  })
   // 卡片
   const [cardConfig, setCardConfig] = useState<Icard[]>([
     {
@@ -71,11 +81,11 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
         <div className='app-configuration__container' id='js_stage'>
           {/* 舞台 */}
           <Stage
-            width={window.innerWidth}
-            height={window.innerHeight - 102}
+            {...stageConfig}
             onMouseUp={onMouseUp}
             onMouseMove={onMouseMove}
-            onMouseDown={onMouseDown}>
+            onMouseDown={onMouseDown}
+            type='stage'>
             <Layer>
               {cardConfig.map((item) => (
                 <Card config={item} key={item.id} />
@@ -83,15 +93,20 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
             </Layer>
           </Stage>
           <Drawer
-            title='Create a new account'
-            width={720}
-            bodyStyle={{ paddingBottom: 80 }}
+            title='表单配置'
+            width='90%'
+            open={true}
+            maskClosable={false}
+            bodyStyle={{ padding: 0 }}
+            headerStyle={{borderBottom: '1px solid #ddd'}}
             extra={
               <Space>
-                <Button>Cancel</Button>
-                <Button type='primary'>Submit</Button>
+                <Button>取消</Button>
+                <Button type='primary'>保存</Button>
               </Space>
-            }></Drawer>
+            }>
+            <ConfigurationForm />
+          </Drawer>
         </div>
       </div>
       <div className='app-configuration__footer'></div>

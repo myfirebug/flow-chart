@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-15 21:30:33
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-16 15:46:27
+ * @LastEditTime: 2023-02-17 11:25:23
  * @FilePath: \flow-chart\src\components\card\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -17,14 +17,21 @@ import Frame from './components/frame'
 import Title from './components/title'
 // 点位
 import Port from './components/port'
+import Konva from 'konva'
 
 interface ICardProps {
   config: Icard
 }
 
 const Card: FC<ICardProps> = ({ config }) => {
+  const clickHandler = (e: Konva.KonvaEventObject<MouseEvent>) => {
+    const { evt } = e
+    evt.stopPropagation()
+    evt.preventDefault()
+    console.log(e, 'click')
+  }
   return (
-    <Group {...config}>
+    <Group {...config} onClick={clickHandler}>
       {/* frame */}
       <Frame config={config} />
       {/* title */}
@@ -40,8 +47,7 @@ const Card: FC<ICardProps> = ({ config }) => {
                   key={item.id}
                   config={{
                     ...config,
-                    x:
-                      config.width - PORT_DIMENSION - MARGIN_LEFT * 2
+                    x: config.width - PORT_DIMENSION - MARGIN_LEFT * 2
                   }}
                 />
               )

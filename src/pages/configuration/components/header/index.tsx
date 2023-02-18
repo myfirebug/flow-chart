@@ -42,8 +42,15 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
         title='修改标题'
         open={visible}
         onOk={onOk}
+        destroyOnClose
         onCancel={() => setVisible(false)}>
-        <Form name='basic' autoComplete='off' form={form}>
+        <Form
+          name='basic'
+          autoComplete='off'
+          form={form}
+          initialValues={{
+            name: title
+          }}>
           <Form.Item
             label='标题'
             name='name'

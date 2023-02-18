@@ -56,6 +56,7 @@ const Port: FC<IPortProps> = ({ config }) => {
     <Group x={config.x}>
       <Path {...pathConfig} />
       <Rect
+        type='port'
         {...rectConfig}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
