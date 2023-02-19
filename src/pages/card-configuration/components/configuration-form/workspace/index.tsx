@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-19 21:43:40
+ * @LastEditTime: 2023-02-19 22:08:53
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\workspace\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -23,12 +23,12 @@ const Workspace: FC<IWorkspaceProps> = () => {
             <span className='app-icon is-disabled'>&#xe61e;</span>
           </Tooltip>
           <Tooltip placement='top' title='重做'>
-            <span className='app-icon'>&#xe60f;</span>
+            <span className='app-icon is-disabled'>&#xe60f;</span>
           </Tooltip>
         </div>
         <div className='right'>
           <Tooltip placement='top' title='编辑'>
-            <span className='app-icon'>&#xec88;</span>
+            <span className='app-icon is-selected'>&#xec88;</span>
           </Tooltip>
           <Tooltip placement='top' title='JSON'>
             <span className='app-icon'>&#xe7bd;</span>

@@ -45,6 +45,10 @@
       justify-content: space-between;
       height: 28px;
       margin-bottom: 4px;
+      .left,
+      .right {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.08);
+      }
       span {
         display: inline-block;
         width: 28px;
@@ -55,15 +59,24 @@
         line-height: 28px;
         color: #333;
         background: #fff;
-        border: 1px solid #ddd;
+        border: 1px solid #ccc;
         box-sizing: border-box;
         transform: all 0.25s ease 0s;
+        &.is-selected {
+          color: #fff;
+          background: #096dd9;
+          &:hover {
+            color: #fff;
+            background: #096dd9;
+          }
+        }
         &.is-disabled {
           cursor: no-drop;
-          background: rgba(0, 0, 0, 0.1);
+          color: #aaa;
+          background: rgba(0, 0, 0, 0.05);
           &:hover {
-            color: #333;
-            background: rgba(0, 0, 0, 0.1);
+            color: #aaa;
+            background: rgba(0, 0, 0, 0.05);
           }
         }
         &:hover {
