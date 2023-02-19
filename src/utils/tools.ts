@@ -605,7 +605,7 @@ export const routePrefix = '/manamage'
  * 右击处理菜单
  * @param e 事件对像
  */
-export const contentMenuHandler = (e: any) => {
+export const showContentMenu = (e: any) => {
   e.preventDefault()
   e.stopPropagation()
   const dom: any = document.querySelector('#js-content-menu')
@@ -619,8 +619,8 @@ export const contentMenuHandler = (e: any) => {
       const clickY = e.clientY //事件发生时鼠标的Y坐标
       const screenW = window.innerWidth //文档显示区的宽度
       const screenH = window.innerHeight
-      const rootW = 200 //右键菜单本身元素的宽度
-      const rootH = 244
+      const rootW = 270 //右键菜单本身元素的宽度
+      const rootH = 95
       const right = screenW - clickX > rootW
       const left = !right
       const top = screenH - clickY > rootH
@@ -645,6 +645,16 @@ export const contentMenuHandler = (e: any) => {
       dom.style = style
     }
   }, 0)
+}
+
+/**
+ * 隐藏菜单
+ */
+export const hideContentMenu = () => {
+  const dom: any = document.querySelector('#js-content-menu')
+  if (dom) {
+    dom.style.display = 'none'
+  }
 }
 /**
  * 设置样式cursor

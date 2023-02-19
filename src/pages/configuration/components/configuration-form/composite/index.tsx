@@ -15,14 +15,13 @@ interface ICompositeProps {}
 const Composite: FC<ICompositeProps> = () => {
   const [datas, setDatas] = useState(CONTROL_DATAS)
   return (
-    <ul className='app-configuration__composite'>
-      <div className='app-configuration__composite--header'>组件</div>
-      <div className='app-configuration__composite--list'>
+    <ul className='app-card-configuration__composite'>
+      <div className='app-card-configuration__composite--header'>组件</div>
+      <div className='app-card-configuration__composite--list'>
         {datas.map((item) => (
           <li
-            className='app-configuration__composite--item'
-            key={item.value}
-            draggable>
+            className='app-card-configuration__composite--item'
+            key={item.value}>
             {item.value}
           </li>
         ))}

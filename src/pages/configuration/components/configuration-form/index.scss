@@ -1,9 +1,10 @@
-@include b(configuration) {
+@include b(card-configuration) {
   display: flex;
   width: 100%;
+  height: calc(100vh - 65px);
   overflow: hidden;
   @include e(composite) {
-    width: 300px;
+    width: 280px;
     border-right: 1px solid #d9d9d9;
     @include m(header) {
       height: 36px;
@@ -32,10 +33,35 @@
     }
   }
   @include e(workspace) {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    background: #eee;
+    padding: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    @include m(menu) {
+      display: flex;
+      justify-content: space-between;
+      height: 28px;
+      margin-bottom: 4px;
+    }
+    @include m(body) {
+      flex: 1;
+      background: #fff;
+    }
   }
   @include e(settings) {
-    width: 300px;
+    width: 280px;
     border-left: 1px solid #d9d9d9;
+    @include m(header) {
+      height: 36px;
+      padding-left: 10px;
+      line-height: 36px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #f5f5f5;
+      border-bottom: 1px solid #ddd;
+    }
   }
 }

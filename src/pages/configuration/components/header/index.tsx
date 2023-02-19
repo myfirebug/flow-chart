@@ -6,7 +6,7 @@ interface IConfigurationHeaderProps {}
 const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
   const [form] = Form.useForm()
   // 标题
-  const [title, setTitle] = useState('未全名文件')
+  const [title, setTitle] = useState('未命名卡片')
   // 是否显示弹窗
   const [visible, setVisible] = useState(false)
   // 提交表单

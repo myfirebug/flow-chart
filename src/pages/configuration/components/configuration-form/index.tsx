@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import './index.scss'
 import Composite from './composite'
 import Workspace from './workspace'
@@ -8,7 +8,7 @@ interface IConfigurationForm {}
 
 const ConfigurationForm: FC<IConfigurationForm> = () => {
   return (
-    <div className='app-configuration'>
+    <div className='app-card-configuration'>
       <Composite />
       <Workspace />
       <Settings />

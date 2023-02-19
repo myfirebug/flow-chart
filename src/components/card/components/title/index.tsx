@@ -9,7 +9,6 @@ import {
   MARGIN_LEFT,
   ICON_DIMENSION
 } from '../constant'
-import { modifyCursor } from '@src/utils/tools'
 interface ITitleProp {
   config: Icard
 }
@@ -63,28 +62,12 @@ const Title: FC<ITitleProp> = ({ config }) => {
     }
   }, [])
 
-  // 鼠标移入
-  const onMouseEnter = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    modifyCursor('js_stage', 'move')
-  }
-  // 鼠标移除
-  const onMouseLeave = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    modifyCursor('js_stage', 'default')
-  }
-
   return (
     <Group>
       <Rect {...bgConfig} />
       <Text {...textConfig} />
       {imageConfig ? <KonvaImage {...imageConfig} /> : null}
       <Rect {...lineConfig} />
-      <Rect
-        type='title'
-        width={bgConfig?.width}
-        height={bgConfig?.height}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      />
     </Group>
   )
 }
