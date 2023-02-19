@@ -98,7 +98,7 @@ const Card: FC<ICardProps> = ({ strategy, getStrategy, path }) => {
             <span
               onClick={() => {
                 console.log(record.pages, 'record.pages')
-                history.push(`/frame/configuration?id=${record.id}`)
+                history.push(`/frame/card-configuration?id=${record.id}`)
               }}
               className='link'>
               编辑
@@ -133,7 +133,7 @@ const Card: FC<ICardProps> = ({ strategy, getStrategy, path }) => {
   }
 
   const addProject = () => {
-    history.push('/frame/configuration')
+    history.push('/frame/card-configuration')
   }
   return (
     <>

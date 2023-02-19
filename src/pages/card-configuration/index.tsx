@@ -3,8 +3,8 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-19 20:21:45
- * @FilePath: \flow-chart\src\pages\configuration\index.tsx
+ * @LastEditTime: 2023-02-19 21:26:38
+ * @FilePath: \flow-chart\src\pages\card-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import React, { FC, useState, useReducer } from 'react'
@@ -78,6 +78,8 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
       ]
     }
   ])
+  // 是否显示配置表单
+  const [visible, setVisible] = useState(false)
 
   // 鼠标按下
   const onMouseDown = (e: Konva.KonvaEventObject<MouseEvent>) => {
@@ -107,11 +109,11 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
         data: state
       }}>
       {/* 菜单 */}
-      <ContentMenu></ContentMenu>
-      <div className='app-configuration'>
+      <ContentMenu setVisible={setVisible}></ContentMenu>
+      <div className='app-card-configuration'>
         {/* 头部 */}
         <ConfigurationHeader />
-        <div className='app-configuration__body'>
+        <div className='app-card-configuration__body'>
           <div className='app-configuration__container' id='js_stage'>
             {/* 舞台 */}
             <Stage
@@ -129,23 +131,29 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
               </Layer>
             </Stage>
             <Drawer
-              title='卡片参数配置'
+              title='参数配置'
               width='70%'
-              open={false}
+              open={visible}
               maskClosable={false}
+              closable={false}
               bodyStyle={{ padding: 0 }}
-              headerStyle={{ borderBottom: '1px solid #ddd' }}
+              headerStyle={{
+                borderBottom: '1px solid #ddd',
+                padding: '10px'
+              }}
               extra={
                 <Space>
-                  <Button>取消</Button>
-                  <Button type='primary'>保存</Button>
+                  <Button onClick={() => setVisible(false)}>取消</Button>
+                  <Button type='primary' onClick={() => setVisible(false)}>
+                    保存
+                  </Button>
                 </Space>
               }>
               <ConfigurationForm />
             </Drawer>
           </div>
         </div>
-        <div className='app-configuration__footer'></div>
+        <div className='app-card-configuration__footer'></div>
       </div>
     </CardConfigurationContext.Provider>
   )

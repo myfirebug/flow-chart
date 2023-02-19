@@ -73,6 +73,16 @@ export const getMenu =
         },
         {
           isMemu: 1,
+          resUrl: '/frame/card-configuration',
+          components: 'card-configuration',
+          resIcon: '',
+          resTitle: '卡片配置',
+          status: 0,
+          flag: false,
+          subResource: []
+        },
+        {
+          isMemu: 1,
           resUrl: '/frame/preview',
           components: 'preview',
           resIcon: 'e670',
