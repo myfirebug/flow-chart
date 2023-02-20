@@ -3,23 +3,21 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-19 21:26:38
+ * @LastEditTime: 2023-02-20 10:53:53
  * @FilePath: \flow-chart\src\pages\card-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import React, { FC, useState, useReducer } from 'react'
-import { Drawer, Button, Space } from 'antd'
 import { Stage, Layer } from 'react-konva'
 import './index.scss'
 import Card from '@src/components/card'
 import { Icard } from '@src/types'
 import { showContentMenu, hideContentMenu } from '@utils/tools'
-import ContentMenu from './components/content-menu'
 import Konva from 'konva'
-//  配置表单
-import ConfigurationForm from './components/configuration-form'
 // 头部
 import ConfigurationHeader from './components/header'
+// 卡片配置
+import Sittings from './components/settings'
 
 import { counter, initialState } from './store/reducers'
 import { STATE } from './store/type'
@@ -45,7 +43,7 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
   const [stageConfig, setStageConfig] = useState<any>({
     x: 0,
     y: 0,
-    width: window.innerWidth,
+    width: window.innerWidth - 300,
     height: window.innerHeight - 62
   })
   // 卡片
@@ -78,8 +76,6 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
       ]
     }
   ])
-  // 是否显示配置表单
-  const [visible, setVisible] = useState(false)
 
   // 鼠标按下
   const onMouseDown = (e: Konva.KonvaEventObject<MouseEvent>) => {
@@ -108,13 +104,11 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
         dispatch,
         data: state
       }}>
-      {/* 菜单 */}
-      <ContentMenu setVisible={setVisible}></ContentMenu>
       <div className='app-card-configuration'>
         {/* 头部 */}
         <ConfigurationHeader />
         <div className='app-card-configuration__body'>
-          <div className='app-configuration__container' id='js_stage'>
+          <div className='app-card-configuration__container' id='js_stage'>
             {/* 舞台 */}
             <Stage
               {...stageConfig}
@@ -130,28 +124,9 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
                 ))}
               </Layer>
             </Stage>
-            <Drawer
-              title='参数配置'
-              width='70%'
-              open={visible}
-              maskClosable={false}
-              closable={false}
-              bodyStyle={{ padding: 0 }}
-              headerStyle={{
-                borderBottom: '1px solid #ddd',
-                padding: '10px'
-              }}
-              extra={
-                <Space>
-                  <Button onClick={() => setVisible(false)}>取消</Button>
-                  <Button type='primary' onClick={() => setVisible(false)}>
-                    保存
-                  </Button>
-                </Space>
-              }>
-              <ConfigurationForm />
-            </Drawer>
           </div>
+          {/* 卡片配置 */}
+          <Sittings />
         </div>
         <div className='app-card-configuration__footer'></div>
       </div>

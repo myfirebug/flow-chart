@@ -3,12 +3,12 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-19 22:08:53
+ * @LastEditTime: 2023-02-20 10:25:08
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\workspace\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import { FC, useContext } from 'react'
-import { Tooltip } from 'antd'
+import { Tooltip, Result } from 'antd'
 import { CardConfigurationContext } from '../../../index'
 
 interface IWorkspaceProps {}
@@ -38,7 +38,14 @@ const Workspace: FC<IWorkspaceProps> = () => {
           </Tooltip>
         </div>
       </div>
-      <div className='app-card-configuration-form__workspace--body'></div>
+      <div className='app-card-configuration-form__workspace--body'>
+        <Result
+          style={{ paddingTop: 100 }}
+          status='404'
+          title='暂无数据'
+          subTitle='请点击左侧的组件添加表单元素'
+        />
+      </div>
     </div>
   )
 }

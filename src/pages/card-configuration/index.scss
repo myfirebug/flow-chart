@@ -42,9 +42,39 @@
     }
   }
   @include e(body) {
-    height: calc(100vh - 62px);
+    display: flex;
+    height: calc(100% - 62px);
+    overflow: hidden;
+  }
+  @include e(container) {
+    flex: 1;
     background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuXzAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgcng9IjEiIHJ5PSIxIiBmaWxsPSIjYWFhYWFhIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm5fMCkiLz48L3N2Zz4=')
       repeat;
     overflow: hidden;
+  }
+  @include e(aside) {
+    width: 300px;
+    height: 100%;
+    border-left: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    .header {
+      height: 36px;
+      padding-left: 10px;
+      line-height: 36px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #f5f5f5;
+      border-bottom: 1px solid #ddd;
+    }
+    .body {
+      padding: 10px;
+      .ant-form-item {
+        margin-bottom: 10px;
+      }
+      .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+        margin: 0;
+      }
+    }
   }
 }

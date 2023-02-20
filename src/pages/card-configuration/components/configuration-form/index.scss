@@ -88,6 +88,15 @@
     @include m(body) {
       flex: 1;
       background: #fff;
+      box-sizing: border-box;
+      border: 1px solid #fff;
+      transition: all 0.25s ease 0s;
+      &:hover {
+        border: 1px dashed #096dd9;
+      }
+      @include when(selected) {
+        border: 1px solid #096dd9;
+      }
     }
   }
   @include e(settings) {
