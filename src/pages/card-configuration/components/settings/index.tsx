@@ -7,7 +7,7 @@
  * @FilePath: \flow-chart\src\pages\card-configuration\components\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, useState, useContext, useEffect } from 'react'
+import { FC, useState, useContext, useEffect, useCallback } from 'react'
 import { Form, Input, Checkbox, Button, Drawer, Space } from 'antd'
 
 //  配置表单
@@ -34,6 +34,20 @@ const Sittings: FC<ISittingsProps> = () => {
       })
     }
   }, [cardConfigurationContent.card, form])
+
+  const changeHander = useCallback(
+    (value: any, field: string) => {
+      switch (field) {
+        case 'title':
+          cardConfigurationContent.dispatch({
+            type: 'MODIFY_CARD_TITLE',
+            title: value
+          })
+          break
+      }
+    },
+    [cardConfigurationContent]
+  )
   return (
     <div className='app-card-configuration__aside'>
       <div className='header'>卡片配置</div>
@@ -48,7 +62,7 @@ const Sittings: FC<ISittingsProps> = () => {
           requiredMark={false}
           autoComplete='off'>
           <Form.Item label='卡片名称' name='title'>
-            <Input />
+            <Input onChange={(e) => changeHander(e.target.value, 'title')} />
           </Form.Item>
           <Form.Item label='卡片宽度' name='width'>
             <Input />

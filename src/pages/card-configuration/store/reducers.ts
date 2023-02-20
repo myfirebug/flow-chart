@@ -8,7 +8,7 @@
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import { ModifyAction } from './action'
-import { CARD, CARD_STATE } from './type'
+import { CARD, CARD_STATE, MODIFY_CARD_TITLE } from './type'
 
 // 处理并返回 state
 export const initialState: CARD_STATE | null = null
@@ -20,6 +20,13 @@ export const counter = (
   switch (action.type) {
     case CARD:
       return action.data
+    case MODIFY_CARD_TITLE:
+      return state
+        ? {
+            ...state,
+            title: action.title
+          }
+        : null
     default:
       return state
   }

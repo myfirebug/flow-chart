@@ -37,3 +37,7 @@ export type CARD_STATE = {
 // 获取卡片数据
 export const CARD = 'CARD'
 export type CARD_TYPE = typeof CARD
+
+// 获取卡片数据
+export const MODIFY_CARD_TITLE = 'MODIFY_CARD_TITLE'
+export type MODIFY_CARD_TITLE_TYPE = typeof MODIFY_CARD_TITLE
