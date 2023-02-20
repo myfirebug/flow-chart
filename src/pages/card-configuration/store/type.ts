@@ -3,20 +3,37 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:28:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-19 11:29:07
- * @FilePath: \flow-chart\src\pages\configuration\components\configuration-form\store\type.ts
+ * @LastEditTime: 2023-02-20 13:15:44
+ * @FilePath: \flow-chart\src\pages\card-configuration\store\type.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
+import { IAnyObject } from '@src/types'
 // counter state数据类型
-export type COUNTER_STATE = number
-// 定义增加 state 类型常量
-export const INCREMENT = 'INCREMENT'
-export type INCREMENT_TYPE = typeof INCREMENT
-
-// 定义减少 state 类型常量
-export const DECREMENT = 'DECREMENT'
-export type DECREMENT_TYPE = typeof DECREMENT
-
-export type STATE = {
-  counter: COUNTER_STATE
+type IPORT = {
+  visible: boolean
+  group: 'left' | 'right'
+  id: string | number
 }
+
+interface IPARAM extends IAnyObject {
+  field: string
+  formType: 'Input'
+  label: string
+  placeholder: string
+  value: string | number | boolean
+}
+
+export type CARD_STATE = {
+  id: string | number
+  width: number
+  height: number
+  title: string
+  x: number
+  y: number
+  ports: IPORT[]
+  inParams: IPARAM[]
+}
+
+// 获取卡片数据
+export const CARD = 'CARD'
+export type CARD_TYPE = typeof CARD

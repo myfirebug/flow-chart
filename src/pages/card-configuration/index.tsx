@@ -3,16 +3,16 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 10:53:53
+ * @LastEditTime: 2023-02-20 14:17:14
  * @FilePath: \flow-chart\src\pages\card-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import React, { FC, useState, useReducer } from 'react'
+import React, { FC, useState, useReducer, useEffect } from 'react'
 import { Stage, Layer } from 'react-konva'
 import './index.scss'
 import Card from '@src/components/card'
 import { Icard } from '@src/types'
-import { showContentMenu, hideContentMenu } from '@utils/tools'
+import { showContentMenu, hideContentMenu, getUrl, guid } from '@utils/tools'
 import Konva from 'konva'
 // 头部
 import ConfigurationHeader from './components/header'
@@ -20,18 +20,18 @@ import ConfigurationHeader from './components/header'
 import Sittings from './components/settings'
 
 import { counter, initialState } from './store/reducers'
-import { STATE } from './store/type'
+import { CARD_STATE } from './store/type'
 import { ModifyAction } from './store/action'
 
 export type IType = 'stage' | 'move' | 'port'
 
 export type Icontent = {
   dispatch: React.Dispatch<ModifyAction>
-  data: STATE
+  card: CARD_STATE | null
 }
 // context
 export const CardConfigurationContext = React.createContext<Icontent>({
-  data: initialState,
+  card: initialState,
   dispatch: () => {}
 })
 
@@ -40,43 +40,45 @@ interface IConfigurationProps {}
 const Iconfiguration: FC<IConfigurationProps> = () => {
   const [state, dispatch] = useReducer(counter, initialState)
   // 舞台配置
-  const [stageConfig, setStageConfig] = useState<any>({
+  const [stageConfig] = useState<any>({
     x: 0,
     y: 0,
     width: window.innerWidth - 300,
     height: window.innerHeight - 62
   })
-  // 卡片
-  const [cardConfig, setCardConfig] = useState<Icard[]>([
-    {
-      id: 2,
-      width: 240,
-      height: 85,
-      x: 10,
-      y: 10,
-      title: '表格提取',
-      ports: [
-        {
-          id: 1,
-          group: 'left'
-        },
-        {
-          id: 2,
-          group: 'right'
+  // 获取卡片数据
+  useEffect(() => {
+    // 如果ID存在调用获取卡片详情接口
+    const id = getUrl('id')
+    if (!id) {
+      dispatch({
+        type: 'CARD',
+        data: {
+          id: guid(),
+          width: 200,
+          height: 80,
+          title: '未命名卡片',
+          x: 10,
+          y: 10,
+          ports: [
+            {
+              id: 1,
+              group: 'left',
+              visible: true
+            },
+            {
+              id: 2,
+              group: 'right',
+              visible: true
+            }
+          ],
+          inParams: []
         }
-      ],
-      inParams: [
-        {
-          label: '未命名',
-          field: 'name',
-          formType: 'Input',
-          placeholder: '请输入用户名',
-          value: ''
-        }
-      ]
+      })
     }
-  ])
+  }, [])
 
+  console.log(state, 'cardConfig')
   // 鼠标按下
   const onMouseDown = (e: Konva.KonvaEventObject<MouseEvent>) => {
     const { evt } = e
@@ -102,7 +104,7 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
     <CardConfigurationContext.Provider
       value={{
         dispatch,
-        data: state
+        card: state
       }}>
       <div className='app-card-configuration'>
         {/* 头部 */}
@@ -116,13 +118,8 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
               onMouseMove={onMouseMove}
               onMouseDown={onMouseDown}
               onContextMenu={onContextMenu}
-              draggable
               type='stage'>
-              <Layer>
-                {cardConfig.map((item) => (
-                  <Card config={item} key={item.id} />
-                ))}
-              </Layer>
+              <Layer>{state ? <Card config={state} /> : null}</Layer>
             </Stage>
           </div>
           {/* 卡片配置 */}

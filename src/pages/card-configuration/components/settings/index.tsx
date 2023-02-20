@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 11:42:17
+ * @LastEditTime: 2023-02-20 14:28:11
  * @FilePath: \flow-chart\src\pages\card-configuration\components\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, useState, useContext } from 'react'
+import { FC, useState, useContext, useEffect } from 'react'
 import { Form, Input, Checkbox, Button, Drawer, Space } from 'antd'
 
 //  配置表单
@@ -18,15 +18,28 @@ import { CardConfigurationContext } from '../../index'
 interface ISittingsProps {}
 
 const Sittings: FC<ISittingsProps> = () => {
+  const [form] = Form.useForm()
   const cardConfigurationContent = useContext(CardConfigurationContext)
   console.log(cardConfigurationContent, 'cardConfigurationContent')
   // 是否显示配置表单
   const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    if (cardConfigurationContent.card) {
+      const { title, width, ports } = cardConfigurationContent.card
+      form.setFieldsValue({
+        title: title,
+        width: width,
+        ports: ports.filter((item) => item.visible).map((item) => item.group)
+      })
+    }
+  }, [cardConfigurationContent.card, form])
   return (
     <div className='app-card-configuration__aside'>
       <div className='header'>卡片配置</div>
       <div className='body'>
         <Form
+          form={form}
           name='basic'
           labelAlign='left'
           colon={false}
@@ -34,7 +47,7 @@ const Sittings: FC<ISittingsProps> = () => {
           wrapperCol={{ span: 15 }}
           requiredMark={false}
           autoComplete='off'>
-          <Form.Item label='卡片名称' name='name'>
+          <Form.Item label='卡片名称' name='title'>
             <Input />
           </Form.Item>
           <Form.Item label='卡片宽度' name='width'>
@@ -50,7 +63,6 @@ const Sittings: FC<ISittingsProps> = () => {
               </Checkbox>
             </Checkbox.Group>
           </Form.Item>
-
           <Form.Item name='inParams' label='入参配置'>
             <Button
               type='primary'

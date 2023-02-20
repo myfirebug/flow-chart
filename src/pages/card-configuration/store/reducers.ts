@@ -3,33 +3,23 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-19 11:38:19
- * @FilePath: \flow-chart\src\pages\configuration\components\configuration-form\store\reducers.ts
+ * @LastEditTime: 2023-02-20 12:39:35
+ * @FilePath: \flow-chart\src\pages\card-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import { ModifyAction } from './action'
-import { DECREMENT, INCREMENT, STATE } from './type'
+import { CARD, CARD_STATE } from './type'
 
 // 处理并返回 state
-export const initialState: STATE = {
-  counter: 0
-}
+export const initialState: CARD_STATE | null = null
 
 export const counter = (
-  state: STATE = initialState,
+  state: CARD_STATE | null = initialState,
   action: ModifyAction
-): STATE => {
+): CARD_STATE | null => {
   switch (action.type) {
-    case DECREMENT:
-      return {
-        ...state,
-        counter: state.counter - 1
-      }
-    case INCREMENT:
-      return {
-        ...state,
-        counter: state.counter + 1
-      }
+    case CARD:
+      return action.data
     default:
       return state
   }
