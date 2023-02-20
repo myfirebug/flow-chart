@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:28:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 13:15:44
+ * @LastEditTime: 2023-02-20 18:22:30
  * @FilePath: \flow-chart\src\pages\card-configuration\store\type.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -16,9 +16,11 @@ export type IPORT = {
   id: string | number
 }
 
-interface IPARAM extends IAnyObject {
+export type FORM_TYPE = 'Input' | 'TextArea'
+
+export interface IPARAM extends IAnyObject {
   field: string
-  formType: 'Input'
+  formType: string
   label: string
   placeholder: string
   value: string | number | boolean
@@ -46,3 +48,7 @@ export type MODIFY_CARD_TITLE_TYPE = typeof MODIFY_CARD_TITLE
 // 修改卡片连接点
 export const MODIFY_CARD_PORTS = 'MODIFY_CARD_PORTS'
 export type MODIFY_CARD_PORTS_TYPE = typeof MODIFY_CARD_PORTS
+
+// 添加卡片的表单元素
+export const ADD_CARD_FROM_ITEM = 'ADD_CARD_FROM_ITEM'
+export type ADD_CARD_FROM_ITEM_TYPE = typeof ADD_CARD_FROM_ITEM

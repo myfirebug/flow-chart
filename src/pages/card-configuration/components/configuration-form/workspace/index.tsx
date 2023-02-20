@@ -39,6 +39,7 @@ const Workspace: FC<IWorkspaceProps> = () => {
         </div>
       </div>
       <div className='app-card-configuration-form__workspace--body'>
+        <div className='form'></div>
         <Result
           style={{ paddingTop: 100 }}
           status='404'

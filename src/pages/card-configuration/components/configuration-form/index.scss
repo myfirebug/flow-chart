@@ -26,6 +26,15 @@
       text-indent: 10px;
       border: 1px dashed #ccc;
       transition: all 0.25s ease 0s;
+      &.is-disabled {
+        cursor: no-drop;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-color: #ddd;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+          border-color: #ddd;
+        }
+      }
       &:hover {
         background-color: rgba(24, 144, 255, 0.1);
         border-color: #096dd9;
@@ -86,16 +95,24 @@
       }
     }
     @include m(body) {
+      position: relative;
       flex: 1;
       background: #fff;
       box-sizing: border-box;
-      border: 1px solid #fff;
-      transition: all 0.25s ease 0s;
-      &:hover {
-        border: 1px dashed #096dd9;
-      }
-      @include when(selected) {
-        border: 1px solid #096dd9;
+      .form {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        top: 0;
+        border: 1px solid transparent;
+        transition: all 0.25s ease 0s;
+        &:hover {
+          border: 1px dashed #096dd9;
+        }
+        @include when(selected) {
+          border: 1px solid #096dd9;
+        }
       }
     }
   }

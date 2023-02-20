@@ -8,12 +8,14 @@
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import { ModifyAction } from './action'
+import { guid } from '@src/utils/tools'
 import {
   CARD,
   CARD_STATE,
   MODIFY_CARD_TITLE,
   MODIFY_CARD_PORTS,
-  IPORT
+  IPORT,
+  ADD_CARD_FROM_ITEM
 } from './type'
 
 // 处理并返回 state
@@ -41,6 +43,13 @@ export const counter = (
               ...item,
               visible: action.data.includes(item.group)
             }))
+          }
+        : null
+    case ADD_CARD_FROM_ITEM:
+      return state
+        ? {
+            ...state,
+            inParams: [...state.inParams, action.data]
           }
         : null
     default:

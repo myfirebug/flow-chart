@@ -3,66 +3,144 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-18 16:32:45
- * @FilePath: \flow-chart\src\pages\configuration\components\configuration-form\constant.ts
+ * @LastEditTime: 2023-02-20 18:21:11
+ * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
+import { IPARAM } from '../../store/type'
+const formItemBaseConfig: IPARAM = {
+  field: '',
+  formType: 'Input',
+  label: '',
+  placeholder: '',
+  value: ''
+}
 // 控件
 export const CONTROL_DATAS = [
   {
     value: 'Input',
-    name: '输入框'
+    name: '输入框',
+    disabled: false,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'TextArea',
-    name: '多行输入'
+    name: '多行输入',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Number',
-    name: '数字输入'
+    name: '数字输入',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Password',
-    name: '密码输入'
+    name: '密码输入',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Select',
-    name: '选择框'
+    name: '选择框',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Checkbox Group',
-    name: '复选框'
+    name: '复选框',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Radio Group',
-    name: '单选框'
+    name: '单选框',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Cascader',
-    name: '联级框'
+    name: '联级框',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Date',
-    name: '日期选择'
+    name: '日期选择',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Date Range',
-    name: '日期范围'
+    name: '日期范围',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Time',
-    name: '时间选择'
+    name: '时间选择',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Time Range',
-    name: '时间范围'
+    name: '时间范围',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'Switch',
-    name: '开关'
+    name: '开关',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   },
   {
     value: 'TreeSelect',
-    name: '树选择'
+    name: '树选择',
+    disabled: true,
+    data: {
+      ...formItemBaseConfig,
+      formType: 'Input'
+    }
   }
 ]
