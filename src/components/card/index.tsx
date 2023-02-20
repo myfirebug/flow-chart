@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-15 21:30:33
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-19 14:10:05
+ * @LastEditTime: 2023-02-20 15:18:13
  * @FilePath: \flow-chart\src\components\card\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -52,9 +52,9 @@ const Card: FC<ICardProps> = ({ config }) => {
       {/* 连线的点 */}
       {config.ports
         ? config.ports.map((item: any) => {
-            if (item.group === 'left') {
+            if (item.group === 'left' && item.visible) {
               return <Port config={{ ...config, x: 0 }} key={item.id} />
-            } else if (item.group === 'right') {
+            } else if (item.group === 'right' && item.visible) {
               return (
                 <Port
                   key={item.id}

@@ -3,12 +3,18 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 12:39:35
+ * @LastEditTime: 2023-02-20 15:13:36
  * @FilePath: \flow-chart\src\pages\card-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import { ModifyAction } from './action'
-import { CARD, CARD_STATE, MODIFY_CARD_TITLE } from './type'
+import {
+  CARD,
+  CARD_STATE,
+  MODIFY_CARD_TITLE,
+  MODIFY_CARD_PORTS,
+  IPORT
+} from './type'
 
 // 处理并返回 state
 export const initialState: CARD_STATE | null = null
@@ -25,6 +31,16 @@ export const counter = (
         ? {
             ...state,
             title: action.title
+          }
+        : null
+    case MODIFY_CARD_PORTS:
+      return state
+        ? {
+            ...state,
+            ports: state.ports.map((item: IPORT) => ({
+              ...item,
+              visible: action.data.includes(item.group)
+            }))
           }
         : null
     default:

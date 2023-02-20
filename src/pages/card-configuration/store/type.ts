@@ -8,10 +8,11 @@
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import { IAnyObject } from '@src/types'
+export type IPORT_TYPE = 'left' | 'right'
 // counter state数据类型
-type IPORT = {
+export type IPORT = {
   visible: boolean
-  group: 'left' | 'right'
+  group: IPORT_TYPE
   id: string | number
 }
 
@@ -38,6 +39,10 @@ export type CARD_STATE = {
 export const CARD = 'CARD'
 export type CARD_TYPE = typeof CARD
 
-// 获取卡片数据
+// 修改卡片标题
 export const MODIFY_CARD_TITLE = 'MODIFY_CARD_TITLE'
 export type MODIFY_CARD_TITLE_TYPE = typeof MODIFY_CARD_TITLE
+
+// 修改卡片连接点
+export const MODIFY_CARD_PORTS = 'MODIFY_CARD_PORTS'
+export type MODIFY_CARD_PORTS_TYPE = typeof MODIFY_CARD_PORTS

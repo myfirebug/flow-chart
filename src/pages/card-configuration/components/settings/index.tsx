@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 14:28:11
+ * @LastEditTime: 2023-02-20 15:11:47
  * @FilePath: \flow-chart\src\pages\card-configuration\components\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -20,7 +20,6 @@ interface ISittingsProps {}
 const Sittings: FC<ISittingsProps> = () => {
   const [form] = Form.useForm()
   const cardConfigurationContent = useContext(CardConfigurationContext)
-  console.log(cardConfigurationContent, 'cardConfigurationContent')
   // 是否显示配置表单
   const [visible, setVisible] = useState(false)
 
@@ -44,6 +43,12 @@ const Sittings: FC<ISittingsProps> = () => {
             title: value
           })
           break
+        case 'ports':
+          cardConfigurationContent.dispatch({
+            type: 'MODIFY_CARD_PORTS',
+            data: value
+          })
+          break
       }
     },
     [cardConfigurationContent]
@@ -65,10 +70,10 @@ const Sittings: FC<ISittingsProps> = () => {
             <Input onChange={(e) => changeHander(e.target.value, 'title')} />
           </Form.Item>
           <Form.Item label='卡片宽度' name='width'>
-            <Input />
+            <Input disabled />
           </Form.Item>
           <Form.Item name='ports' label='连接点'>
-            <Checkbox.Group>
+            <Checkbox.Group onChange={(e) => changeHander(e, 'ports')}>
               <Checkbox value='left' style={{ lineHeight: '32px' }}>
                 左连接点
               </Checkbox>
