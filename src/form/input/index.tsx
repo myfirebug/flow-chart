@@ -22,7 +22,7 @@ const CustomInput: FC<ICustomInputProps> = ({
       selectId={selectId}>
       <Form.Item
         label={item.label}
-        name={item.name}
+        name={item.field}
         tooltip={item.tooltip}
         rules={[{ required: item.require }]}>
         <Input
