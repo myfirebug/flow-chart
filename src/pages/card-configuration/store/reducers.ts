@@ -22,7 +22,8 @@ import {
   ALL_STATE,
   MODIFY_CARD_FROM_ITEM,
   SELECT_CARD_FROM_ITEM,
-  DELETE_CARD_FROM_ITEM
+  DELETE_CARD_FROM_ITEM,
+  COPY_CARD_FROM_ITEM
 } from './type'
 import { CARD_STATE, IPORT } from '@src/types'
 
@@ -110,6 +111,22 @@ export const counter = (
         if (index !== -1) {
           copy.card.inParams.splice(index, 1)
           copy.selectFormItemId = ''
+          copy.card.height = diffHeight(copy.card)
+        }
+      }
+      return copy
+    case COPY_CARD_FROM_ITEM:
+      if (copy.selectFormItemId) {
+        const index = copy.card.inParams.findIndex(
+          (item) => item.id === copy.selectFormItemId
+        )
+        if (index !== -1) {
+          let id = guid()
+          copy.card.inParams.push({
+            ...copy.card.inParams[index],
+            id: id
+          })
+          copy.selectFormItemId = id
           copy.card.height = diffHeight(copy.card)
         }
       }

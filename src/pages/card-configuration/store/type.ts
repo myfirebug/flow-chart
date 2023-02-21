@@ -37,6 +37,10 @@ export type SELECT_CARD_FROM_ITEM_TYPE = typeof SELECT_CARD_FROM_ITEM
 export const DELETE_CARD_FROM_ITEM = 'DELETE_CARD_FROM_ITEM'
 export type DELETE_CARD_FROM_ITEM_TYPE = typeof DELETE_CARD_FROM_ITEM
 
+// 复制卡片的表单元素
+export const COPY_CARD_FROM_ITEM = 'COPY_CARD_FROM_ITEM'
+export type COPY_CARD_FROM_ITEM_TYPE = typeof COPY_CARD_FROM_ITEM
+
 export interface ALL_STATE {
   card: CARD_STATE | null
   selectFormItemId: string

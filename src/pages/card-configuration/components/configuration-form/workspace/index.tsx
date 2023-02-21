@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-21 17:05:12
+ * @LastEditTime: 2023-02-21 19:29:40
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\workspace\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -42,6 +42,9 @@ const Workspace: FC<IWorkspaceProps> = () => {
           case 'moveDown':
             break
           case 'copy':
+            cardConfigurationContent.dispatch({
+              type: 'COPY_CARD_FROM_ITEM'
+            })
             break
           case 'delete':
             cardConfigurationContent.dispatch({
