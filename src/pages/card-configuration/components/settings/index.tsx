@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 20:30:07
+ * @LastEditTime: 2023-02-21 11:54:20
  * @FilePath: \flow-chart\src\pages\card-configuration\components\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -67,7 +67,7 @@ const Sittings: FC<ISittingsProps> = () => {
           requiredMark={false}
           autoComplete='off'>
           <Form.Item label='卡片名称' name='title'>
-            <Input onChange={(e) => changeHander(e.target.value, 'title')} />
+            <Input onBlur={(e) => changeHander(e.target.value, 'title')} />
           </Form.Item>
           <Form.Item label='卡片宽度' name='width'>
             <Input disabled />

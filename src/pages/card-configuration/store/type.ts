@@ -29,6 +29,10 @@ export type ADD_CARD_FROM_ITEM_TYPE = typeof ADD_CARD_FROM_ITEM
 export const MODIFY_CARD_FROM_ITEM = 'MODIFY_CARD_FROM_ITEM'
 export type MODIFY_CARD_FROM_ITEM_TYPE = typeof MODIFY_CARD_FROM_ITEM
 
+// 添加卡片的表单元素
+export const SELECT_CARD_FROM_ITEM = 'SELECT_CARD_FROM_ITEM'
+export type SELECT_CARD_FROM_ITEM_TYPE = typeof SELECT_CARD_FROM_ITEM
+
 export interface ALL_STATE {
   card: CARD_STATE | null
   selectFormItemId: string

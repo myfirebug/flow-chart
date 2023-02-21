@@ -97,23 +97,9 @@
     @include m(body) {
       position: relative;
       flex: 1;
+      padding: 10px 10px 0 10px;
       background: #fff;
       box-sizing: border-box;
-      .form {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        top: 0;
-        border: 1px solid transparent;
-        transition: all 0.25s ease 0s;
-        &:hover {
-          border: 1px dashed #096dd9;
-        }
-        @include when(selected) {
-          border: 1px solid #096dd9;
-        }
-      }
     }
   }
   @include e(settings) {

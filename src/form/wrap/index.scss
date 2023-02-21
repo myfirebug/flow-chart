@@ -1,0 +1,18 @@
+@include b(custom-form-item) {
+  position: relative;
+  .edit {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    cursor: pointer;
+    &:hover {
+      border: 1px dashed #096dd9;
+    }
+    &.is-selected {
+      border: 2px solid #096dd9;
+    }
+  }
+}

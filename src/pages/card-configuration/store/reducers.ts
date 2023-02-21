@@ -20,7 +20,8 @@ import {
   MODIFY_CARD_PORTS,
   ADD_CARD_FROM_ITEM,
   ALL_STATE,
-  MODIFY_CARD_FROM_ITEM
+  MODIFY_CARD_FROM_ITEM,
+  SELECT_CARD_FROM_ITEM
 } from './type'
 import { CARD_STATE, IPORT } from '@src/types'
 
@@ -96,6 +97,9 @@ export const counter = (
           })
         }
       }
+      return copy
+    case SELECT_CARD_FROM_ITEM:
+      copy.selectFormItemId = action.id
       return copy
     default:
       return state
