@@ -3,17 +3,20 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 18:21:11
+ * @LastEditTime: 2023-02-20 20:40:31
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { IPARAM } from '../../store/type'
+import { IPARAM } from '@src/types'
 const formItemBaseConfig: IPARAM = {
-  field: '',
+  field: 'test',
   formType: 'Input',
   label: '',
-  placeholder: '',
-  value: ''
+  placeholder: '请输入',
+  value: 'test',
+  disabled: false,
+  required: false,
+  tooltip: ''
 }
 // 控件
 export const CONTROL_DATAS = [

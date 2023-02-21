@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 15:11:47
+ * @LastEditTime: 2023-02-20 20:30:07
  * @FilePath: \flow-chart\src\pages\card-configuration\components\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -24,15 +24,15 @@ const Sittings: FC<ISittingsProps> = () => {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    if (cardConfigurationContent.card) {
-      const { title, width, ports } = cardConfigurationContent.card
+    if (cardConfigurationContent.data.card) {
+      const { title, width, ports } = cardConfigurationContent.data.card
       form.setFieldsValue({
         title: title,
         width: width,
         ports: ports.filter((item) => item.visible).map((item) => item.group)
       })
     }
-  }, [cardConfigurationContent.card, form])
+  }, [cardConfigurationContent.data.card, form])
 
   const changeHander = useCallback(
     (value: any, field: string) => {
@@ -105,9 +105,8 @@ const Sittings: FC<ISittingsProps> = () => {
         }}
         extra={
           <Space>
-            <Button onClick={() => setVisible(false)}>取消</Button>
             <Button type='primary' onClick={() => setVisible(false)}>
-              保存
+              关闭
             </Button>
           </Space>
         }>

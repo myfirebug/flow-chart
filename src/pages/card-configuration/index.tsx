@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 14:17:14
+ * @LastEditTime: 2023-02-20 21:43:31
  * @FilePath: \flow-chart\src\pages\card-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -11,7 +11,6 @@ import React, { FC, useState, useReducer, useEffect } from 'react'
 import { Stage, Layer } from 'react-konva'
 import './index.scss'
 import Card from '@src/components/card'
-import { Icard } from '@src/types'
 import { showContentMenu, hideContentMenu, getUrl, guid } from '@utils/tools'
 import Konva from 'konva'
 // 头部
@@ -20,18 +19,18 @@ import ConfigurationHeader from './components/header'
 import Sittings from './components/settings'
 
 import { counter, initialState } from './store/reducers'
-import { CARD_STATE } from './store/type'
+import { ALL_STATE } from './store/type'
 import { ModifyAction } from './store/action'
 
 export type IType = 'stage' | 'move' | 'port'
 
 export type Icontent = {
   dispatch: React.Dispatch<ModifyAction>
-  card: CARD_STATE | null
+  data: ALL_STATE
 }
 // context
 export const CardConfigurationContext = React.createContext<Icontent>({
-  card: initialState,
+  data: initialState,
   dispatch: () => {}
 })
 
@@ -62,12 +61,12 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
           y: 10,
           ports: [
             {
-              id: 1,
+              id: guid(),
               group: 'left',
               visible: true
             },
             {
-              id: 2,
+              id: guid(),
               group: 'right',
               visible: true
             }
@@ -104,7 +103,7 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
     <CardConfigurationContext.Provider
       value={{
         dispatch,
-        card: state
+        data: state
       }}>
       <div className='app-card-configuration'>
         {/* 头部 */}
@@ -118,8 +117,9 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
               onMouseMove={onMouseMove}
               onMouseDown={onMouseDown}
               onContextMenu={onContextMenu}
+              draggable
               type='stage'>
-              <Layer>{state ? <Card config={state} /> : null}</Layer>
+              <Layer>{state.card ? <Card config={state.card} /> : null}</Layer>
             </Stage>
           </div>
           {/* 卡片配置 */}

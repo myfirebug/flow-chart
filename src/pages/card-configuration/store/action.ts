@@ -1,12 +1,11 @@
 import {
   CARD_TYPE,
-  CARD_STATE,
   MODIFY_CARD_TITLE_TYPE,
   MODIFY_CARD_PORTS_TYPE,
-  IPORT_TYPE,
   ADD_CARD_FROM_ITEM_TYPE,
-  IPARAM
+  MODIFY_CARD_FROM_ITEM_TYPE
 } from './type'
+import { CARD_STATE, IPORT_TYPE, IPARAM } from '@src/types'
 
 // 获取卡片数据
 export interface ICardAction {
@@ -30,9 +29,16 @@ export interface IAddCardFormItemAction {
   data: IPARAM
 }
 
+// 添加卡片表单元素
+export interface ModifyCardFormItemAction {
+  type: MODIFY_CARD_FROM_ITEM_TYPE
+  data: any
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
   | ICardAction
   | IModifyCardTitleAction
   | IModifyCardPortsAction
   | IAddCardFormItemAction
+  | ModifyCardFormItemAction

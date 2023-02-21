@@ -70,6 +70,8 @@
     .body {
       padding: 10px;
       .ant-form-item {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
         margin-bottom: 10px;
       }
       .ant-checkbox-wrapper + .ant-checkbox-wrapper {

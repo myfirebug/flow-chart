@@ -24,3 +24,35 @@ export interface Icard extends IAnyObject {
   width: number
   height: number
 }
+
+export type IPORT_TYPE = 'left' | 'right'
+// counter state数据类型
+export type IPORT = {
+  visible: boolean
+  group: IPORT_TYPE
+  id: string | number
+}
+
+export type FORM_TYPE = 'Input' | 'TextArea'
+
+export interface IPARAM extends IAnyObject {
+  field: string
+  formType: string
+  label: string
+  placeholder: string
+  required: boolean
+  tooltip: string
+  disabled: boolean
+  value: string | number | boolean
+}
+
+export type CARD_STATE = {
+  id: string | number
+  width: number
+  height: number
+  title: string
+  x: number
+  y: number
+  ports: IPORT[]
+  inParams: IPARAM[]
+}

@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 18:34:01
+ * @LastEditTime: 2023-02-21 10:55:59
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\composite\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -16,7 +16,7 @@ interface ICompositeProps {}
 const Composite: FC<ICompositeProps> = () => {
   const cardConfigurationContent = useContext(CardConfigurationContext)
   const [datas] = useState(CONTROL_DATAS)
-  //添加卡片
+  //添加卡片表单项
   const addCardFormItem = useCallback(
     (item: any) => {
       if (

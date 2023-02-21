@@ -3,14 +3,18 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-15 21:30:33
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 15:18:13
+ * @LastEditTime: 2023-02-20 20:16:39
  * @FilePath: \flow-chart\src\components\card\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC } from 'react'
-import { Group, Rect } from 'react-konva'
-import { Icard } from '@src/types'
-import { PORT_DIMENSION, MARGIN_LEFT } from './components/constant'
+import { FC, useEffect, useState } from 'react'
+import { Group, Rect, Text } from 'react-konva'
+import { CARD_STATE } from '@src/types'
+import {
+  PORT_DIMENSION,
+  MARGIN_LEFT,
+  TITLE_HEIGHT
+} from './components/constant'
 // 外框
 import Frame from './components/frame'
 // 标题
@@ -22,10 +26,19 @@ import Konva from 'konva'
 import { modifyCursor } from '@src/utils/tools'
 
 interface ICardProps {
-  config: Icard
+  config: CARD_STATE
 }
 
 const Card: FC<ICardProps> = ({ config }) => {
+  const [textConfig, setTextConfig] = useState<Konva.TextConfig>()
+  useEffect(() => {
+    setTextConfig({
+      x: MARGIN_LEFT,
+      lineHeight: PORT_DIMENSION / 14,
+      fontSize: 12,
+      fill: '#999'
+    })
+  }, [config])
   // 鼠标移入
   const onMouseEnter = (e: Konva.KonvaEventObject<MouseEvent>) => {
     modifyCursor('js_stage', 'move')
@@ -36,7 +49,11 @@ const Card: FC<ICardProps> = ({ config }) => {
   }
 
   return (
-    <Group {...config}>
+    <Group
+      x={config.x}
+      y={config.y}
+      width={config.width}
+      height={config.height}>
       {/* frame */}
       <Frame config={config} />
       {/* title */}
@@ -69,6 +86,21 @@ const Card: FC<ICardProps> = ({ config }) => {
             }
           })
         : null}
+      {/* 入参参数 */}
+      {config.inParams.map((item, index) => (
+        <Text
+          {...textConfig}
+          key={item.id}
+          text={`${item.field}：${item.value || '""'}`}
+          y={
+            TITLE_HEIGHT +
+            (config.ports.some((item) => item.visible)
+              ? PORT_DIMENSION + MARGIN_LEFT * 2
+              : MARGIN_LEFT) +
+            index * PORT_DIMENSION
+          }
+        />
+      ))}
     </Group>
   )
 }

@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 20:32:09
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 17:22:10
+ * @LastEditTime: 2023-02-20 19:46:07
  * @FilePath: \flow-chart\src\pages\card-configuration\components\header\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -20,7 +20,9 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
 
   const save = useCallback(() => {
     if (cardConfigurationContent) {
-      if (!cardConfigurationContent.card?.ports.some((item) => item.visible)) {
+      if (
+        !cardConfigurationContent.data.card?.ports.some((item) => item.visible)
+      ) {
         message.error('必须选择一个连接点')
       }
     }
