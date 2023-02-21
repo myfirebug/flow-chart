@@ -42,8 +42,6 @@
     }
   }
   @include e(workspace) {
-    display: flex;
-    flex-direction: column;
     flex: 1;
     background: #eee;
     padding: 4px;
@@ -96,10 +94,12 @@
     }
     @include m(body) {
       position: relative;
-      flex: 1;
+      height: calc(100% - 32px);
       padding: 20px 10px 0 10px;
       background: #fff;
       box-sizing: border-box;
+      overflow: hidden;
+      overflow-y: scroll;
     }
   }
   @include e(settings) {

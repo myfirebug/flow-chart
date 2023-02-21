@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-21 17:53:26
+ * @LastEditTime: 2023-02-21 19:42:41
  * @FilePath: \flow-chart\src\pages\card-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -110,7 +110,11 @@ export const counter = (
         )
         if (index !== -1) {
           copy.card.inParams.splice(index, 1)
-          copy.selectFormItemId = ''
+          if (copy.card.inParams.length) {
+            copy.selectFormItemId = copy.card.inParams[0].id
+          } else {
+            copy.selectFormItemId = ''
+          }
           copy.card.height = diffHeight(copy.card)
         }
       }
