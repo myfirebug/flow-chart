@@ -33,6 +33,10 @@ export type MODIFY_CARD_FROM_ITEM_TYPE = typeof MODIFY_CARD_FROM_ITEM
 export const SELECT_CARD_FROM_ITEM = 'SELECT_CARD_FROM_ITEM'
 export type SELECT_CARD_FROM_ITEM_TYPE = typeof SELECT_CARD_FROM_ITEM
 
+// 删除卡片的表单元素
+export const DELETE_CARD_FROM_ITEM = 'DELETE_CARD_FROM_ITEM'
+export type DELETE_CARD_FROM_ITEM_TYPE = typeof DELETE_CARD_FROM_ITEM
+
 export interface ALL_STATE {
   card: CARD_STATE | null
   selectFormItemId: string

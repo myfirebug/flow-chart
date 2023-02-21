@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-21 14:41:29
+ * @LastEditTime: 2023-02-21 17:05:12
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\workspace\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -19,20 +19,47 @@ const Workspace: FC<IWorkspaceProps> = () => {
   const [status, setStatus] = useState<0 | 1 | 2>(0)
   // 选中表单项
   const selectHandler = useCallback(
-    (id: string) => {
+    (id: string, e: any) => {
+      const { type } = e.target.dataset
+      console.log(type, '234')
       const { card, selectFormItemId } = cardConfigurationContent.data
-      if (card && selectFormItemId !== id) {
-        cardConfigurationContent.dispatch({
-          type: 'SELECT_CARD_FROM_ITEM',
-          id: id
-        })
+      if (card) {
+        switch (type) {
+          case 'wrap':
+            if (selectFormItemId !== id) {
+              cardConfigurationContent.dispatch({
+                type: 'SELECT_CARD_FROM_ITEM',
+                id: id
+              })
+            }
+            break
+          case 'top':
+            break
+          case 'bottom':
+            break
+          case 'moveUp':
+            break
+          case 'moveDown':
+            break
+          case 'copy':
+            break
+          case 'delete':
+            cardConfigurationContent.dispatch({
+              type: 'DELETE_CARD_FROM_ITEM'
+            })
+            break
+        }
       }
     },
     [cardConfigurationContent]
   )
   return (
     <div className='app-card-configuration-form__workspace'>
-      <div className='app-card-configuration-form__workspace--menu'>
+      <div
+        className='app-card-configuration-form__workspace--menu'
+        onClick={(e) =>
+          selectHandler(cardConfigurationContent.data.selectFormItemId, e)
+        }>
         <div className='left'>
           <Tooltip placement='top' title='撤销'>
             <span className='app-icon is-disabled'>&#xe61e;</span>
@@ -42,6 +69,7 @@ const Workspace: FC<IWorkspaceProps> = () => {
           </Tooltip>
           <Tooltip placement='top' title='置顶'>
             <span
+              data-type='top'
               className={`app-icon ${
                 cardConfigurationContent.data.selectFormItemId
                   ? ''
@@ -52,6 +80,7 @@ const Workspace: FC<IWorkspaceProps> = () => {
           </Tooltip>
           <Tooltip placement='top' title='置底'>
             <span
+              data-type='down'
               className={`app-icon ${
                 cardConfigurationContent.data.selectFormItemId
                   ? ''
@@ -62,6 +91,7 @@ const Workspace: FC<IWorkspaceProps> = () => {
           </Tooltip>
           <Tooltip placement='top' title='上移'>
             <span
+              data-type='moveUp'
               className={`app-icon ${
                 cardConfigurationContent.data.selectFormItemId
                   ? ''
@@ -72,6 +102,7 @@ const Workspace: FC<IWorkspaceProps> = () => {
           </Tooltip>
           <Tooltip placement='top' title='下移'>
             <span
+              data-type='moveDown'
               className={`app-icon ${
                 cardConfigurationContent.data.selectFormItemId
                   ? ''
@@ -82,6 +113,7 @@ const Workspace: FC<IWorkspaceProps> = () => {
           </Tooltip>
           <Tooltip placement='top' title='复制'>
             <span
+              data-type='copy'
               className={`app-icon ${
                 cardConfigurationContent.data.selectFormItemId
                   ? ''
@@ -92,6 +124,7 @@ const Workspace: FC<IWorkspaceProps> = () => {
           </Tooltip>
           <Tooltip placement='top' title='删除'>
             <span
+              data-type='delete'
               className={`app-icon ${
                 cardConfigurationContent.data.selectFormItemId
                   ? ''

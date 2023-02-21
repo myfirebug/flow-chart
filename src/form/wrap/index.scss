@@ -1,6 +1,9 @@
 @include b(custom-form-item) {
   position: relative;
   .edit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -8,11 +11,52 @@
     right: 0;
     z-index: 1000;
     cursor: pointer;
+    box-sizing: border-box;
     &:hover {
       border: 1px dashed #096dd9;
     }
     &.is-selected {
       border: 2px solid #096dd9;
+    }
+    .tools {
+      position: absolute;
+      bottom: -28px;
+      right: -2px;
+    }
+    span {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      margin-left: -1px;
+      text-align: center;
+      cursor: pointer;
+      line-height: 24px;
+      color: #333;
+      background: #fff;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      transform: all 0.25s ease 0s;
+      &.is-selected {
+        color: #fff;
+        background: #096dd9;
+        &:hover {
+          color: #fff;
+          background: #096dd9;
+        }
+      }
+      &.is-disabled {
+        cursor: no-drop;
+        color: #aaa;
+        background: rgba(0, 0, 0, 0.05);
+        &:hover {
+          color: #aaa;
+          background: rgba(0, 0, 0, 0.05);
+        }
+      }
+      &:hover {
+        color: #096dd9;
+        background: rgba(24, 144, 255, 0.05);
+      }
     }
   }
 }

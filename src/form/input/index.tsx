@@ -6,7 +6,9 @@ import FormItemWrap from '../wrap'
 
 interface ICustomInputProps {
   item: IPARAM
-  selectHandler?: (id: string) => void
+  selectHandler?: (
+    id: string,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   selectId?: string
 }
 

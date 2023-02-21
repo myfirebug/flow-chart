@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-21 11:21:46
+ * @LastEditTime: 2023-02-21 17:53:26
  * @FilePath: \flow-chart\src\pages\card-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -21,7 +21,8 @@ import {
   ADD_CARD_FROM_ITEM,
   ALL_STATE,
   MODIFY_CARD_FROM_ITEM,
-  SELECT_CARD_FROM_ITEM
+  SELECT_CARD_FROM_ITEM,
+  DELETE_CARD_FROM_ITEM
 } from './type'
 import { CARD_STATE, IPORT } from '@src/types'
 
@@ -100,6 +101,18 @@ export const counter = (
       return copy
     case SELECT_CARD_FROM_ITEM:
       copy.selectFormItemId = action.id
+      return copy
+    case DELETE_CARD_FROM_ITEM:
+      if (copy.selectFormItemId) {
+        const index = copy.card.inParams.findIndex(
+          (item) => item.id === copy.selectFormItemId
+        )
+        if (index !== -1) {
+          copy.card.inParams.splice(index, 1)
+          copy.selectFormItemId = ''
+          copy.card.height = diffHeight(copy.card)
+        }
+      }
       return copy
     default:
       return state

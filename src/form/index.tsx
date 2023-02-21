@@ -5,7 +5,10 @@ import CustomInput from './input'
 // 自定义input
 interface ICustomFormProps {
   list: IPARAM[]
-  selectHandler?: (id: string) => void
+  selectHandler?: (
+    id: string,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void
   selectId?: string
 }
 
