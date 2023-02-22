@@ -41,6 +41,14 @@ export type DELETE_CARD_FROM_ITEM_TYPE = typeof DELETE_CARD_FROM_ITEM
 export const COPY_CARD_FROM_ITEM = 'COPY_CARD_FROM_ITEM'
 export type COPY_CARD_FROM_ITEM_TYPE = typeof COPY_CARD_FROM_ITEM
 
+// 卡片的表单元素置顶
+export const TOP_CARD_FROM_ITEM = 'TOP_CARD_FROM_ITEM'
+export type TOP_CARD_FROM_ITEM_TYPE = typeof TOP_CARD_FROM_ITEM
+
+// 卡片的表单元素置底
+export const BOTTOM_CARD_FROM_ITEM = 'BOTTOM_CARD_FROM_ITEM'
+export type BOTTOM_CARD_FROM_ITEM_TYPE = typeof BOTTOM_CARD_FROM_ITEM
+
 export interface ALL_STATE {
   card: CARD_STATE | null
   selectFormItemId: string

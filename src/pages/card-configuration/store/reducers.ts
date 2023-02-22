@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-21 19:42:41
+ * @LastEditTime: 2023-02-22 10:36:22
  * @FilePath: \flow-chart\src\pages\card-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -23,7 +23,9 @@ import {
   MODIFY_CARD_FROM_ITEM,
   SELECT_CARD_FROM_ITEM,
   DELETE_CARD_FROM_ITEM,
-  COPY_CARD_FROM_ITEM
+  COPY_CARD_FROM_ITEM,
+  TOP_CARD_FROM_ITEM,
+  BOTTOM_CARD_FROM_ITEM
 } from './type'
 import { CARD_STATE, IPORT } from '@src/types'
 
@@ -132,6 +134,28 @@ export const counter = (
           })
           copy.selectFormItemId = id
           copy.card.height = diffHeight(copy.card)
+        }
+      }
+      return copy
+    case TOP_CARD_FROM_ITEM:
+      if (copy.selectFormItemId) {
+        const index = copy.card.inParams.findIndex(
+          (item) => item.id === copy.selectFormItemId
+        )
+        if (index !== -1) {
+          const currentFormItem = copy.card.inParams.splice(index, 1)
+          copy.card.inParams.unshift(currentFormItem[0])
+        }
+      }
+      return copy
+    case BOTTOM_CARD_FROM_ITEM:
+      if (copy.selectFormItemId) {
+        const index = copy.card.inParams.findIndex(
+          (item) => item.id === copy.selectFormItemId
+        )
+        if (index !== -1) {
+          const currentFormItem = copy.card.inParams.splice(index, 1)
+          copy.card.inParams.push(currentFormItem[0])
         }
       }
       return copy

@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-22 10:07:57
+ * @LastEditTime: 2023-02-22 10:35:22
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\workspace\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -67,32 +67,39 @@ const Workspace: FC<IWorkspaceProps> = () => {
   const selectHandler = useCallback(
     (id: string, e: any) => {
       const { type } = e.target.dataset
+      const { dispatch } = cardConfigurationContent
       const { card, selectFormItemId } = cardConfigurationContent.data
       if (card) {
         switch (type) {
           case 'wrap':
             if (selectFormItemId !== id) {
-              cardConfigurationContent.dispatch({
+              dispatch({
                 type: 'SELECT_CARD_FROM_ITEM',
                 id: id
               })
             }
             break
           case 'top':
+            dispatch({
+              type: 'TOP_CARD_FROM_ITEM'
+            })
             break
           case 'bottom':
+            dispatch({
+              type: 'BOTTOM_CARD_FROM_ITEM'
+            })
             break
           case 'moveUp':
             break
           case 'moveDown':
             break
           case 'copy':
-            cardConfigurationContent.dispatch({
+            dispatch({
               type: 'COPY_CARD_FROM_ITEM'
             })
             break
           case 'delete':
-            cardConfigurationContent.dispatch({
+            dispatch({
               type: 'DELETE_CARD_FROM_ITEM'
             })
             break
@@ -125,7 +132,7 @@ const Workspace: FC<IWorkspaceProps> = () => {
           </Tooltip>
           <Tooltip placement='top' title='置底'>
             <span
-              data-type='down'
+              data-type='bottom'
               className={`app-icon ${
                 disabledTypes.bottom ? 'is-disabled' : ''
               }`}>
