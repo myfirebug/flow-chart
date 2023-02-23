@@ -8,7 +8,9 @@ import {
   DELETE_CARD_FROM_ITEM_TYPE,
   COPY_CARD_FROM_ITEM_TYPE,
   TOP_CARD_FROM_ITEM_TYPE,
-  BOTTOM_CARD_FROM_ITEM_TYPE
+  BOTTOM_CARD_FROM_ITEM_TYPE,
+  MOVEUP_CARD_FROM_ITEM_TYPE,
+  MOVEDOWN_CARD_FROM_ITEM_TYPE
 } from './type'
 import { CARD_STATE, IPORT_TYPE, IPARAM } from '@src/types'
 
@@ -66,6 +68,16 @@ export interface bottomCardFormItemAction {
   type: BOTTOM_CARD_FROM_ITEM_TYPE
 }
 
+// 置底选中表单元素
+export interface moveUpCardFormItemAction {
+  type: MOVEUP_CARD_FROM_ITEM_TYPE
+}
+
+// 置底选中表单元素
+export interface movedownCardFormItemAction {
+  type: MOVEDOWN_CARD_FROM_ITEM_TYPE
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
   | cardAction
@@ -78,3 +90,5 @@ export type ModifyAction =
   | copyCardFormItemAction
   | topCardFormItemAction
   | bottomCardFormItemAction
+  | moveUpCardFormItemAction
+  | movedownCardFormItemAction

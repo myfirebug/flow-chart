@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-22 10:35:22
+ * @LastEditTime: 2023-02-23 11:39:56
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\workspace\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -25,6 +25,8 @@ const Workspace: FC<IWorkspaceProps> = () => {
     delete: true
   })
   const [status, setStatus] = useState<0 | 1 | 2>(0)
+
+  console.log(disabledTypes, 'disabledTypes')
 
   // 修改禁用按钮状态
   useEffect(() => {
@@ -80,33 +82,45 @@ const Workspace: FC<IWorkspaceProps> = () => {
             }
             break
           case 'top':
-            dispatch({
-              type: 'TOP_CARD_FROM_ITEM'
-            })
+            !disabledTypes.top &&
+              dispatch({
+                type: 'TOP_CARD_FROM_ITEM'
+              })
             break
           case 'bottom':
-            dispatch({
-              type: 'BOTTOM_CARD_FROM_ITEM'
-            })
+            !disabledTypes.bottom &&
+              dispatch({
+                type: 'BOTTOM_CARD_FROM_ITEM'
+              })
             break
           case 'moveUp':
+            !disabledTypes.moveUp &&
+              dispatch({
+                type: 'MOVEUP_CARD_FROM_ITEM'
+              })
             break
           case 'moveDown':
+            !disabledTypes.moveDown &&
+              dispatch({
+                type: 'MOVEDOWN_CARD_FROM_ITEM'
+              })
             break
           case 'copy':
-            dispatch({
-              type: 'COPY_CARD_FROM_ITEM'
-            })
+            !disabledTypes.copy &&
+              dispatch({
+                type: 'COPY_CARD_FROM_ITEM'
+              })
             break
           case 'delete':
-            dispatch({
-              type: 'DELETE_CARD_FROM_ITEM'
-            })
+            !disabledTypes.delete &&
+              dispatch({
+                type: 'DELETE_CARD_FROM_ITEM'
+              })
             break
         }
       }
     },
-    [cardConfigurationContent]
+    [cardConfigurationContent, disabledTypes]
   )
 
   return (

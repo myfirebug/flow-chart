@@ -49,6 +49,14 @@ export type TOP_CARD_FROM_ITEM_TYPE = typeof TOP_CARD_FROM_ITEM
 export const BOTTOM_CARD_FROM_ITEM = 'BOTTOM_CARD_FROM_ITEM'
 export type BOTTOM_CARD_FROM_ITEM_TYPE = typeof BOTTOM_CARD_FROM_ITEM
 
+// 卡片的表单元素上移
+export const MOVEUP_CARD_FROM_ITEM = 'MOVEUP_CARD_FROM_ITEM'
+export type MOVEUP_CARD_FROM_ITEM_TYPE = typeof MOVEUP_CARD_FROM_ITEM
+
+// 卡片的表单元素下移
+export const MOVEDOWN_CARD_FROM_ITEM = 'MOVEDOWN_CARD_FROM_ITEM'
+export type MOVEDOWN_CARD_FROM_ITEM_TYPE = typeof MOVEDOWN_CARD_FROM_ITEM
+
 export interface ALL_STATE {
   card: CARD_STATE | null
   selectFormItemId: string

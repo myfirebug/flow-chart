@@ -25,7 +25,9 @@ import {
   DELETE_CARD_FROM_ITEM,
   COPY_CARD_FROM_ITEM,
   TOP_CARD_FROM_ITEM,
-  BOTTOM_CARD_FROM_ITEM
+  BOTTOM_CARD_FROM_ITEM,
+  MOVEUP_CARD_FROM_ITEM,
+  MOVEDOWN_CARD_FROM_ITEM
 } from './type'
 import { CARD_STATE, IPORT } from '@src/types'
 
@@ -156,6 +158,28 @@ export const counter = (
         if (index !== -1) {
           const currentFormItem = copy.card.inParams.splice(index, 1)
           copy.card.inParams.push(currentFormItem[0])
+        }
+      }
+      return copy
+    case MOVEUP_CARD_FROM_ITEM:
+      if (copy.selectFormItemId) {
+        const index = copy.card.inParams.findIndex(
+          (item) => item.id === copy.selectFormItemId
+        )
+        if (index > 0) {
+          const currentFormItem = copy.card.inParams.splice(index, 1)
+          copy.card.inParams.splice(index - 1, 0, ...currentFormItem)
+        }
+      }
+      return copy
+    case MOVEDOWN_CARD_FROM_ITEM:
+      if (copy.selectFormItemId) {
+        const index = copy.card.inParams.findIndex(
+          (item) => item.id === copy.selectFormItemId
+        )
+        if (index !== -1 && index < copy.card.inParams.length - 1) {
+          const currentFormItem = copy.card.inParams.splice(index, 1)
+          copy.card.inParams.splice(index + 1, 0, ...currentFormItem)
         }
       }
       return copy
