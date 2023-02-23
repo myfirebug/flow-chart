@@ -4,7 +4,9 @@ import { IPARAM } from '@src/types'
 // 自定义表单项盒子
 import FormItemWrap from '../wrap'
 
-interface ICustomInputProps {
+const { TextArea } = Input
+
+interface ICustomTextAreaProps {
   item: IPARAM
   selectHandler?: (
     id: string,
@@ -13,7 +15,7 @@ interface ICustomInputProps {
   selectId?: string
 }
 
-const CustomInput: FC<ICustomInputProps> = ({
+const CustomTextArea: FC<ICustomTextAreaProps> = ({
   item,
   selectHandler,
   selectId
@@ -28,7 +30,7 @@ const CustomInput: FC<ICustomInputProps> = ({
         name={item.field}
         tooltip={item.tooltip}
         rules={[{ required: item.require }]}>
-        <Input
+        <TextArea
           allowClear
           showCount={item.showCount}
           maxLength={item.maxLength}
@@ -40,4 +42,4 @@ const CustomInput: FC<ICustomInputProps> = ({
   )
 }
 
-export default CustomInput
+export default CustomTextArea

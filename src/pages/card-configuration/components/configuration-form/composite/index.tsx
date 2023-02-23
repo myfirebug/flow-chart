@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-21 10:55:59
+ * @LastEditTime: 2023-02-23 14:22:26
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\composite\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -19,14 +19,20 @@ const Composite: FC<ICompositeProps> = () => {
   //添加卡片表单项
   const addCardFormItem = useCallback(
     (item: any) => {
-      if (
-        !item.disabled &&
-        cardConfigurationContent &&
-        cardConfigurationContent.dispatch
-      ) {
-        cardConfigurationContent.dispatch({
+      const { data, dispatch } = cardConfigurationContent
+      const { card } = data
+      if (!item.disabled && cardConfigurationContent && dispatch) {
+        const arr = card
+          ? card.inParams.filter((sub) => sub.formType === item.data.formType)
+          : []
+
+        dispatch({
           type: 'ADD_CARD_FROM_ITEM',
-          data: item.data
+          data: {
+            ...item.data,
+            label: `${item.name}${arr.length}`,
+            field: `${item.data.formType.toLocaleLowerCase()}${arr.length}`
+          }
         })
       }
     },

@@ -32,10 +32,9 @@ export const CONTROL_DATAS = [
   {
     value: 'TextArea',
     name: '多行输入',
-    disabled: true,
     data: {
       ...formItemBaseConfig,
-      formType: 'Input'
+      formType: 'TextArea'
     }
   },
   {

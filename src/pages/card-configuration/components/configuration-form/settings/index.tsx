@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-21 13:18:43
+ * @LastEditTime: 2023-02-23 14:04:57
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, useCallback, useContext, useEffect } from 'react'
+import { FC, useCallback, useContext, useEffect, useMemo } from 'react'
 import {
   Form,
   Input,
@@ -24,10 +24,9 @@ import { CardConfigurationContext } from '../../../index'
 const { TextArea } = Input
 const { Option } = Select
 const { Panel } = Collapse
-const { inputConfigure } = configuration
 interface ISittingsProps {}
 
-console.log(inputConfigure, '12312')
+console.log(configuration, '12312')
 
 const Sittings: FC<ISittingsProps> = () => {
   const cardConfigurationContent = useContext(CardConfigurationContext)
@@ -283,6 +282,23 @@ const Sittings: FC<ISittingsProps> = () => {
     })
   }
 
+  // 获取选中表单类型
+  const getFormType = useMemo(() => {
+    const { card, selectFormItemId } = cardConfigurationContent.data
+    let result = ''
+    if (card && selectFormItemId) {
+      const index = card.inParams.findIndex(
+        (item) => item.id === selectFormItemId
+      )
+      if (index !== -1) {
+        result = card.inParams[index].formType
+      }
+    }
+    return result
+  }, [cardConfigurationContent.data])
+
+  console.log(getFormType, 'getFormType')
+
   return (
     <div className='app-card-configuration-form__settings'>
       <div className='header'>属性配置</div>
@@ -295,7 +311,13 @@ const Sittings: FC<ISittingsProps> = () => {
             autoComplete='off'
             colon={false}
             labelAlign='left'>
-            {renderDynamicForm(inputConfigure.configure, configureForm, true)}
+            {getFormType && configuration[getFormType]
+              ? renderDynamicForm(
+                  configuration[getFormType].configure,
+                  configureForm,
+                  true
+                )
+              : null}
           </Form>
         ) : (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />

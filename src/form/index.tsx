@@ -1,7 +1,10 @@
 import { FC, useEffect } from 'react'
 import { Form } from 'antd'
 import { IPARAM } from '@src/types'
+// 输入框
 import CustomInput from './input'
+// 多行输入框
+import CustomTextArea from './textarea'
 // 自定义input
 interface ICustomFormProps {
   list: IPARAM[]
@@ -33,11 +36,23 @@ const CustomForm: FC<ICustomFormProps> = ({
       labelCol={{ span: 7 }}
       wrapperCol={{ span: 17 }}
       autoComplete='off'
+      colon={false}
+      labelAlign='left'
       form={form}>
       {list.map((item) => {
         if (item.formType === 'Input') {
           return (
             <CustomInput
+              key={item.id}
+              item={item}
+              selectHandler={selectHandler}
+              selectId={selectId}
+            />
+          )
+        }
+        if (item.formType === 'TextArea') {
+          return (
+            <CustomTextArea
               key={item.id}
               item={item}
               selectHandler={selectHandler}
