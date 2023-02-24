@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-21 13:00:39
+ * @LastEditTime: 2023-02-24 11:00:07
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -13,7 +13,7 @@ const formItemBaseConfig: IPARAM = {
   formType: 'Input',
   label: 'label',
   placeholder: '请输入',
-  value: 'test',
+  value: '',
   disabled: false,
   required: false,
   tooltip: ''
@@ -40,10 +40,9 @@ export const CONTROL_DATAS = [
   {
     value: 'Number',
     name: '数字输入',
-    disabled: true,
     data: {
       ...formItemBaseConfig,
-      formType: 'Input'
+      formType: 'InputNumber'
     }
   },
   {

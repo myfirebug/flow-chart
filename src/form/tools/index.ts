@@ -8,10 +8,12 @@
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import Input from './input'
+import InputNumber from './input-number'
 import TextArea from './textarea'
 
 const configuration: any = {
   Input,
+  InputNumber,
   TextArea
 }
 

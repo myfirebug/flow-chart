@@ -5,6 +5,8 @@ import { IPARAM } from '@src/types'
 import CustomInput from './input'
 // 多行输入框
 import CustomTextArea from './textarea'
+// 数字输入框
+import CustomInputNumber from './input-number'
 // 自定义input
 interface ICustomFormProps {
   list: IPARAM[]
@@ -53,6 +55,16 @@ const CustomForm: FC<ICustomFormProps> = ({
         if (item.formType === 'TextArea') {
           return (
             <CustomTextArea
+              key={item.id}
+              item={item}
+              selectHandler={selectHandler}
+              selectId={selectId}
+            />
+          )
+        }
+        if (item.formType === 'InputNumber') {
+          return (
+            <CustomInputNumber
               key={item.id}
               item={item}
               selectHandler={selectHandler}
