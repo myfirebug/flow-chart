@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-23 14:04:57
+ * @LastEditTime: 2023-02-24 11:17:33
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -43,7 +43,7 @@ const Sittings: FC<ISittingsProps> = () => {
         configureForm.setFieldsValue(card?.inParams[index])
       }
     }
-  }, [cardConfigurationContent])
+  }, [cardConfigurationContent, configureForm])
   /**
    *
    * @param callback 返回的方法
