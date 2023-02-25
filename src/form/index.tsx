@@ -3,8 +3,6 @@ import { Form } from 'antd'
 import { IPARAM } from '@src/types'
 // 输入框
 import CustomInput from './input'
-// 多行输入框
-import CustomTextArea from './textarea'
 // 数字输入框
 import CustomInputNumber from './input-number'
 // 自定义input
@@ -42,19 +40,14 @@ const CustomForm: FC<ICustomFormProps> = ({
       labelAlign='left'
       form={form}>
       {list.map((item) => {
-        if (item.formType === 'Input') {
+        if (
+          item.formType === 'Input' ||
+          item.formType === 'TextArea' ||
+          item.formType === 'Password'
+        ) {
           return (
             <CustomInput
-              key={item.id}
-              item={item}
-              selectHandler={selectHandler}
-              selectId={selectId}
-            />
-          )
-        }
-        if (item.formType === 'TextArea') {
-          return (
-            <CustomTextArea
+              type={item.formType}
               key={item.id}
               item={item}
               selectHandler={selectHandler}

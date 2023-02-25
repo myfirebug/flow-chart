@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-24 11:00:07
+ * @LastEditTime: 2023-02-25 09:48:50
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -48,10 +48,9 @@ export const CONTROL_DATAS = [
   {
     value: 'Password',
     name: '密码输入',
-    disabled: true,
     data: {
       ...formItemBaseConfig,
-      formType: 'Input'
+      formType: 'Password'
     }
   },
   {

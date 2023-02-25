@@ -10,11 +10,13 @@
 import Input from './input'
 import InputNumber from './input-number'
 import TextArea from './textarea'
+import Password from './password'
 
 const configuration: any = {
   Input,
   InputNumber,
-  TextArea
+  TextArea,
+  Password
 }
 
 export default configuration

@@ -5,6 +5,7 @@ import { IPARAM } from '@src/types'
 import FormItemWrap from '../wrap'
 
 interface ICustomInputProps {
+  type: 'Input' | 'TextArea' | 'Password'
   item: IPARAM
   selectHandler?: (
     id: string,
@@ -16,7 +17,8 @@ interface ICustomInputProps {
 const CustomInput: FC<ICustomInputProps> = ({
   item,
   selectHandler,
-  selectId
+  selectId,
+  type
 }) => {
   return (
     <FormItemWrap
@@ -28,13 +30,34 @@ const CustomInput: FC<ICustomInputProps> = ({
         name={item.field}
         tooltip={item.tooltip}
         rules={[{ required: item.require }]}>
-        <Input
-          allowClear
-          showCount={item.showCount}
-          maxLength={item.maxLength}
-          disabled={item.disabled}
-          placeholder={item.placeholder}
-        />
+        <>
+          {type === 'Input' ? (
+            <Input
+              allowClear
+              showCount={item.showCount}
+              maxLength={item.maxLength}
+              disabled={item.disabled}
+              placeholder={item.placeholder}
+            />
+          ) : null}
+          {type === 'TextArea' ? (
+            <Input.TextArea
+              allowClear
+              showCount={item.showCount}
+              maxLength={item.maxLength}
+              disabled={item.disabled}
+              placeholder={item.placeholder}
+            />
+          ) : null}
+          {type === 'Password' ? (
+            <Input.Password
+              allowClear
+              maxLength={item.maxLength}
+              disabled={item.disabled}
+              placeholder={item.placeholder}
+            />
+          ) : null}
+        </>
       </Form.Item>
     </FormItemWrap>
   )
