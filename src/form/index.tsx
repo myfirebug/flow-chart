@@ -5,7 +5,8 @@ import { IPARAM } from '@src/types'
 import CustomInput from './input'
 // 数字输入框
 import CustomInputNumber from './input-number'
-// 自定义input
+// switch
+import CustomSwitch from './switch'
 interface ICustomFormProps {
   list: IPARAM[]
   selectHandler?: (
@@ -58,6 +59,16 @@ const CustomForm: FC<ICustomFormProps> = ({
         if (item.formType === 'InputNumber') {
           return (
             <CustomInputNumber
+              key={item.id}
+              item={item}
+              selectHandler={selectHandler}
+              selectId={selectId}
+            />
+          )
+        }
+        if (item.formType === 'Switch') {
+          return (
+            <CustomSwitch
               key={item.id}
               item={item}
               selectHandler={selectHandler}

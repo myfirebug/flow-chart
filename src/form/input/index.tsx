@@ -29,6 +29,7 @@ const CustomInput: FC<ICustomInputProps> = ({
         label={item.label}
         name={item.field}
         tooltip={item.tooltip}
+        required={item.required}
         rules={[{ required: item.require }]}>
         <>
           {type === 'Input' ? (

@@ -128,10 +128,9 @@ export const CONTROL_DATAS = [
   {
     value: 'Switch',
     name: '开关',
-    disabled: true,
     data: {
       ...formItemBaseConfig,
-      formType: 'Input'
+      formType: 'Switch'
     }
   },
   {
