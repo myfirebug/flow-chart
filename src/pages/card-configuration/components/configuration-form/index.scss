@@ -96,11 +96,8 @@
     @include m(body) {
       position: relative;
       height: calc(100% - 32px);
-      padding: 20px 10px 0 10px;
       background: #fff;
       box-sizing: border-box;
-      overflow: hidden;
-      overflow-y: scroll;
     }
   }
   @include e(settings) {

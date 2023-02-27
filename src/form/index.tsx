@@ -7,6 +7,8 @@ import CustomInput from './input'
 import CustomInputNumber from './input-number'
 // switch
 import CustomSwitch from './switch'
+import './index.scss'
+
 interface ICustomFormProps {
   list: IPARAM[]
   selectHandler?: (
@@ -38,6 +40,7 @@ const CustomForm: FC<ICustomFormProps> = ({
       wrapperCol={{ span: 17 }}
       autoComplete='off'
       colon={false}
+      className='app-configuration-form'
       labelAlign='left'
       form={form}>
       {list.map((item) => {

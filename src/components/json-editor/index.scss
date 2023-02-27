@@ -1,0 +1,6 @@
+@include b(json-editor) {
+  height: 100%;
+  .jsoneditor {
+    overflow: hidden;
+  }
+}

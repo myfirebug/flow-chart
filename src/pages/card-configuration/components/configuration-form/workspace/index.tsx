@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-23 11:39:56
+ * @LastEditTime: 2023-02-28 09:28:31
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\workspace\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -11,6 +11,7 @@ import { FC, useCallback, useContext, useEffect, useState } from 'react'
 import { Tooltip, Result } from 'antd'
 import { CardConfigurationContext } from '../../../index'
 import CustomForm from '@src/form'
+import JsonEditor from '@src/components/json-editor'
 
 interface IWorkspaceProps {}
 
@@ -228,6 +229,16 @@ const Workspace: FC<IWorkspaceProps> = () => {
                 list={cardConfigurationContent.data.card?.inParams || []}
                 selectHandler={selectHandler}
                 selectId={cardConfigurationContent.data.selectFormItemId}
+              />
+            ) : null}
+            {status === 1 ? (
+              <JsonEditor
+                value={
+                  cardConfigurationContent.data?.card &&
+                  cardConfigurationContent.data?.card.inParams
+                    ? cardConfigurationContent.data?.card.inParams
+                    : {}
+                }
               />
             ) : null}
             {status === 2 ? (

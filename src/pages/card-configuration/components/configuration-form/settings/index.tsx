@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-24 11:17:33
+ * @LastEditTime: 2023-02-26 21:16:31
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -25,8 +25,6 @@ const { TextArea } = Input
 const { Option } = Select
 const { Panel } = Collapse
 interface ISittingsProps {}
-
-console.log(configuration, '12312')
 
 const Sittings: FC<ISittingsProps> = () => {
   const cardConfigurationContent = useContext(CardConfigurationContext)
@@ -296,8 +294,6 @@ const Sittings: FC<ISittingsProps> = () => {
     }
     return result
   }, [cardConfigurationContent.data])
-
-  console.log(getFormType, 'getFormType')
 
   return (
     <div className='app-card-configuration-form__settings'>
