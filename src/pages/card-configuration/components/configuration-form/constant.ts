@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-25 09:48:50
+ * @LastEditTime: 2023-02-28 09:37:45
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -56,10 +56,9 @@ export const CONTROL_DATAS = [
   {
     value: 'Select',
     name: '选择框',
-    disabled: true,
     data: {
       ...formItemBaseConfig,
-      formType: 'Input'
+      formType: 'Select'
     }
   },
   {

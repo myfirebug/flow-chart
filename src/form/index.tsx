@@ -7,6 +7,8 @@ import CustomInput from './input'
 import CustomInputNumber from './input-number'
 // switch
 import CustomSwitch from './switch'
+// select
+import CustomSelect from './select'
 import './index.scss'
 
 interface ICustomFormProps {
@@ -29,7 +31,7 @@ const CustomForm: FC<ICustomFormProps> = ({
     if (list) {
       let params: any = {}
       list.forEach((item) => {
-        params[item.field] = item.value
+        params[item.field] = item.value || undefined
       })
       form.setFieldsValue(params)
     }
@@ -72,6 +74,16 @@ const CustomForm: FC<ICustomFormProps> = ({
         if (item.formType === 'Switch') {
           return (
             <CustomSwitch
+              key={item.id}
+              item={item}
+              selectHandler={selectHandler}
+              selectId={selectId}
+            />
+          )
+        }
+        if (item.formType === 'Select') {
+          return (
+            <CustomSelect
               key={item.id}
               item={item}
               selectHandler={selectHandler}

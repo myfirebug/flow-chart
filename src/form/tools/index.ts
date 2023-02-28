@@ -12,13 +12,15 @@ import InputNumber from './input-number'
 import TextArea from './textarea'
 import Password from './password'
 import Switch from './switch'
+import Select from './select'
 
 const configuration: any = {
   Input,
   InputNumber,
   TextArea,
   Password,
-  Switch
+  Switch,
+  Select
 }
 
 export default configuration
