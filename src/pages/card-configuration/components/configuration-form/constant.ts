@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-28 09:37:45
+ * @LastEditTime: 2023-02-28 11:22:32
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -18,6 +18,18 @@ const formItemBaseConfig: IPARAM = {
   required: false,
   tooltip: ''
 }
+
+const params = {
+  dataType: 'mock',
+  mock: [{ label: '', value: '' }],
+  url: '',
+  method: 'get',
+  isHeader: false,
+  headerField: '',
+  headerValue: '',
+  correspondField: ''
+}
+
 // 控件
 export const CONTROL_DATAS = [
   {
@@ -58,7 +70,8 @@ export const CONTROL_DATAS = [
     name: '选择框',
     data: {
       ...formItemBaseConfig,
-      formType: 'Select'
+      formType: 'Select',
+      ...params
     }
   },
   {

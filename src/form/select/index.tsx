@@ -3,6 +3,9 @@ import { Select, Form } from 'antd'
 import { IPARAM } from '@src/types'
 // 自定义表单项盒子
 import FormItemWrap from '../wrap'
+
+import UseRequest from '@src/hooks/useRequest'
+
 const { Option } = Select
 interface ICustomInputProps {
   item: IPARAM
@@ -18,7 +21,19 @@ const CustomInput: FC<ICustomInputProps> = ({
   selectHandler,
   selectId
 }) => {
-  console.log(item, 'select')
+  const data = UseRequest(
+    JSON.stringify({
+      dataType: item.dataType,
+      mock: item.mock,
+      url: item.url,
+      method: item.method,
+      isHeader: item.isHeader,
+      headerField: item.headerField,
+      headerValue: item.headerValue,
+      correspondField: item.correspondField
+    })
+  )
+  console.log(item, data, 'select')
   return (
     <FormItemWrap
       selectHandler={selectHandler}
@@ -34,7 +49,11 @@ const CustomInput: FC<ICustomInputProps> = ({
           allowClear
           disabled={item.disabled}
           placeholder={item.placeholder}>
-          <Option>123</Option>
+          {data.map((item: any, index) => (
+            <Option key={index} value={item.value}>
+              {item.label}
+            </Option>
+          ))}
         </Select>
       </Form.Item>
     </FormItemWrap>

@@ -1,0 +1,37 @@
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { IAnyObject } from '@src/types'
+
+function UseRequest(props: string) {
+  const [data, setData] = useState([])
+
+  // 初始化数据
+  useEffect(() => {
+    const confs: IAnyObject = JSON.parse(props)
+    if (confs.dataType === 'mock') {
+      setData(confs.mock)
+    } else {
+      if (confs.url && confs.method) {
+        const header: any = {}
+        if (confs.isHeader && confs.headerField && confs.headerValue) {
+          header[confs.headerField] = confs.headerValue
+        }
+        axios({
+          url: confs.url,
+          method: confs.method,
+          headers: header
+        }).then((res: any) => {
+          if (confs.correspondField && res[confs.correspondFiel]) {
+            setData(res[confs.correspondFiel])
+          } else {
+            setData(res)
+          }
+        })
+      }
+    }
+  }, [props])
+
+  return data
+}
+
+export default UseRequest

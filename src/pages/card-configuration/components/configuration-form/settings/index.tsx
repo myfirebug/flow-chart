@@ -3,11 +3,18 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-26 21:16:31
+ * @LastEditTime: 2023-02-28 14:32:17
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, useCallback, useContext, useEffect, useMemo } from 'react'
+import {
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
 import {
   Form,
   Input,
@@ -17,19 +24,32 @@ import {
   Collapse,
   Switch,
   Slider,
-  Empty
+  Empty,
+  Button
 } from 'antd'
 import configuration from '@src/form/tools'
 import { CardConfigurationContext } from '../../../index'
+import MockForm from '../mock'
+
 const { TextArea } = Input
 const { Option } = Select
 const { Panel } = Collapse
 interface ISittingsProps {}
 
+export interface IDrawerProps {
+  visible: boolean
+  mock: never[]
+}
+
 const Sittings: FC<ISittingsProps> = () => {
   const cardConfigurationContent = useContext(CardConfigurationContext)
   // 配置from
   const [configureForm] = Form.useForm()
+  const [drawerConf, setDrawerConf] = useState<IDrawerProps>({
+    visible: false,
+    mock: []
+  })
+
   useEffect(() => {
     const { data } = cardConfigurationContent
     const { card, selectFormItemId } = data
@@ -181,6 +201,25 @@ const Sittings: FC<ISittingsProps> = () => {
             </Select>
           </Form.Item>
         )}
+        {item.componentName === 'MockButton' && (
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}>
+            <Button
+              type='primary'
+              style={{ width: '100%' }}
+              onClick={() =>
+                setDrawerConf({
+                  visible: true,
+                  mock: configureForm.getFieldValue('mock')
+                })
+              }>
+              配置mock数据
+            </Button>
+          </Form.Item>
+        )}
       </>
     )
   }
@@ -239,7 +278,7 @@ const Sittings: FC<ISittingsProps> = () => {
                   ? subItem.relationFields.split(',')
                   : []
               return (
-                <Collapse key={subIndex} activeKey={0}>
+                <Collapse key={subIndex} defaultActiveKey={0} accordion>
                   {subItem.relationFields === undefined ? (
                     <Panel header={subItem.name} key={subIndex}>
                       {renderDynamicForm(subItem.list, form, isUpdate)}
@@ -255,7 +294,7 @@ const Sittings: FC<ISittingsProps> = () => {
                           )
                         ) {
                           return (
-                            <Collapse key={subIndex}>
+                            <Collapse key={subIndex} accordion>
                               <Panel
                                 header={subItem.name}
                                 key={subItem + subIndex}>
@@ -295,26 +334,42 @@ const Sittings: FC<ISittingsProps> = () => {
     return result
   }, [cardConfigurationContent.data])
 
+  // 保存
+  const saveMockHandler = (data: never[]) => {
+    setDrawerConf((state) => ({
+      ...state,
+      visible: false
+    }))
+    onChangeHandler('mock', data)
+  }
+
   return (
     <div className='app-card-configuration-form__settings'>
       <div className='header'>属性配置</div>
       <div className='body'>
         {cardConfigurationContent.data.selectFormItemId ? (
-          <Form
-            form={configureForm}
-            labelCol={{ span: 7 }}
-            wrapperCol={{ span: 17 }}
-            autoComplete='off'
-            colon={false}
-            labelAlign='left'>
-            {getFormType && configuration[getFormType]
-              ? renderDynamicForm(
-                  configuration[getFormType].configure,
-                  configureForm,
-                  true
-                )
-              : null}
-          </Form>
+          <>
+            <Form
+              form={configureForm}
+              labelCol={{ span: 7 }}
+              wrapperCol={{ span: 17 }}
+              autoComplete='off'
+              colon={false}
+              labelAlign='left'>
+              {getFormType && configuration[getFormType]
+                ? renderDynamicForm(
+                    configuration[getFormType].configure,
+                    configureForm,
+                    true
+                  )
+                : null}
+            </Form>
+            <MockForm
+              drawerConf={drawerConf}
+              setDrawerConf={setDrawerConf}
+              saveMockHandler={saveMockHandler}
+            />
+          </>
         ) : (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         )}
