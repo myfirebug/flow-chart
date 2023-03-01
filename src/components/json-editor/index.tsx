@@ -1,15 +1,13 @@
-import {
-  FC, useCallback, useEffect, useRef
-} from 'react'
+import { FC, useCallback, useEffect, useRef } from 'react'
 import { IAnyObject } from '@src/types'
 import JSONEditor, { JSONEditorOptions } from 'jsoneditor'
 import 'jsoneditor/dist/jsoneditor.css'
 import './index.scss'
 
 interface IJsonEditorProps {
-  value: IAnyObject;
-  onChange?: (josn?: any) => void;
-  options?: JSONEditorOptions;
+  value: IAnyObject
+  onChange?: (josn?: any) => void
+  options?: JSONEditorOptions
 }
 
 const JsonEditor: FC<IJsonEditorProps> = ({
@@ -17,7 +15,6 @@ const JsonEditor: FC<IJsonEditorProps> = ({
   onChange,
   options = {}
 }) => {
-
   const editorRef = useRef<any>(null)
   const editorObj = useRef<any>(null)
 
@@ -39,19 +36,24 @@ const JsonEditor: FC<IJsonEditorProps> = ({
     initEditor()
   }, [initEditor])
 
-
   useEffect(() => {
+    if (editorObj.current) {
+      // 这里更新
+      // editorObj.current.set(value)
+      // editorObj.current.get()
+      // console.log(editorObj.current.set, value)
+    }
     return () => {
       // 销毁
       if (editorObj.current) {
         editorObj.current.destroy()
       }
     }
-  }, [editorObj])
+  }, [editorObj, value])
 
-  return (
-    <div ref={editorRef} className="app-json-editor"></div>
-  )
+  console.log(editorObj.current, editorRef.current, 'editorObj.current')
+
+  return <div ref={editorRef} className='app-json-editor'></div>
 }
 
 export default JsonEditor

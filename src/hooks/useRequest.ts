@@ -21,10 +21,10 @@ function UseRequest(props: string) {
           method: confs.method,
           headers: header
         }).then((res: any) => {
-          if (confs.correspondField && res[confs.correspondFiel]) {
-            setData(res[confs.correspondFiel])
+          if (confs.correspondField && res.data[confs.correspondField]) {
+            setData(res.data[confs.correspondField])
           } else {
-            setData(res)
+            setData(res.data)
           }
         })
       }

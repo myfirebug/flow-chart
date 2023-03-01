@@ -33,7 +33,7 @@ const CustomInput: FC<ICustomInputProps> = ({
       correspondField: item.correspondField
     })
   )
-  console.log(item, data, 'select')
+  console.log(data, 'datadatadatadatadatadata')
   return (
     <FormItemWrap
       selectHandler={selectHandler}
@@ -49,11 +49,13 @@ const CustomInput: FC<ICustomInputProps> = ({
           allowClear
           disabled={item.disabled}
           placeholder={item.placeholder}>
-          {data.map((item: any, index) => (
-            <Option key={index} value={item.value}>
-              {item.label}
-            </Option>
-          ))}
+          {data instanceof Array
+            ? data.map((item: any, index) => (
+                <Option key={index} value={item.value}>
+                  {item.label}
+                </Option>
+              ))
+            : null}
         </Select>
       </Form.Item>
     </FormItemWrap>

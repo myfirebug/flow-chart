@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-28 09:28:31
+ * @LastEditTime: 2023-02-28 14:59:55
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\workspace\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -26,8 +26,6 @@ const Workspace: FC<IWorkspaceProps> = () => {
     delete: true
   })
   const [status, setStatus] = useState<0 | 1 | 2>(0)
-
-  console.log(disabledTypes, 'disabledTypes')
 
   // 修改禁用按钮状态
   useEffect(() => {

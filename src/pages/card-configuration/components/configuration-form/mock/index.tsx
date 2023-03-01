@@ -17,7 +17,6 @@ const MockForm: FC<IMockFormProps> = ({
 }) => {
   // mock配置
   const [mockForm] = Form.useForm()
-  console.log(drawerConf, 'drawerConfdrawerConfdrawerConf')
 
   useEffect(() => {
     if (drawerConf.mock && drawerConf.mock.length) {
@@ -75,7 +74,6 @@ const MockForm: FC<IMockFormProps> = ({
                   </Col>
                 </Row>
                 {fields.map((field) => {
-                  console.log(field)
                   return (
                     <Row key={field.key}>
                       <Col span={11} style={{ paddingLeft: 10 }}>

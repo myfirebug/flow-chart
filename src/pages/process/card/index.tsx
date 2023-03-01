@@ -97,7 +97,6 @@ const Card: FC<ICardProps> = ({ strategy, getStrategy, path }) => {
           <div className='app-table__operation'>
             <span
               onClick={() => {
-                console.log(record.pages, 'record.pages')
                 history.push(`/frame/card-configuration?id=${record.id}`)
               }}
               className='link'>
