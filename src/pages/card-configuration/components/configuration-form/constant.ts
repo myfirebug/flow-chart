@@ -71,16 +71,18 @@ export const CONTROL_DATAS = [
     data: {
       ...formItemBaseConfig,
       formType: 'Select',
-      ...params
+      ...params,
+      mock: [{ label: '选择框1', value: 'select1' }]
     }
   },
   {
     value: 'Checkbox Group',
     name: '复选框',
-    disabled: true,
     data: {
       ...formItemBaseConfig,
-      formType: 'Input'
+      formType: 'CheckboxGroup',
+      ...params,
+      mock: [{ label: '复选框1', value: 'checkbox1' }]
     }
   },
   {

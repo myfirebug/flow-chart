@@ -9,6 +9,8 @@ import CustomInputNumber from './input-number'
 import CustomSwitch from './switch'
 // select
 import CustomSelect from './select'
+// checkbox-group
+import CustomCheckboxGroup from './checkbox-group'
 import './index.scss'
 
 interface ICustomFormProps {
@@ -84,6 +86,16 @@ const CustomForm: FC<ICustomFormProps> = ({
         if (item.formType === 'Select') {
           return (
             <CustomSelect
+              key={item.id}
+              item={item}
+              selectHandler={selectHandler}
+              selectId={selectId}
+            />
+          )
+        }
+        if (item.formType === 'CheckboxGroup') {
+          return (
+            <CustomCheckboxGroup
               key={item.id}
               item={item}
               selectHandler={selectHandler}

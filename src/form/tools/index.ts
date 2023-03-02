@@ -13,6 +13,7 @@ import TextArea from './textarea'
 import Password from './password'
 import Switch from './switch'
 import Select from './select'
+import CheckboxGroup from './checkbox-group'
 
 const configuration: any = {
   Input,
@@ -20,7 +21,8 @@ const configuration: any = {
   TextArea,
   Password,
   Switch,
-  Select
+  Select,
+  CheckboxGroup
 }
 
 export default configuration
