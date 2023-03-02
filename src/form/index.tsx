@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useCallback, useEffect, useMemo } from 'react'
 import { Form } from 'antd'
 import { IPARAM } from '@src/types'
 // 输入框
@@ -38,6 +38,22 @@ const CustomForm: FC<ICustomFormProps> = ({
       form.setFieldsValue(params)
     }
   }, [form, list])
+  // 获取参数
+  const getParams = useCallback(
+    (dependency: never[]) => {
+      let result: any = {}
+      if (dependency) {
+        dependency.forEach((item) => {
+          const index = list.findIndex((sub) => sub.field === item)
+          if (index !== -1) {
+            result[item] = list[index].value
+          }
+        })
+      }
+      return result
+    },
+    [list]
+  )
   return (
     <Form
       labelCol={{ span: 7 }}
@@ -87,7 +103,10 @@ const CustomForm: FC<ICustomFormProps> = ({
           return (
             <CustomSelect
               key={item.id}
-              item={item}
+              item={{
+                ...item,
+                params: getParams(item.dependency)
+              }}
               selectHandler={selectHandler}
               selectId={selectId}
             />
@@ -97,12 +116,16 @@ const CustomForm: FC<ICustomFormProps> = ({
           return (
             <CustomCheckboxGroup
               key={item.id}
-              item={item}
+              item={{
+                ...item,
+                params: getParams(item.dependency)
+              }}
               selectHandler={selectHandler}
               selectId={selectId}
             />
           )
         }
+        return null
       })}
     </Form>
   )

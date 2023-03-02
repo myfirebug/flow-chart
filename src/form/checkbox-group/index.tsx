@@ -30,6 +30,7 @@ const CustomInput: FC<ICustomInputProps> = ({
       isHeader: item.isHeader,
       headerField: item.headerField,
       headerValue: item.headerValue,
+      params: item.params,
       correspondField: item.correspondField
     })
   )
@@ -45,8 +46,7 @@ const CustomInput: FC<ICustomInputProps> = ({
         tooltip={item.tooltip}
         required={item.required}
         rules={[{ required: item.require }]}>
-        <Checkbox.Group
-          disabled={item.disabled}>
+        <Checkbox.Group disabled={item.disabled}>
           {data instanceof Array
             ? data.map((item: any, index) => (
                 <Checkbox key={index} value={item.value}>

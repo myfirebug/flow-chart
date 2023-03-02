@@ -36,7 +36,7 @@ export const data = {
       label: 'mock数据',
       name: 'mock',
       required: false,
-      placeholder: '请输入mock数据',
+      placeholder: '',
       relationFields: 'dataType',
       relationValues: 'mock'
     },
@@ -50,6 +50,15 @@ export const data = {
       relationValues: 'dynamic'
     },
     {
+      componentName: 'Dependency',
+      label: '依赖项',
+      name: 'dependency',
+      required: false,
+      placeholder: '',
+      relationFields: 'dataType',
+      relationValues: 'dynamic'
+    },
+    {
       componentName: 'Select',
       label: '请求方式',
       name: 'method',
@@ -58,8 +67,8 @@ export const data = {
       relationFields: 'dataType',
       relationValues: 'dynamic',
       options: [
-        { code: 'get', name: 'GET' },
-        { code: 'post', name: 'post' }
+        { code: 'GET', name: 'GET' },
+        { code: 'POST', name: 'POST' }
       ]
     },
     {

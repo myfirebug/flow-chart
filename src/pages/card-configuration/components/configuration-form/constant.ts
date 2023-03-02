@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-28 11:22:32
+ * @LastEditTime: 2023-03-02 17:43:06
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -23,11 +23,12 @@ const params = {
   dataType: 'mock',
   mock: [{ label: '', value: '' }],
   url: '',
-  method: 'get',
+  method: 'GET',
   isHeader: false,
   headerField: '',
   headerValue: '',
-  correspondField: ''
+  correspondField: '',
+  dependency: undefined
 }
 
 // 控件

@@ -16,10 +16,13 @@ function UseRequest(props: string) {
         if (confs.isHeader && confs.headerField && confs.headerValue) {
           header[confs.headerField] = confs.headerValue
         }
+        console.log(confs, 'confs')
         axios({
           url: confs.url,
           method: confs.method,
-          headers: header
+          headers: header,
+          params: confs.method === 'GET' ? confs.params : null,
+          data: confs.method === 'POST' ? confs.params : null
         }).then((res: any) => {
           if (confs.correspondField && res.data[confs.correspondField]) {
             setData(res.data[confs.correspondField])

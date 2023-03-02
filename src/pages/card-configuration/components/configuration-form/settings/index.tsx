@@ -201,6 +201,42 @@ const Sittings: FC<ISittingsProps> = () => {
             </Select>
           </Form.Item>
         )}
+        {item.componentName === 'Dependency' && (
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}>
+            <Select
+              allowClear
+              disabled={item.disabled}
+              onChange={(value: string) =>
+                isUpdate && onChangeHandler(item.name, value)
+              }
+              mode='multiple'
+              placeholder={item.placeholder}>
+              {cardConfigurationContent.data &&
+              cardConfigurationContent.data.card &&
+              cardConfigurationContent.data.card.inParams
+                ? cardConfigurationContent.data.card.inParams.map(
+                    (sub, index) => {
+                      if (
+                        sub.id !==
+                        cardConfigurationContent.data.selectFormItemId
+                      ) {
+                        return (
+                          <Option key={index} value={sub.field}>
+                            {sub.label}
+                          </Option>
+                        )
+                      }
+                      return null
+                    }
+                  )
+                : null}
+            </Select>
+          </Form.Item>
+        )}
         {item.componentName === 'MockButton' && (
           <Form.Item
             label={item.label}

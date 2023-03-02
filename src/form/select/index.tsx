@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import { Select, Form } from 'antd'
 import { IPARAM } from '@src/types'
 // 自定义表单项盒子
@@ -30,10 +30,11 @@ const CustomInput: FC<ICustomInputProps> = ({
       isHeader: item.isHeader,
       headerField: item.headerField,
       headerValue: item.headerValue,
+      params: item.params,
       correspondField: item.correspondField
     })
   )
-  console.log(data, 'datadatadatadatadatadata')
+  console.log(item, 'datadatadatadatadatadata')
   return (
     <FormItemWrap
       selectHandler={selectHandler}
