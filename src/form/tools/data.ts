@@ -54,7 +54,7 @@ export const data = {
       label: '依赖项',
       name: 'dependency',
       required: false,
-      placeholder: '',
+      placeholder: '请选择',
       relationFields: 'dataType',
       relationValues: 'dynamic'
     },

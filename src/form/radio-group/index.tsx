@@ -1,10 +1,11 @@
 import { FC } from 'react'
-import { Form, Checkbox } from 'antd'
+import { Form, Checkbox, Radio } from 'antd'
 import { IPARAM } from '@src/types'
 // 自定义表单项盒子
 import FormItemWrap from '../wrap'
 
 import UseRequest from '@src/hooks/useRequest'
+
 interface ICustomInputProps {
   item: IPARAM
   selectHandler?: (
@@ -44,15 +45,15 @@ const CustomInput: FC<ICustomInputProps> = ({
         tooltip={item.tooltip}
         required={item.required}
         rules={[{ required: item.require }]}>
-        <Checkbox.Group disabled={item.disabled}>
+        <Radio.Group disabled={item.disabled}>
           {data instanceof Array
             ? data.map((item: any, index) => (
-                <Checkbox key={index} value={item.value}>
+                <Radio key={index} value={item.value}>
                   {item.label}
-                </Checkbox>
+                </Radio>
               ))
             : null}
-        </Checkbox.Group>
+        </Radio.Group>
       </Form.Item>
     </FormItemWrap>
   )

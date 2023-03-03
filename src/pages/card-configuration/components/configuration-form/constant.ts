@@ -89,10 +89,11 @@ export const CONTROL_DATAS = [
   {
     value: 'Radio Group',
     name: '单选框',
-    disabled: true,
     data: {
       ...formItemBaseConfig,
-      formType: 'Input'
+      formType: 'RadioGroup',
+      ...params,
+      mock: [{ label: '单选框1', value: 'radio1' }]
     }
   },
   {

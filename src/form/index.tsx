@@ -11,6 +11,8 @@ import CustomSwitch from './switch'
 import CustomSelect from './select'
 // checkbox-group
 import CustomCheckboxGroup from './checkbox-group'
+// radio-group
+import CustomRadioGroup from './radio-group'
 import './index.scss'
 
 interface ICustomFormProps {
@@ -125,6 +127,20 @@ const CustomForm: FC<ICustomFormProps> = ({
             />
           )
         }
+        if (item.formType === 'RadioGroup') {
+          return (
+            <CustomRadioGroup
+              key={item.id}
+              item={{
+                ...item,
+                params: getParams(item.dependency)
+              }}
+              selectHandler={selectHandler}
+              selectId={selectId}
+            />
+          )
+        }
+        
         return null
       })}
     </Form>
