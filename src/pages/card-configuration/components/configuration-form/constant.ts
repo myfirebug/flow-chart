@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-02 17:43:06
+ * @LastEditTime: 2023-03-04 23:42:18
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -99,10 +99,16 @@ export const CONTROL_DATAS = [
   {
     value: 'Cascader',
     name: '联级框',
-    disabled: true,
     data: {
       ...formItemBaseConfig,
-      formType: 'Input'
+      formType: 'Cascader',
+      ...params,
+      dataType: 'dynamic',
+      url: window.location.href.split('#')[0] + 'mock/tree.json',
+      correspondField: 'datas',
+      expandTrigger: 'click',
+      changeOnSelect: false,
+      multiple: false
     }
   },
   {

@@ -13,6 +13,8 @@ import CustomSelect from './select'
 import CustomCheckboxGroup from './checkbox-group'
 // radio-group
 import CustomRadioGroup from './radio-group'
+// cascader
+import CustomCascader from './cascader'
 import './index.scss'
 
 interface ICustomFormProps {
@@ -130,6 +132,19 @@ const CustomForm: FC<ICustomFormProps> = ({
         if (item.formType === 'RadioGroup') {
           return (
             <CustomRadioGroup
+              key={item.id}
+              item={{
+                ...item,
+                params: getParams(item.dependency)
+              }}
+              selectHandler={selectHandler}
+              selectId={selectId}
+            />
+          )
+        }
+        if (item.formType === 'Cascader') {
+          return (
+            <CustomCascader
               key={item.id}
               item={{
                 ...item,

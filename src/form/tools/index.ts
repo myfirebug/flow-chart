@@ -15,6 +15,7 @@ import Switch from './switch'
 import Select from './select'
 import CheckboxGroup from './checkbox-group'
 import RadioGroup from './radio-group'
+import Cascader from './cascader'
 
 const configuration: any = {
   Input,
@@ -24,7 +25,8 @@ const configuration: any = {
   Switch,
   Select,
   CheckboxGroup,
-  RadioGroup
+  RadioGroup,
+  Cascader
 }
 
 export default configuration

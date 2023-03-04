@@ -187,7 +187,9 @@ const Sittings: FC<ISittingsProps> = () => {
             tooltip={item.tooltip}
             rules={[{ required: item.require }]}>
             <Select
-              allowClear
+              allowClear={
+                typeof item.allowClear !== 'undefined' ? item.allowClear : true
+              }
               disabled={item.disabled}
               onChange={(value: string) =>
                 isUpdate && onChangeHandler(item.name, value)
