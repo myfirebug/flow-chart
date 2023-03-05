@@ -34,7 +34,6 @@ const CustomInput: FC<ICustomInputProps> = ({
       correspondField: item.correspondField
     })
   )
-  console.log(item, 'datadatadatadatadatadata')
   return (
     <FormItemWrap
       selectHandler={selectHandler}

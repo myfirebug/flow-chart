@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-28 14:32:17
+ * @LastEditTime: 2023-03-05 11:14:48
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -25,11 +25,14 @@ import {
   Switch,
   Slider,
   Empty,
-  Button
+  Button,
+  Drawer,
+  Space
 } from 'antd'
 import configuration from '@src/form/tools'
 import { CardConfigurationContext } from '../../../index'
-import MockForm from '../mock'
+import MockForm from '../mock-form'
+import FieldNamesForm from '../field-names-form'
 
 const { TextArea } = Input
 const { Option } = Select
@@ -37,8 +40,12 @@ const { Panel } = Collapse
 interface ISittingsProps {}
 
 export interface IDrawerProps {
+  title: string
+  width: number
   visible: boolean
-  mock: never[]
+  type: 'mock' | 'fieldNames'
+  details: any
+  form?: FormInstance<any>
 }
 
 const Sittings: FC<ISittingsProps> = () => {
@@ -46,8 +53,11 @@ const Sittings: FC<ISittingsProps> = () => {
   // 配置from
   const [configureForm] = Form.useForm()
   const [drawerConf, setDrawerConf] = useState<IDrawerProps>({
+    title: '',
+    width: 600,
     visible: false,
-    mock: []
+    type: 'mock',
+    details: []
   })
 
   useEffect(() => {
@@ -249,12 +259,39 @@ const Sittings: FC<ISittingsProps> = () => {
               type='primary'
               style={{ width: '100%' }}
               onClick={() =>
-                setDrawerConf({
+                setDrawerConf((state) => ({
+                  ...state,
+                  title: '配置mock数据',
+                  width: 600,
+                  type: 'mock',
                   visible: true,
-                  mock: configureForm.getFieldValue('mock')
-                })
+                  details: configureForm.getFieldValue('mock')
+                }))
               }>
               配置mock数据
+            </Button>
+          </Form.Item>
+        )}
+        {item.componentName === 'FieldNamesButton' && (
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}>
+            <Button
+              type='primary'
+              style={{ width: '100%' }}
+              onClick={() =>
+                setDrawerConf((state) => ({
+                  ...state,
+                  title: '配置自定义字段',
+                  width: 300,
+                  type: 'fieldNames',
+                  visible: true,
+                  details: configureForm.getFieldValue('fieldNames')
+                }))
+              }>
+              自定义字段
             </Button>
           </Form.Item>
         )}
@@ -373,12 +410,23 @@ const Sittings: FC<ISittingsProps> = () => {
   }, [cardConfigurationContent.data])
 
   // 保存
-  const saveMockHandler = (data: never[]) => {
-    setDrawerConf((state) => ({
-      ...state,
-      visible: false
-    }))
-    onChangeHandler('mock', data)
+  const saveHandler = () => {
+    if (drawerConf.form) {
+      drawerConf.form.validateFields().then((res) => {
+        setDrawerConf((state) => ({
+          ...state,
+          visible: false
+        }))
+        switch (drawerConf.type) {
+          case 'mock':
+            onChangeHandler('mock', res.mock)
+            break
+          case 'fieldNames':
+            onChangeHandler('fieldNames', res)
+            break
+        }
+      })
+    }
   }
 
   return (
@@ -402,11 +450,38 @@ const Sittings: FC<ISittingsProps> = () => {
                   )
                 : null}
             </Form>
-            <MockForm
-              drawerConf={drawerConf}
-              setDrawerConf={setDrawerConf}
-              saveMockHandler={saveMockHandler}
-            />
+            <Drawer
+              title={drawerConf.title}
+              width={drawerConf.width}
+              bodyStyle={{ padding: 0 }}
+              headerStyle={{
+                borderBottom: '1px solid #ddd',
+                padding: '10px'
+              }}
+              onClose={() =>
+                setDrawerConf((state) => ({ ...state, visible: false }))
+              }
+              extra={
+                <Space>
+                  <Button type='primary' onClick={saveHandler}>
+                    确定
+                  </Button>
+                </Space>
+              }
+              open={drawerConf.visible}>
+              {drawerConf.type === 'mock' ? (
+                <MockForm
+                  drawerConf={drawerConf}
+                  setDrawerConf={setDrawerConf}
+                />
+              ) : null}
+              {drawerConf.type === 'fieldNames' ? (
+                <FieldNamesForm
+                  drawerConf={drawerConf}
+                  setDrawerConf={setDrawerConf}
+                />
+              ) : null}
+            </Drawer>
           </>
         ) : (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />

@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-20 22:01:22
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-28 09:59:03
+ * @LastEditTime: 2023-03-05 10:38:21
  * @FilePath: \flow-chart\src\form\tools\cascader.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -23,6 +23,7 @@ const cascader = {
             required: false,
             placeholder: '',
             allowClear: false,
+            tooltip: "次级菜单的展开方式，可选 'click' 和 'hover'",
             options: [
               { code: 'click', name: 'click' },
               { code: 'hover', name: 'hover' }
@@ -34,7 +35,8 @@ const cascader = {
             name: 'changeOnSelect',
             required: false,
             disabled: false,
-            tooltip: '',
+            tooltip:
+              '（单选时生效）当此项为 true 时，点选每级菜单选项值都会发生变化，具体见上面的演示',
             placeholder: '请选择',
             relationFields: 'expandTrigger',
             relationValues: 'click'
@@ -45,8 +47,16 @@ const cascader = {
             name: 'multiple',
             required: false,
             disabled: false,
-            tooltip: '',
+            tooltip: '支持多选节点',
             placeholder: '请选择'
+          },
+          {
+            componentName: 'FieldNamesButton',
+            label: '自定义',
+            name: 'fieldNames',
+            tooltip: '自定义 options 中 label value children 的字段',
+            required: false,
+            placeholder: ''
           }
         ]
       }

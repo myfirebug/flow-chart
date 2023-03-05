@@ -33,7 +33,6 @@ const CustomInput: FC<ICustomInputProps> = ({
       correspondField: item.correspondField
     })
   )
-  console.log(item, 'datadatadatadatadatadata')
   return (
     <FormItemWrap
       selectHandler={selectHandler}
@@ -51,6 +50,7 @@ const CustomInput: FC<ICustomInputProps> = ({
           changeOnSelect={
             item.expandTrigger === 'click' ? item.changeOnSelect : false
           }
+          fieldNames={item.fieldNames}
           multiple={item.multiple}
           options={data && Array.isArray(data) ? data : []}
           disabled={item.disabled}

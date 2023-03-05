@@ -105,10 +105,16 @@ export const CONTROL_DATAS = [
       ...params,
       dataType: 'dynamic',
       url: window.location.href.split('#')[0] + 'mock/tree.json',
+      mock: [],
       correspondField: 'datas',
       expandTrigger: 'click',
       changeOnSelect: false,
-      multiple: false
+      multiple: false,
+      fieldNames: {
+        label: 'label',
+        value: 'value',
+        children: 'children'
+      }
     }
   },
   {
