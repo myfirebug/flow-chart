@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-20 21:43:31
+ * @LastEditTime: 2023-03-05 22:18:01
  * @FilePath: \flow-chart\src\pages\card-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -36,15 +36,16 @@ export const CardConfigurationContext = React.createContext<Icontent>({
 
 interface IConfigurationProps {}
 
-const Iconfiguration: FC<IConfigurationProps> = () => {
+// 舞台配置
+const stageConfig = {
+  x: 0,
+  y: 0,
+  width: window.innerWidth - 300,
+  height: window.innerHeight - 62
+}
+
+const Configuration: FC<IConfigurationProps> = () => {
   const [state, dispatch] = useReducer(counter, initialState)
-  // 舞台配置
-  const [stageConfig] = useState<any>({
-    x: 0,
-    y: 0,
-    width: window.innerWidth - 300,
-    height: window.innerHeight - 62
-  })
   // 获取卡片数据
   useEffect(() => {
     // 如果ID存在调用获取卡片详情接口
@@ -77,28 +78,6 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
     }
   }, [])
 
-  console.log(state, 'cardConfig')
-  // 鼠标按下
-  const onMouseDown = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    const { evt } = e
-    // 隐藏菜单
-    if (evt.which === 1) {
-      hideContentMenu()
-    }
-  }
-  // 鼠标抬起
-  const onMouseUp = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    console.log(e, '2')
-  }
-  // 鼠标移动
-  const onMouseMove = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    // console.log(e, '3')
-  }
-  // 右键菜单
-  const onContextMenu = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    e.evt.preventDefault()
-    showContentMenu(e.evt)
-  }
   return (
     <CardConfigurationContext.Provider
       value={{
@@ -110,19 +89,10 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
         <ConfigurationHeader />
         <div className='app-card-configuration__body'>
           <div className='app-card-configuration__container' id='js_stage'>
-            {/* 舞台 */}
-            <Stage
-              {...stageConfig}
-              onMouseUp={onMouseUp}
-              onMouseMove={onMouseMove}
-              onMouseDown={onMouseDown}
-              onContextMenu={onContextMenu}
-              draggable
-              type='stage'>
+            <Stage {...stageConfig}>
               <Layer>{state.card ? <Card config={state.card} /> : null}</Layer>
             </Stage>
           </div>
-          {/* 卡片配置 */}
           <Sittings />
         </div>
         <div className='app-card-configuration__footer'></div>
@@ -130,4 +100,4 @@ const Iconfiguration: FC<IConfigurationProps> = () => {
     </CardConfigurationContext.Provider>
   )
 }
-export default Iconfiguration
+export default Configuration
