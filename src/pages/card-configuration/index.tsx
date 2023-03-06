@@ -3,24 +3,26 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-06 09:56:47
+ * @LastEditTime: 2023-03-06 19:05:49
  * @FilePath: \flow-chart\src\pages\card-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import React, { FC, useState, useReducer, useEffect } from 'react'
+import React, { FC, useReducer, useEffect } from 'react'
 import { Stage, Layer } from 'react-konva'
 import './index.scss'
 import Card from '@src/components/card'
-import { showContentMenu, hideContentMenu, getUrl, guid } from '@utils/tools'
-import Konva from 'konva'
+import { getUrl, guid } from '@utils/tools'
 // 头部
 import ConfigurationHeader from './components/header'
 // 卡片配置
 import Sittings from './components/settings'
 
+import Ajax from '@src/service'
+
 import { counter, initialState } from './store/reducers'
 import { ALL_STATE } from './store/type'
 import { ModifyAction } from './store/action'
+import { CARD_STATE } from '@src/types'
 
 export type IType = 'stage' | 'move' | 'port'
 
@@ -75,6 +77,13 @@ const Configuration: FC<IConfigurationProps> = () => {
           inParams: []
         }
       })
+    } else {
+      Ajax.cardDetails().then((res: any) =>
+        dispatch({
+          type: 'CARD',
+          data: res
+        })
+      )
     }
   }, [])
 

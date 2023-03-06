@@ -49,6 +49,24 @@ const api: IApi = {
       servicePrefix: 'local'
     })
   },
+  // 卡片新增或者编辑
+  cardAddOrEdit(params: any) {
+    return post({
+      url: `/card-add-or-edit`,
+      loading: true,
+      data: params,
+      servicePrefix: 'local'
+    })
+  },
+  // 卡片详情
+  cardDetails(params: any) {
+    return get({
+      url: `/card-details`,
+      loading: true,
+      data: params,
+      servicePrefix: 'local'
+    })
+  },
   // 流程图列表
   diagramsList(params: any) {
     return get({

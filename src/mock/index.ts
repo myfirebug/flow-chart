@@ -42,7 +42,6 @@ function create(mod: any) {
           message: '用户名或密码错误'
         }
       }
-
       return {
         ...data,
         data: {

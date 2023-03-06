@@ -3,8 +3,8 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-08 19:04:48
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-08 19:04:49
- * @FilePath: \flow-chart\src\mock\modules\report copy.ts
+ * @LastEditTime: 2023-03-06 18:38:35
+ * @FilePath: \flow-chart\src\mock\modules\card.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 /*eslint-disable*/
@@ -31,6 +31,61 @@ export const cardList = {
   }
 }
 
+// 卡片详情
+export const cardDetails = {
+  url: '/card-details',
+  method: 'get',
+  data: {
+    code: 0,
+    sucess: true,
+    data: Mock.mock({
+      id: '@id',
+      width: 200,
+      height: 80,
+      title: '开始节点',
+      x: 10,
+      y: 10,
+      ports: [
+        {
+          id: '@id',
+          group: 'left',
+          visible: true
+        },
+        {
+          id: '@id',
+          group: 'right',
+          visible: true
+        }
+      ],
+      inParams: [
+        {
+          disabled: false,
+          field: 'username',
+          formType: 'Input',
+          id: '@id',
+          label: '用户名',
+          placeholder: '请输入用户名',
+          required: false,
+          tooltip: '',
+          value: ''
+        },
+        {
+          disabled: false,
+          field: 'account',
+          formType: 'Input',
+          id: '@id',
+          label: '账号',
+          placeholder: '请输入账号',
+          required: false,
+          tooltip: '',
+          value: ''
+        }
+      ]
+    }),
+    message: '成功'
+  }
+}
+
 // 删除
 export const cardDelete = {
   url: '/card-delete',
@@ -40,5 +95,17 @@ export const cardDelete = {
     sucess: true,
     data: null,
     message: '删除成功'
+  }
+}
+
+// 新增或者编辑
+export const cardAddOrEdit = {
+  url: '/card-add-or-edit',
+  method: 'post',
+  data: {
+    code: 0,
+    sucess: true,
+    data: null,
+    message: '保存成功'
   }
 }

@@ -9,9 +9,11 @@
  */
 import { FC, useCallback, useContext } from 'react'
 import { Tooltip, Button, message } from 'antd'
-import { getUrl } from '@utils/tools'
+import { getUrl, guid } from '@utils/tools'
 import { useHistory } from 'react-router-dom'
 import { CardConfigurationContext } from '../../index'
+import Ajax from '@src/service'
+
 interface IConfigurationHeaderProps {}
 
 const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
@@ -24,9 +26,16 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
         !cardConfigurationContent.data.card?.ports.some((item) => item.visible)
       ) {
         message.error('必须选择一个连接点')
+      } else {
+        Ajax.cardAddOrEdit({
+          id: cardConfigurationContent.data.card.id || guid()
+        }).then(() => {
+          message.success('保存成功')
+          history.goBack()
+        })
       }
     }
-  }, [cardConfigurationContent])
+  }, [cardConfigurationContent, history])
   return (
     <div className='app-card-configuration__header'>
       <div className='left'>
