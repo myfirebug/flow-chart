@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:19:34
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-05 11:14:48
+ * @LastEditTime: 2023-03-06 09:59:43
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\settings\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -437,8 +437,8 @@ const Sittings: FC<ISittingsProps> = () => {
           <>
             <Form
               form={configureForm}
-              labelCol={{ span: 7 }}
-              wrapperCol={{ span: 17 }}
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
               autoComplete='off'
               colon={false}
               labelAlign='left'>

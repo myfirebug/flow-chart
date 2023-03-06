@@ -4,7 +4,7 @@
   height: calc(100vh - 65px);
   overflow: hidden;
   @include e(composite) {
-    width: 280px;
+    width: 300px;
     border-right: 1px solid #d9d9d9;
     @include m(header) {
       height: 36px;
@@ -101,7 +101,7 @@
     }
   }
   @include e(settings) {
-    width: 280px;
+    width: 300px;
     border-left: 1px solid #d9d9d9;
     .header {
       height: 36px;
@@ -125,7 +125,7 @@
         padding: 6px 16px;
       }
       .ant-collapse-content > .ant-collapse-content-box {
-        padding: 10px 5px;
+        padding: 10px;
       }
     }
   }

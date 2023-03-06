@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-05 22:18:01
+ * @LastEditTime: 2023-03-06 09:56:47
  * @FilePath: \flow-chart\src\pages\card-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -89,7 +89,7 @@ const Configuration: FC<IConfigurationProps> = () => {
         <ConfigurationHeader />
         <div className='app-card-configuration__body'>
           <div className='app-card-configuration__container' id='js_stage'>
-            <Stage {...stageConfig}>
+            <Stage {...stageConfig} draggable>
               <Layer>{state.card ? <Card config={state.card} /> : null}</Layer>
             </Stage>
           </div>
