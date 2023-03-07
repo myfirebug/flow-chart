@@ -24,7 +24,19 @@ const radioGroup = {
     [
       {
         name: '数据',
-        list: [...data.configure]
+        list: [
+          ...data.configure.map((item) => {
+            if (item.name === 'url') {
+              return {
+                ...item,
+                tooltip: `测试地址：${
+                  window.location.href.split('#')[0]
+                }temporary-list`
+              }
+            }
+            return item
+          })
+        ]
       }
     ]
   ]

@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-10-10 20:59:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-08 20:06:20
+ * @LastEditTime: 2023-03-07 12:36:55
  * @FilePath: \flow-chart\src\mock\index.ts
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
@@ -16,11 +16,14 @@ import * as configuration from './modules/configuration'
 import * as card from './modules/card'
 // 流程图数据接口
 import * as diagrams from './modules/diagrams'
+// 临时数据接口
+import * as temporary from './modules/temporary'
 
 create(login)
 create(configuration)
 create(card)
 create(diagrams)
+create(temporary)
 /**
  * 根据模块创建接口
  * @param mod m模块

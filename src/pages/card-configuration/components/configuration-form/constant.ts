@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-18 16:32:45
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-04 23:42:18
+ * @LastEditTime: 2023-03-07 22:05:18
  * @FilePath: \flow-chart\src\pages\card-configuration\components\configuration-form\constant.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -73,6 +73,7 @@ export const CONTROL_DATAS = [
       ...formItemBaseConfig,
       formType: 'Select',
       ...params,
+      correspondField: 'datas',
       mock: [{ label: '选择框1', value: 'select1' }]
     }
   },
@@ -83,6 +84,7 @@ export const CONTROL_DATAS = [
       ...formItemBaseConfig,
       formType: 'CheckboxGroup',
       ...params,
+      correspondField: 'datas',
       mock: [{ label: '复选框1', value: 'checkbox1' }]
     }
   },
@@ -93,6 +95,7 @@ export const CONTROL_DATAS = [
       ...formItemBaseConfig,
       formType: 'RadioGroup',
       ...params,
+      correspondField: 'datas',
       mock: [{ label: '单选框1', value: 'radio1' }]
     }
   },
@@ -104,7 +107,7 @@ export const CONTROL_DATAS = [
       formType: 'Cascader',
       ...params,
       dataType: 'dynamic',
-      url: window.location.href.split('#')[0] + 'mock/tree.json',
+      url: window.location.href.split('#')[0] + '/temporary-tree',
       mock: [],
       correspondField: 'datas',
       expandTrigger: 'click',

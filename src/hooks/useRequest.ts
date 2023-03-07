@@ -20,14 +20,14 @@ function UseRequest(props: string) {
         axios({
           url: confs.url,
           method: confs.method,
-          headers: header,
           params: confs.method === 'GET' ? confs.params : null,
           data: confs.method === 'POST' ? confs.params : null
         }).then((res: any) => {
-          if (confs.correspondField && res.data[confs.correspondField]) {
-            setData(res.data[confs.correspondField])
+          console.log(res, '1231')
+          if (confs.correspondField && res[confs.correspondField]) {
+            setData(res[confs.correspondField])
           } else {
-            setData(res.data)
+            setData(res.data || [])
           }
         })
       }

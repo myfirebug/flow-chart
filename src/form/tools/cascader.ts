@@ -72,6 +72,14 @@ const cascader = {
                 disabled: true
               }
             }
+            if (item.name === 'url') {
+              return {
+                ...item,
+                tooltip: `测试地址：${
+                  window.location.href.split('#')[0]
+                }temporary-tree`
+              }
+            }
             return item
           })
         ]
