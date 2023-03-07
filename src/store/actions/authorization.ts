@@ -83,6 +83,16 @@ export const getMenu =
         },
         {
           isMemu: 1,
+          resUrl: '/frame/diagrams-configuration',
+          components: 'diagrams-configuration',
+          resIcon: '',
+          resTitle: '流程图配置',
+          status: 0,
+          flag: false,
+          subResource: []
+        },
+        {
+          isMemu: 1,
           resUrl: '/frame/preview',
           components: 'preview',
           resIcon: 'e670',

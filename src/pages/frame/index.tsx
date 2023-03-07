@@ -38,7 +38,7 @@ const Frame: FC<IFrameProps> = ({
   // 判断全屏的路由
   const isFullscreen = useMemo(() => {
     const map = [
-      '/frame/configuration',
+      '/frame/diagrams-configuration',
       '/frame/card-configuration',
       '/frame/preview'
     ]

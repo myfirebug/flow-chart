@@ -97,7 +97,7 @@ const Diagrams: FC<IDiagramsProps> = ({ strategy, getStrategy, path }) => {
           <div className='app-table__operation'>
             <span
               onClick={() => {
-                history.push(`/frame/configuration?id=${record.id}`)
+                history.push(`/frame/diagrams-configuration?id=${record.id}`)
               }}
               className='link'>
               编辑
@@ -109,13 +109,6 @@ const Diagrams: FC<IDiagramsProps> = ({ strategy, getStrategy, path }) => {
                 ids: [record.id]
               }}
               reload={actionRef.current?.reloadAndRest}></PopConfirm>
-            <span
-              onClick={() => {
-                history.push(`/frame/preview?id=${record.id}`)
-              }}
-              className='link'>
-              预览
-            </span>
           </div>
         )
       }
@@ -132,7 +125,7 @@ const Diagrams: FC<IDiagramsProps> = ({ strategy, getStrategy, path }) => {
   }
 
   const addProject = () => {
-    history.push('/frame/configuration')
+    history.push('/frame/diagrams-configuration')
   }
   return (
     <>
