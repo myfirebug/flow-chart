@@ -109,13 +109,6 @@ const Card: FC<ICardProps> = ({ strategy, getStrategy, path }) => {
                 ids: [record.id]
               }}
               reload={actionRef.current?.reloadAndRest}></PopConfirm>
-            <span
-              onClick={() => {
-                history.push(`/frame/preview?id=${record.id}`)
-              }}
-              className='link'>
-              预览
-            </span>
           </div>
         )
       }
