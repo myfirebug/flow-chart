@@ -1,0 +1,37 @@
+@include b(diagrams-configuration) {
+  @include e(settings) {
+    width: 300px;
+    height: 100%;
+    border-left: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    .header {
+      height: 36px;
+      padding-left: 10px;
+      line-height: 36px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #f5f5f5;
+      border-bottom: 1px solid #ddd;
+    }
+    .body {
+      .ant-tabs-nav {
+        background: #fafafa;
+        &:before {
+          border-bottom: 1px solid #d9d9d9;
+        }
+      }
+      .ant-tabs-tab {
+        padding: 8px 0;
+      }
+      .ant-form-item {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 10px;
+      }
+      .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+        margin: 0;
+      }
+    }
+  }
+}

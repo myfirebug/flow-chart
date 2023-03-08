@@ -1,4 +1,4 @@
-@include b(card-configuration) {
+@include b(diagrams-configuration) {
   width: 100vw;
   height: 100vh;
   .app-icon {
@@ -7,38 +7,6 @@
     transition: all 0.25s ease 0s;
     &:hover {
       color: #333;
-    }
-  }
-  @include e(header) {
-    display: flex;
-    justify-content: space-between;
-    height: 62px;
-    padding: 15px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #e5e5e5;
-    box-sizing: border-box;
-    .left {
-      display: flex;
-      align-items: center;
-    }
-    .logo {
-      width: 30px;
-      height: 30px;
-      margin-left: 10px;
-      text-align: center;
-      line-height: 30px;
-      color: #fff;
-      font-size: 14px;
-      background-color: #1890ff;
-      border-radius: 5px;
-    }
-    .title {
-      margin: 0 10px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-    .save {
-      font-size: 20px;
     }
   }
   @include e(body) {
@@ -51,32 +19,5 @@
     background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuXzAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgcng9IjEiIHJ5PSIxIiBmaWxsPSIjYWFhYWFhIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm5fMCkiLz48L3N2Zz4=')
       repeat;
     overflow: hidden;
-  }
-  @include e(aside) {
-    width: 300px;
-    height: 100%;
-    border-left: 1px solid #ddd;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    .header {
-      height: 36px;
-      padding-left: 10px;
-      line-height: 36px;
-      font-size: 16px;
-      font-weight: bold;
-      background: #f5f5f5;
-      border-bottom: 1px solid #ddd;
-    }
-    .body {
-      padding: 10px;
-      .ant-form-item {
-        padding-bottom: 10px;
-        border-bottom: 1px solid #eee;
-        margin-bottom: 10px;
-      }
-      .ant-checkbox-wrapper + .ant-checkbox-wrapper {
-        margin: 0;
-      }
-    }
   }
 }

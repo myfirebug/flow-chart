@@ -1,0 +1,100 @@
+@include b(diagrams-configuration) {
+  @include e(header) {
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    height: 62px;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    .left {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      width: 30px;
+      height: 30px;
+      margin-left: 10px;
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      font-size: 14px;
+      background-color: #1890ff;
+      border-radius: 5px;
+      &:hover {
+        color: #fff;
+      }
+    }
+    .title {
+      margin: 0 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .save {
+      font-size: 20px;
+    }
+    .menu {
+      display: flex;
+      &-item {
+        position: relative;
+        margin-left: 4px;
+        line-height: 24px;
+        padding: 0 6px;
+        transition: all 0.25s ease 0s;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+          .sub-menu {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+      }
+      .sub-menu {
+        transition: all 0.25s ease 0s;
+        opacity: 0;
+        transform: scale(1, 0);
+        transform-origin: 0 0;
+        overflow: hidden;
+        position: absolute;
+        width: 220px;
+        padding-top: 4px;
+        padding-bottom: 2px;
+        color: #212930;
+        font-size: 13px;
+        line-height: 32px;
+        background: #fff;
+        border: #e9edf2;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        dd {
+          display: flex;
+          padding: 0 10px;
+          cursor: pointer;
+          transition: all 0.25s ease 0s;
+          .app-icon {
+            padding-right: 5px;
+          }
+          .name {
+            flex: 1;
+          }
+          .value {
+            color: #aaa;
+          }
+          &.is-disabled {
+            cursor: no-drop;
+            color: #aaa;
+            &:hover {
+              background: #fff;
+            }
+          }
+          &:hover {
+            background: rgba(0, 0, 0, 0.05);
+          }
+        }
+      }
+    }
+  }
+}

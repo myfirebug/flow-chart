@@ -1,0 +1,26 @@
+@include b(diagrams-configuration) {
+  @include e(menus) {
+    width: 300px;
+    height: 100%;
+    border-left: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    .header {
+      height: 36px;
+      padding-left: 10px;
+      line-height: 36px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #f5f5f5;
+      border-bottom: 1px solid #ddd;
+    }
+    .body {
+      .ant-collapse {
+        border: none;
+        .ant-collapse-header {
+          padding: 8px 10px;
+        }
+      }
+    }
+  }
+}
