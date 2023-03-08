@@ -22,7 +22,6 @@ import Ajax from '@src/service'
 import { counter, initialState } from './store/reducers'
 import { ALL_STATE } from './store/type'
 import { ModifyAction } from './store/action'
-import { CARD_STATE } from '@src/types'
 
 export type IType = 'stage' | 'move' | 'port'
 

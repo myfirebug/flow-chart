@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-08 19:04:48
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-06 18:38:35
+ * @LastEditTime: 2023-03-08 21:55:56
  * @FilePath: \flow-chart\src\mock\modules\card.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -17,15 +17,48 @@ export const cardList = {
     code: 0,
     sucess: true,
     data: Mock.mock({
-      'data|8': [
+      'data|20': [
         {
           id: '@id',
           description: '@cparagraph',
-          title: '@csentence(10)',
-          createTime: '@datetime(yyyy-MM-dd HH:mm:ss)'
+          title: '@csentence(2, 7)',
+          createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+          width: 200,
+          height: 80,
+          x: 10,
+          y: 10,
+          'type|1': ['base', 'other'],
+          ports: [
+            {
+              group: 'left',
+              visible: true
+            },
+            {
+              group: 'right',
+              visible: true
+            }
+          ],
+          inParams: [
+            {
+              field: 'username',
+              formType: 'Input',
+              label: '用户名',
+              placeholder: '请输入用户名',
+              required: false,
+              value: ''
+            },
+            {
+              field: 'account',
+              formType: 'Input',
+              label: '账号',
+              placeholder: '请输入账号',
+              required: false,
+              value: ''
+            }
+          ]
         }
       ],
-      total: 8
+      total: 20
     }),
     message: '成功'
   }

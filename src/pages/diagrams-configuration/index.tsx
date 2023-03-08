@@ -3,17 +3,29 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-08 09:54:58
+ * @LastEditTime: 2023-03-08 22:22:18
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Stage } from 'react-konva'
 import ConfigurationHeader from './components/header'
 import Settings from './components/settings'
 import Menus from './components/menus'
 import './index.scss'
-
+import Ajax from '@src/service'
+import { ALL_STATE } from './store/type'
+import { ModifyAction } from './store/action'
+import { initialState } from './store/reducers'
+export type Icontent = {
+  dispatch: React.Dispatch<ModifyAction>
+  data: ALL_STATE
+}
+// context
+export const DiagramsConfigurationContext = React.createContext<Icontent>({
+  data: initialState,
+  dispatch: () => {}
+})
 export type IType = 'stage' | 'move' | 'port'
 
 interface IConfigurationProps {}
@@ -28,7 +40,9 @@ const stageConfig = {
 
 const Configuration: FC<IConfigurationProps> = () => {
   // 获取卡片数据
-  useEffect(() => {}, [])
+  useEffect(() => {
+    
+  }, [])
 
   return (
     <div className='app-diagrams-configuration'>

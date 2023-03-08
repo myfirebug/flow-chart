@@ -20,6 +20,31 @@
         .ant-collapse-header {
           padding: 8px 10px;
         }
+        .ant-collapse-content-box {
+          padding: 0;
+        }
+      }
+      .menu {
+        &-list {
+          .menu-item:last-child {
+            border: none;
+          }
+        }
+        &-item {
+          height: 36px;
+          padding: 0 10px 0 0;
+          margin-left: 32px;
+          line-height: 36px;
+          cursor: pointer;
+          border-bottom: 1px solid #eeee;
+          transition: all 0.25s ease 0s;
+          &:hover {
+            padding-left: 10px;
+            color: #096dd9;
+            font-weight: bold;
+            background-color: #fafafa;
+          }
+        }
       }
     }
   }
