@@ -13,7 +13,7 @@ import {
   TITLE_HEIGHT,
   MARGIN_TOP
 } from '@src/components/card/components/constant'
-import { DIAGRAMS, ALL_STATE } from './type'
+import { DIAGRAMS, ALL_STATE, MODIFY_DIAGRAMS_TITLE } from './type'
 import { CARD_STATE } from '@src/types'
 
 // 计算卡片高度
@@ -38,7 +38,7 @@ export const initialState: ALL_STATE = {
   cards: []
 }
 
-export const counter = (
+export const diagrams = (
   state: ALL_STATE = initialState,
   action: ModifyAction
 ): ALL_STATE => {
@@ -51,6 +51,11 @@ export const counter = (
           ...item,
           height: diffHeight(item)
         }))
+      }
+    case MODIFY_DIAGRAMS_TITLE:
+      return {
+        ...copy,
+        title: action.title
       }
     default:
       return state

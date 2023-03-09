@@ -13,10 +13,14 @@ import { CARD_STATE } from '@src/types'
 export const DIAGRAMS = 'DIAGRAMS'
 export type DIAGRAMS_TYPE = typeof DIAGRAMS
 
+// 修改流程图标题
+export const MODIFY_DIAGRAMS_TITLE = 'MODIFY_DIAGRAMS_TITLE'
+export type MODIFY_DIAGRAMS_TITLE_TYPE = typeof MODIFY_DIAGRAMS_TITLE
+
 export interface ALL_STATE {
   id: string | null
   title: string
   description: string
-  createTime: string
+  createTime?: string
   cards: CARD_STATE[]
 }
