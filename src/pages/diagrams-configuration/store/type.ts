@@ -17,6 +17,10 @@ export type DIAGRAMS_TYPE = typeof DIAGRAMS
 export const MODIFY_DIAGRAMS_TITLE = 'MODIFY_DIAGRAMS_TITLE'
 export type MODIFY_DIAGRAMS_TITLE_TYPE = typeof MODIFY_DIAGRAMS_TITLE
 
+// 添加卡片
+export const ADD_CARD = 'ADD_CARD'
+export type ADD_CARD_TYPE = typeof ADD_CARD
+
 export interface ALL_STATE {
   id: string | null
   title: string

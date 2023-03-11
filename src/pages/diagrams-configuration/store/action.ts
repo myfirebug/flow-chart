@@ -1,9 +1,21 @@
-import { DIAGRAMS_TYPE, ALL_STATE, MODIFY_DIAGRAMS_TITLE_TYPE } from './type'
+import {
+  DIAGRAMS_TYPE,
+  ALL_STATE,
+  MODIFY_DIAGRAMS_TITLE_TYPE,
+  ADD_CARD_TYPE
+} from './type'
+import { CARD_STATE } from '@src/types'
 
 // 获取流程图数据
 export interface diagramsAction {
   type: DIAGRAMS_TYPE
   data: ALL_STATE
+}
+
+// 添加卡片
+export interface addCardAction {
+  type: ADD_CARD_TYPE
+  data: CARD_STATE
 }
 
 // 获取流程图数据
@@ -13,4 +25,7 @@ export interface modifyDiagramsTitleAction {
 }
 
 // 定义 ModifyAction 类型
-export type ModifyAction = diagramsAction | modifyDiagramsTitleAction
+export type ModifyAction =
+  | diagramsAction
+  | modifyDiagramsTitleAction
+  | addCardAction

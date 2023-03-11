@@ -3,12 +3,12 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-09 10:53:54
+ * @LastEditTime: 2023-03-11 16:15:43
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import React, { FC, useEffect, useReducer } from 'react'
-import { Stage } from 'react-konva'
+import { Stage, Layer } from 'react-konva'
 import ConfigurationHeader from './components/header'
 import Settings from './components/settings'
 import Menus from './components/menus'
@@ -18,6 +18,8 @@ import { ALL_STATE } from './store/type'
 import { ModifyAction } from './store/action'
 import { diagrams, initialState } from './store/reducers'
 import { getUrl, guid } from '@src/utils/tools'
+import Card from '@src/components/card'
+import { KonvaEventObject } from 'konva/lib/Node'
 export type Icontent = {
   dispatch: React.Dispatch<ModifyAction>
   data: ALL_STATE
@@ -35,7 +37,7 @@ interface IConfigurationProps {}
 const stageConfig = {
   x: 0,
   y: 0,
-  width: window.innerWidth - 300,
+  width: window.innerWidth - 600,
   height: window.innerHeight - 62
 }
 
@@ -59,6 +61,13 @@ const Configuration: FC<IConfigurationProps> = () => {
 
   console.log(state, 'state')
 
+  const onMouseDown = (e: KonvaEventObject<MouseEvent>) => {
+    console.log(e, '12')
+  }
+  const onMouseMove = () => {}
+
+  const onMouseUp = () => {}
+
   return (
     <DiagramsConfigurationContext.Provider
       value={{
@@ -70,7 +79,20 @@ const Configuration: FC<IConfigurationProps> = () => {
         <div className='app-diagrams-configuration__body'>
           <Menus />
           <div className='app-diagrams-configuration__container' id='js_stage'>
-            <Stage {...stageConfig} draggable></Stage>
+            <Stage
+              {...stageConfig}
+              type='stage'
+              onMouseDown={onMouseDown}
+              onMouseMove={onMouseMove}
+              onMouseUp={onMouseUp}>
+              <Layer>
+                {state.cards
+                  ? state.cards.map((item) => (
+                      <Card config={item} key={item.id} />
+                    ))
+                  : null}
+              </Layer>
+            </Stage>
           </div>
           <Settings />
         </div>

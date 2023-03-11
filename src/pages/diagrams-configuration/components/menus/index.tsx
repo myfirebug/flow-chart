@@ -1,14 +1,17 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState, useContext } from 'react'
 import { Collapse } from 'antd'
 import { CARD_STATE } from '@src/types'
+import { guid } from '@src/utils/tools'
 import './index.scss'
 import Ajax from '@src/service'
+import { DiagramsConfigurationContext } from '../../index'
 
 const { Panel } = Collapse
 
 interface ISettingProps {}
 
 const Setting: FC<ISettingProps> = () => {
+  const diagramsConfigurationContent = useContext(DiagramsConfigurationContext)
   const [baseList, setBaseList] = useState<CARD_STATE[]>([])
   const [otherList, setOtherList] = useState<CARD_STATE[]>([])
   useEffect(() => {
@@ -19,6 +22,30 @@ const Setting: FC<ISettingProps> = () => {
     })
   }, [])
 
+  console.log(diagramsConfigurationContent.data, 'data')
+
+  const addCardHandler = (card: CARD_STATE) => {
+    diagramsConfigurationContent.dispatch({
+      type: 'ADD_CARD',
+      data: {
+        ...card,
+        id: guid(),
+        inParams: card.inParams
+          ? card.inParams.map((item) => ({
+              ...item,
+              id: guid()
+            }))
+          : [],
+        ports: card.ports
+          ? card.ports.map((item) => ({
+              ...item,
+              id: guid()
+            }))
+          : []
+      }
+    })
+  }
+
   return (
     <div className='app-diagrams-configuration__menus'>
       <div className='body'>
@@ -26,7 +53,10 @@ const Setting: FC<ISettingProps> = () => {
           <Panel header='基础卡片' key='1'>
             <ul className='menu-list'>
               {baseList.map((item) => (
-                <li className='menu-item' draggable key={item.id}>
+                <li
+                  className='menu-item'
+                  key={item.id}
+                  onClick={() => addCardHandler(item)}>
                   {item.title}
                 </li>
               ))}
@@ -34,8 +64,11 @@ const Setting: FC<ISettingProps> = () => {
           </Panel>
           <Panel header='其他卡片' key='2'>
             <ul className='menu-list'>
-            {otherList.map((item) => (
-                <li className='menu-item' draggable key={item.id}>
+              {otherList.map((item) => (
+                <li
+                  className='menu-item'
+                  key={item.id}
+                  onClick={() => addCardHandler(item)}>
                   {item.title}
                 </li>
               ))}

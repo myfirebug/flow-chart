@@ -3,8 +3,8 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-22 10:36:22
- * @FilePath: \flow-chart\src\pages\card-configuration\store\reducers.ts
+ * @LastEditTime: 2023-03-11 15:48:31
+ * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import { ModifyAction } from './action'
@@ -13,7 +13,7 @@ import {
   TITLE_HEIGHT,
   MARGIN_TOP
 } from '@src/components/card/components/constant'
-import { DIAGRAMS, ALL_STATE, MODIFY_DIAGRAMS_TITLE } from './type'
+import { DIAGRAMS, ALL_STATE, MODIFY_DIAGRAMS_TITLE, ADD_CARD } from './type'
 import { CARD_STATE } from '@src/types'
 
 // 计算卡片高度
@@ -56,6 +56,17 @@ export const diagrams = (
       return {
         ...copy,
         title: action.title
+      }
+    case ADD_CARD:
+      return {
+        ...copy,
+        cards: [
+          ...copy.cards,
+          {
+            ...action.data,
+            height: diffHeight(action.data)
+          }
+        ]
       }
     default:
       return state
