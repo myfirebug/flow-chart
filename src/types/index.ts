@@ -46,6 +46,11 @@ export interface IPARAM extends IAnyObject {
   value: string | number | boolean
 }
 
+export interface COORDINATE {
+  x: number
+  y: number
+}
+
 export type CARD_STATE = {
   id: string
   width: number

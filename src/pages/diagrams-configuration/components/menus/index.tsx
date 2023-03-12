@@ -22,8 +22,6 @@ const Setting: FC<ISettingProps> = () => {
     })
   }, [])
 
-  console.log(diagramsConfigurationContent.data, 'data')
-
   const addCardHandler = (card: CARD_STATE) => {
     diagramsConfigurationContent.dispatch({
       type: 'ADD_CARD',

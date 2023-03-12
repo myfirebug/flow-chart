@@ -8,7 +8,7 @@
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
 import React, { FC, useEffect, useReducer, useState } from 'react'
-import { Stage, Layer } from 'react-konva'
+import { Stage, Layer, Path } from 'react-konva'
 import ConfigurationHeader from './components/header'
 import Settings from './components/settings'
 import Menus from './components/menus'
@@ -19,6 +19,7 @@ import { diagrams, initialState } from './store/reducers'
 import { getUrl } from '@src/utils/tools'
 import Card from '@src/components/card'
 import { KonvaEventObject } from 'konva/lib/Node'
+import AuxiliaryWire from '@src/components/card/components/auxiliary-wire'
 export type Icontent = {
   dispatch: React.Dispatch<ModifyAction>
   data: ALL_STATE
@@ -28,7 +29,7 @@ export const DiagramsConfigurationContext = React.createContext<Icontent>({
   data: initialState,
   dispatch: () => {}
 })
-export type IType = 'stage' | 'move' | 'port'
+export type IType = 'stage' | 'move' | 'port' | ''
 
 interface IConfigurationProps {}
 
@@ -44,8 +45,13 @@ const Configuration: FC<IConfigurationProps> = () => {
   const [state, dispatch] = useReducer(diagrams, initialState)
   // 鼠标的类型
   const [type, setType] = useState<IType>()
-
-  console.log(type, 'type')
+  // 位置信息
+  const [coordinate, setCoordinate] = useState({
+    sx: 0,
+    sy: 0,
+    ex: 0,
+    ey: 0
+  })
 
   // 获取卡片数据
   useEffect(() => {
@@ -64,18 +70,32 @@ const Configuration: FC<IConfigurationProps> = () => {
     }
   }, [])
 
-  console.log(state, 'state')
-
   const onMouseDown = (e: KonvaEventObject<MouseEvent>) => {
     console.log(e, 'eee')
+    const { offsetX, offsetY } = e.evt
     const { type } = e.target.attrs
     if (type) {
       setType(type)
     }
+    setCoordinate({
+      sx: offsetX,
+      sy: offsetY,
+      ex: offsetX,
+      ey: offsetY
+    })
   }
-  const onMouseMove = (e: KonvaEventObject<MouseEvent>) => {}
+  const onMouseMove = (e: KonvaEventObject<MouseEvent>) => {
+    const { offsetX, offsetY } = e.evt
+    setCoordinate((state) => ({
+      ...state,
+      ex: offsetX,
+      ey: offsetY
+    }))
+  }
 
-  const onMouseUp = (e: KonvaEventObject<MouseEvent>) => {}
+  const onMouseUp = (e: KonvaEventObject<MouseEvent>) => {
+    setType('')
+  }
 
   return (
     <DiagramsConfigurationContext.Provider
@@ -104,6 +124,14 @@ const Configuration: FC<IConfigurationProps> = () => {
                       />
                     ))
                   : null}
+              </Layer>
+              <Layer>
+                {type === 'port' ? (
+                  <AuxiliaryWire
+                    s={{ x: coordinate.sx, y: coordinate.sy }}
+                    e={{ x: coordinate.ex, y: coordinate.ey }}
+                  />
+                ) : null}
               </Layer>
             </Stage>
           </div>
