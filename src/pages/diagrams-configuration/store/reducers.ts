@@ -35,6 +35,7 @@ export const initialState: ALL_STATE = {
   title: '',
   description: '',
   createTime: '',
+  SelectedCardsIds: '',
   cards: []
 }
 
@@ -66,7 +67,8 @@ export const diagrams = (
             ...action.data,
             height: diffHeight(action.data)
           }
-        ]
+        ],
+        SelectedCardsIds: action.data.id
       }
     default:
       return state

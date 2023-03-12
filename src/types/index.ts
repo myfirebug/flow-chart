@@ -47,7 +47,7 @@ export interface IPARAM extends IAnyObject {
 }
 
 export type CARD_STATE = {
-  id: string | number
+  id: string
   width: number
   height: number
   title: string

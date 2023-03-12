@@ -7,7 +7,7 @@
  * @FilePath: \flow-chart\src\components\card\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState, memo } from 'react'
 import { Group, Rect, Text } from 'react-konva'
 import { CARD_STATE } from '@src/types'
 import {
@@ -27,9 +27,10 @@ import { modifyCursor } from '@src/utils/tools'
 
 interface ICardProps {
   config: CARD_STATE
+  SelectedCardsIds?: string
 }
 
-const Card: FC<ICardProps> = ({ config }) => {
+const Card: FC<ICardProps> = ({ config, SelectedCardsIds }) => {
   const [textConfig, setTextConfig] = useState<Konva.TextConfig>()
   useEffect(() => {
     setTextConfig({
@@ -55,7 +56,7 @@ const Card: FC<ICardProps> = ({ config }) => {
       width={config.width}
       height={config.height}>
       {/* frame */}
-      <Frame config={config} />
+      <Frame config={config} SelectedCardsIds={SelectedCardsIds} />
       {/* title */}
       <Title config={config} />
       <Rect
