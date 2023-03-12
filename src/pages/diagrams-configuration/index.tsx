@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-12 20:37:01
+ * @LastEditTime: 2023-03-12 22:49:35
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import React, { FC, useEffect, useReducer, useState } from 'react'
+import React, { FC, useCallback, useEffect, useReducer, useState } from 'react'
 import { Stage, Layer, Path } from 'react-konva'
 import ConfigurationHeader from './components/header'
 import Settings from './components/settings'
@@ -50,7 +50,9 @@ const Configuration: FC<IConfigurationProps> = () => {
     sx: 0,
     sy: 0,
     ex: 0,
-    ey: 0
+    ey: 0,
+    distanceX: 0,
+    distanceY: 0
   })
 
   // 获取卡片数据
@@ -71,9 +73,8 @@ const Configuration: FC<IConfigurationProps> = () => {
   }, [])
 
   const onMouseDown = (e: KonvaEventObject<MouseEvent>) => {
-    console.log(e, 'eee')
     const { offsetX, offsetY } = e.evt
-    const { type } = e.target.attrs
+    const { type, cx, cy } = e.target.attrs
     if (type) {
       setType(type)
     }
@@ -81,16 +82,29 @@ const Configuration: FC<IConfigurationProps> = () => {
       sx: offsetX,
       sy: offsetY,
       ex: offsetX,
-      ey: offsetY
+      ey: offsetY,
+      distanceX: offsetX - cx,
+      distanceY: offsetY - cy
     })
   }
   const onMouseMove = (e: KonvaEventObject<MouseEvent>) => {
     const { offsetX, offsetY } = e.evt
-    setCoordinate((state) => ({
-      ...state,
-      ex: offsetX,
-      ey: offsetY
-    }))
+    setCoordinate((state) => {
+      if (type === 'move') {
+        dispatch({
+          type: 'MODIFY_CARD',
+          data: {
+            x: offsetX - state.distanceX,
+            y: offsetY - state.distanceY
+          }
+        })
+      }
+      return {
+        ...state,
+        ex: offsetX,
+        ey: offsetY
+      }
+    })
   }
 
   const onMouseUp = (e: KonvaEventObject<MouseEvent>) => {

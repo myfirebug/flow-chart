@@ -13,7 +13,13 @@ import {
   TITLE_HEIGHT,
   MARGIN_TOP
 } from '@src/components/card/components/constant'
-import { DIAGRAMS, ALL_STATE, MODIFY_DIAGRAMS_TITLE, ADD_CARD } from './type'
+import {
+  DIAGRAMS,
+  ALL_STATE,
+  MODIFY_DIAGRAMS_TITLE,
+  ADD_CARD,
+  MODIFY_CARD
+} from './type'
 import { CARD_STATE } from '@src/types'
 
 // 计算卡片高度
@@ -69,6 +75,19 @@ export const diagrams = (
           }
         ],
         SelectedCardsIds: action.data.id
+      }
+    case MODIFY_CARD:
+      return {
+        ...copy,
+        cards: copy.cards.map((item) => {
+          if (copy.SelectedCardsIds.includes(item.id)) {
+            return {
+              ...item,
+              ...action.data
+            }
+          }
+          return item
+        })
       }
     default:
       return state

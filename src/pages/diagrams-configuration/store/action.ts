@@ -2,7 +2,8 @@ import {
   DIAGRAMS_TYPE,
   ALL_STATE,
   MODIFY_DIAGRAMS_TITLE_TYPE,
-  ADD_CARD_TYPE
+  ADD_CARD_TYPE,
+  MODIFY_CARD_TYPE
 } from './type'
 import { CARD_STATE } from '@src/types'
 
@@ -18,6 +19,12 @@ export interface addCardAction {
   data: CARD_STATE
 }
 
+// 修改卡片
+export interface modifyCardAction {
+  type: MODIFY_CARD_TYPE
+  data: any
+}
+
 // 获取流程图数据
 export interface modifyDiagramsTitleAction {
   type: MODIFY_DIAGRAMS_TITLE_TYPE
@@ -29,3 +36,4 @@ export type ModifyAction =
   | diagramsAction
   | modifyDiagramsTitleAction
   | addCardAction
+  | modifyCardAction

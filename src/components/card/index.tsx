@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-15 21:30:33
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-05 20:22:42
+ * @LastEditTime: 2023-03-12 22:37:38
  * @FilePath: \flow-chart\src\components\card\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, useEffect, useState } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 import { Group, Rect, Text } from 'react-konva'
 import { CARD_STATE } from '@src/types'
 import {
@@ -30,80 +30,91 @@ interface ICardProps {
   SelectedCardsIds?: string
 }
 
-const Card: FC<ICardProps> = ({ config, SelectedCardsIds }) => {
-  const [textConfig, setTextConfig] = useState<Konva.TextConfig>()
-  useEffect(() => {
-    setTextConfig({
-      x: MARGIN_LEFT,
-      lineHeight: PORT_DIMENSION / 14,
-      fontSize: 12,
-      fill: '#999'
-    })
-  }, [config])
-  // 鼠标移入
-  const onMouseEnter = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    modifyCursor('js_stage', 'move')
-  }
-  // 鼠标移除
-  const onMouseLeave = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    modifyCursor('js_stage', 'default')
-  }
+const Card = memo<ICardProps>(
+  ({ config, SelectedCardsIds }) => {
+    const [textConfig, setTextConfig] = useState<Konva.TextConfig>()
+    useEffect(() => {
+      setTextConfig({
+        x: MARGIN_LEFT,
+        lineHeight: PORT_DIMENSION / 14,
+        fontSize: 12,
+        fill: '#999'
+      })
+    }, [config])
+    // 鼠标移入
+    const onMouseEnter = (e: Konva.KonvaEventObject<MouseEvent>) => {
+      modifyCursor('js_stage', 'move')
+    }
+    // 鼠标移除
+    const onMouseLeave = (e: Konva.KonvaEventObject<MouseEvent>) => {
+      modifyCursor('js_stage', 'default')
+    }
 
-  return (
-    <Group
-      x={config.x}
-      y={config.y}
-      width={config.width}
-      height={config.height}>
-      {/* frame */}
-      <Frame config={config} SelectedCardsIds={SelectedCardsIds} />
-      {/* title */}
-      <Title config={config} />
-      <Rect
-        type='move'
-        data-id={config.id}
+    return (
+      <Group
+        x={config.x}
+        y={config.y}
         width={config.width}
-        height={config.height}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      />
-      {/* 连线的点 */}
-      {config.ports
-        ? config.ports.map((item: any) => {
-            if (item.group === 'left' && item.visible) {
-              return <Port config={{ ...config, x: 0 }} key={item.id} />
-            } else if (item.group === 'right' && item.visible) {
-              return (
-                <Port
-                  key={item.id}
-                  config={{
-                    ...config,
-                    x: config.width - PORT_DIMENSION - MARGIN_LEFT * 2
-                  }}
-                />
-              )
-            } else {
-              return null
-            }
-          })
-        : null}
-      {/* 入参参数 */}
-      {config.inParams.map((item, index) => (
-        <Text
-          {...textConfig}
-          key={item.id}
-          text={`${item.field}：${item.value || '""'}`}
-          y={
-            TITLE_HEIGHT +
-            (config.ports.some((item) => item.visible)
-              ? PORT_DIMENSION + MARGIN_LEFT * 2
-              : MARGIN_LEFT) +
-            index * PORT_DIMENSION
-          }
+        height={config.height}>
+        {/* frame */}
+        <Frame config={config} SelectedCardsIds={SelectedCardsIds} />
+        {/* title */}
+        <Title config={config} />
+        <Rect
+          type='move'
+          id={config.id}
+          width={config.width}
+          height={config.height}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          cx={config.x}
+          cy={config.y}
         />
-      ))}
-    </Group>
-  )
-}
+        {/* 连线的点 */}
+        {config.ports
+          ? config.ports.map((item: any) => {
+              if (item.group === 'left' && item.visible) {
+                return <Port config={{ ...config, x: 0 }} key={item.id} />
+              } else if (item.group === 'right' && item.visible) {
+                return (
+                  <Port
+                    key={item.id}
+                    config={{
+                      ...config,
+                      x: config.width - PORT_DIMENSION - MARGIN_LEFT * 2
+                    }}
+                  />
+                )
+              } else {
+                return null
+              }
+            })
+          : null}
+        {/* 入参参数 */}
+        {config.inParams.map((item, index) => (
+          <Text
+            {...textConfig}
+            key={item.id}
+            text={`${item.field}：${item.value || '""'}`}
+            y={
+              TITLE_HEIGHT +
+              (config.ports.some((item) => item.visible)
+                ? PORT_DIMENSION + MARGIN_LEFT * 2
+                : MARGIN_LEFT) +
+              index * PORT_DIMENSION
+            }
+          />
+        ))}
+      </Group>
+    )
+  },
+  (prevProps, nextProps) => {
+    if (JSON.stringify(prevProps) === JSON.stringify(nextProps)) {
+      return true
+    }
+    console.log(12)
+    return false
+  }
+)
 
 export default Card
