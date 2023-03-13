@@ -25,6 +25,10 @@ export type ADD_CARD_TYPE = typeof ADD_CARD
 export const MODIFY_CARD = 'MODIFY_CARD'
 export type MODIFY_CARD_TYPE = typeof MODIFY_CARD
 
+// 选中卡片
+export const SELECTS_CARD = 'SELECTS_CARD'
+export type SELECTS_CARD_TYPE = typeof SELECTS_CARD
+
 export interface ALL_STATE {
   id: string | null
   title: string

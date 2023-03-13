@@ -3,7 +3,8 @@ import {
   ALL_STATE,
   MODIFY_DIAGRAMS_TITLE_TYPE,
   ADD_CARD_TYPE,
-  MODIFY_CARD_TYPE
+  MODIFY_CARD_TYPE,
+  SELECTS_CARD_TYPE
 } from './type'
 import { CARD_STATE } from '@src/types'
 
@@ -31,9 +32,16 @@ export interface modifyDiagramsTitleAction {
   title: string
 }
 
+// 卡片
+export interface selectsCardAction {
+  type: SELECTS_CARD_TYPE
+  ids: string
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
   | diagramsAction
   | modifyDiagramsTitleAction
   | addCardAction
   | modifyCardAction
+  | selectsCardAction

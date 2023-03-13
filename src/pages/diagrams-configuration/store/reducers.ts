@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-11 15:48:31
+ * @LastEditTime: 2023-03-13 10:40:31
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -18,7 +18,8 @@ import {
   ALL_STATE,
   MODIFY_DIAGRAMS_TITLE,
   ADD_CARD,
-  MODIFY_CARD
+  MODIFY_CARD,
+  SELECTS_CARD
 } from './type'
 import { CARD_STATE } from '@src/types'
 
@@ -54,7 +55,7 @@ export const diagrams = (
     case DIAGRAMS:
       return {
         ...action.data,
-        cards: action.data.cards.map((item) => ({
+        cards: action.data.cards.map((item: CARD_STATE) => ({
           ...item,
           height: diffHeight(item)
         }))
@@ -88,6 +89,11 @@ export const diagrams = (
           }
           return item
         })
+      }
+    case SELECTS_CARD:
+      return {
+        ...copy,
+        SelectedCardsIds: action.ids
       }
     default:
       return state

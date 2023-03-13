@@ -7,7 +7,7 @@
  * @FilePath: \flow-chart\src\components\card\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, memo, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { Group, Rect, Text } from 'react-konva'
 import { CARD_STATE } from '@src/types'
 import {
@@ -112,7 +112,6 @@ const Card = memo<ICardProps>(
     if (JSON.stringify(prevProps) === JSON.stringify(nextProps)) {
       return true
     }
-    console.log(12)
     return false
   }
 )

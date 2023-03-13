@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-12 22:49:35
+ * @LastEditTime: 2023-03-13 11:24:50
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -33,16 +33,15 @@ export type IType = 'stage' | 'move' | 'port' | ''
 
 interface IConfigurationProps {}
 
-// 舞台配置
-const stageConfig = {
-  x: 0,
-  y: 0,
-  width: window.innerWidth - 600,
-  height: window.innerHeight - 62
-}
-
 const Configuration: FC<IConfigurationProps> = () => {
   const [state, dispatch] = useReducer(diagrams, initialState)
+  // 舞台配置
+  const [stageConfig, setStageConfig] = useState({
+    x: 0,
+    y: 0,
+    width: window.innerWidth - 600,
+    height: window.innerHeight - 62
+  })
   // 鼠标的类型
   const [type, setType] = useState<IType>()
   // 位置信息
@@ -72,44 +71,57 @@ const Configuration: FC<IConfigurationProps> = () => {
     }
   }, [])
 
-  const onMouseDown = (e: KonvaEventObject<MouseEvent>) => {
-    const { offsetX, offsetY } = e.evt
-    const { type, cx, cy } = e.target.attrs
-    if (type) {
-      setType(type)
-    }
-    setCoordinate({
-      sx: offsetX,
-      sy: offsetY,
-      ex: offsetX,
-      ey: offsetY,
-      distanceX: offsetX - cx,
-      distanceY: offsetY - cy
-    })
-  }
-  const onMouseMove = (e: KonvaEventObject<MouseEvent>) => {
-    const { offsetX, offsetY } = e.evt
-    setCoordinate((state) => {
-      if (type === 'move') {
+  const onMouseDown = useCallback(
+    (e: KonvaEventObject<MouseEvent>) => {
+      const { offsetX, offsetY } = e.evt
+      const { type, cx, cy, id } = e.target.attrs
+      if (type) {
+        setType(type)
+      }
+      // 选中卡片
+      if (type === 'move' && !state.SelectedCardsIds.includes(id)) {
         dispatch({
-          type: 'MODIFY_CARD',
-          data: {
-            x: offsetX - state.distanceX,
-            y: offsetY - state.distanceY
-          }
+          type: 'SELECTS_CARD',
+          ids: id
         })
       }
-      return {
-        ...state,
+      setCoordinate({
+        sx: offsetX,
+        sy: offsetY,
         ex: offsetX,
-        ey: offsetY
-      }
-    })
-  }
+        ey: offsetY,
+        distanceX: offsetX - cx,
+        distanceY: offsetY - cy
+      })
+    },
+    [state.SelectedCardsIds]
+  )
+  const onMouseMove = useCallback(
+    (e: KonvaEventObject<MouseEvent>) => {
+      const { offsetX, offsetY } = e.evt
+      setCoordinate((state) => {
+        if (type === 'move') {
+          dispatch({
+            type: 'MODIFY_CARD',
+            data: {
+              x: offsetX - state.distanceX,
+              y: offsetY - state.distanceY
+            }
+          })
+        }
+        return {
+          ...state,
+          ex: offsetX,
+          ey: offsetY
+        }
+      })
+    },
+    [type]
+  )
 
-  const onMouseUp = (e: KonvaEventObject<MouseEvent>) => {
+  const onMouseUp = useCallback((e: KonvaEventObject<MouseEvent>) => {
     setType('')
-  }
+  }, [])
 
   return (
     <DiagramsConfigurationContext.Provider
