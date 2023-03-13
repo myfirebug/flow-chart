@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-15 21:30:33
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-12 22:37:38
+ * @LastEditTime: 2023-03-13 15:03:44
  * @FilePath: \flow-chart\src\components\card\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -74,11 +74,20 @@ const Card = memo<ICardProps>(
         {config.ports
           ? config.ports.map((item: any) => {
               if (item.group === 'left' && item.visible) {
-                return <Port config={{ ...config, x: 0 }} key={item.id} />
+                return (
+                  <Port
+                    portId={item.id}
+                    cardId={config.id}
+                    config={{ ...config, x: 0 }}
+                    key={item.id}
+                  />
+                )
               } else if (item.group === 'right' && item.visible) {
                 return (
                   <Port
+                    portId={item.id}
                     key={item.id}
+                    cardId={config.id}
                     config={{
                       ...config,
                       x: config.width - PORT_DIMENSION - MARGIN_LEFT * 2

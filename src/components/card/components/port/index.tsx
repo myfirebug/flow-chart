@@ -12,9 +12,11 @@ import {
 
 interface IPortProps {
   config: Icard
+  cardId: string
+  portId: string
 }
 
-const Port: FC<IPortProps> = ({ config }) => {
+const Port: FC<IPortProps> = ({ config, cardId, portId }) => {
   const [pathConfig, setPathConfig] = useState<Konva.PathConfig>()
   const [rectConfig, setRectConfig] = useState<Konva.PathConfig>()
   useEffect(() => {
@@ -58,6 +60,8 @@ const Port: FC<IPortProps> = ({ config }) => {
       <Rect
         type='port'
         {...rectConfig}
+        portId={portId}
+        cardId={cardId}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       />

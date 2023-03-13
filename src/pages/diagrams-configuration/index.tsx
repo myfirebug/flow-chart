@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-13 11:36:28
+ * @LastEditTime: 2023-03-13 14:50:44
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -73,16 +73,18 @@ const Configuration: FC<IConfigurationProps> = () => {
 
   const onMouseDown = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
+      console.log(e, 'eee')
       const { offsetX, offsetY } = e.evt
-      const { type, cx, cy, id } = e.target.attrs
+      const { type, cx, cy, id, cardId, portId } = e.target.attrs
       if (type) {
         setType(type)
       }
       // 选中卡片
-      if (type === 'move' && !state.selectedCardsIds.includes(id)) {
+      if (type !== 'stage' && !state.selectedCardsIds.includes(id)) {
+        console.log(id, cardId)
         dispatch({
           type: 'SELECTS_CARD',
-          ids: id
+          ids: id || cardId
         })
       }
 
