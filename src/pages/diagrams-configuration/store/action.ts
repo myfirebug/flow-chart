@@ -4,14 +4,27 @@ import {
   MODIFY_DIAGRAMS_TITLE_TYPE,
   ADD_CARD_TYPE,
   MODIFY_CARD_TYPE,
-  SELECTS_CARD_TYPE
+  SELECTS_CARD_TYPE,
+  MODIFY_DIAGRAMS_COORDINATE_TYPE
 } from './type'
-import { CARD_STATE } from '@src/types'
+import { CARD_STATE, COORDINATE } from '@src/types'
 
 // 获取流程图数据
 export interface diagramsAction {
   type: DIAGRAMS_TYPE
   data: ALL_STATE
+}
+
+// 获取流程图数据
+export interface modifyDiagramsTitleAction {
+  type: MODIFY_DIAGRAMS_TITLE_TYPE
+  title: string
+}
+
+// 获取流程图舞台坐标
+export interface modifyDiagramsCoordinateAction {
+  type: MODIFY_DIAGRAMS_COORDINATE_TYPE
+  coordinate: COORDINATE
 }
 
 // 添加卡片
@@ -24,12 +37,6 @@ export interface addCardAction {
 export interface modifyCardAction {
   type: MODIFY_CARD_TYPE
   data: any
-}
-
-// 获取流程图数据
-export interface modifyDiagramsTitleAction {
-  type: MODIFY_DIAGRAMS_TITLE_TYPE
-  title: string
 }
 
 // 卡片
@@ -45,3 +52,4 @@ export type ModifyAction =
   | addCardAction
   | modifyCardAction
   | selectsCardAction
+  | modifyDiagramsCoordinateAction

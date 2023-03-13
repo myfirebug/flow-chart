@@ -14,7 +14,9 @@ const Setting: FC<ISettingProps> = () => {
   const list = useMemo(() => {
     const { cards, selectedCardsIds } = diagramsConfigurationContext.data
     let result: IPARAM[] = []
-    let index = cards.findIndex((item) => selectedCardsIds.includes(item.id))
+    let index = cards.findIndex(
+      (item) => selectedCardsIds && selectedCardsIds.includes(item.id)
+    )
     if (index !== -1) {
       result = cards[index].inParams
     }
@@ -31,6 +33,7 @@ const Setting: FC<ISettingProps> = () => {
                 {diagramsConfigurationContext.data.cards.map((item) => (
                   <li
                     className={`card-item ${
+                      diagramsConfigurationContext.data.selectedCardsIds &&
                       diagramsConfigurationContext.data.selectedCardsIds.includes(
                         item.id
                       )

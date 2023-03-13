@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-13 14:50:44
+ * @LastEditTime: 2023-03-13 22:35:55
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -50,13 +50,16 @@ const Configuration: FC<IConfigurationProps> = () => {
     sy: 0,
     ex: 0,
     ey: 0,
-    distanceX: 0,
-    distanceY: 0
+    distanceCardX: 0,
+    distanceCardY: 0,
+    distanceStageX: 0,
+    distanceStageY: 0
   })
 
   // 获取卡片数据
   useEffect(() => {
     if (getUrl('id')) {
+      // 获取接口数据
     } else {
       dispatch({
         type: 'DIAGRAMS',
@@ -65,6 +68,8 @@ const Configuration: FC<IConfigurationProps> = () => {
           title: '未命名流程图',
           description: '',
           selectedCardsIds: '',
+          x: 0,
+          y: 0,
           cards: []
         }
       })
@@ -80,7 +85,10 @@ const Configuration: FC<IConfigurationProps> = () => {
         setType(type)
       }
       // 选中卡片
-      if (type !== 'stage' && !state.selectedCardsIds.includes(id)) {
+      if (
+        type !== 'stage' &&
+        (!state.selectedCardsIds || !state.selectedCardsIds.includes(id))
+      ) {
         console.log(id, cardId)
         dispatch({
           type: 'SELECTS_CARD',
@@ -100,38 +108,67 @@ const Configuration: FC<IConfigurationProps> = () => {
         sy: offsetY,
         ex: offsetX,
         ey: offsetY,
-        distanceX: offsetX - cx,
-        distanceY: offsetY - cy
+        distanceCardX: offsetX - cx,
+        distanceCardY: offsetY - cy,
+        distanceStageX: offsetX - stageConfig.x,
+        distanceStageY: offsetY - stageConfig.y
       })
     },
-    [state.selectedCardsIds]
+    [state.selectedCardsIds, stageConfig.x, stageConfig.y]
   )
   const onMouseMove = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
       const { offsetX, offsetY } = e.evt
       setCoordinate((state) => {
-        if (type === 'move') {
-          dispatch({
-            type: 'MODIFY_CARD',
-            data: {
-              x: offsetX - state.distanceX,
-              y: offsetY - state.distanceY
-            }
-          })
-        }
         return {
           ...state,
           ex: offsetX,
           ey: offsetY
         }
       })
+      switch (type) {
+        case 'move':
+          dispatch({
+            type: 'MODIFY_CARD',
+            data: {
+              x: offsetX - coordinate.distanceCardX,
+              y: offsetY - coordinate.distanceCardY
+            }
+          })
+          break
+        case 'stage':
+          setStageConfig((stage) => ({
+            ...stage,
+            x: offsetX - coordinate.distanceStageX,
+            y: offsetY - coordinate.distanceStageY
+          }))
+          break
+      }
     },
-    [type]
+    [
+      type,
+      coordinate.distanceCardX,
+      coordinate.distanceCardY,
+      coordinate.distanceStageX,
+      coordinate.distanceStageY
+    ]
   )
 
-  const onMouseUp = useCallback((e: KonvaEventObject<MouseEvent>) => {
-    setType('')
-  }, [])
+  const onMouseUp = useCallback(
+    (e: KonvaEventObject<MouseEvent>) => {
+      if (type === 'stage') {
+        dispatch({
+          type: 'MODIFY_DIAGRAMS_COORDINATE',
+          coordinate: {
+            x: stageConfig.x,
+            y: stageConfig.y
+          }
+        })
+      }
+      setType('')
+    },
+    [stageConfig.x, stageConfig.y, type]
+  )
 
   return (
     <DiagramsConfigurationContext.Provider
@@ -164,8 +201,14 @@ const Configuration: FC<IConfigurationProps> = () => {
               <Layer>
                 {type === 'port' ? (
                   <AuxiliaryWire
-                    s={{ x: coordinate.sx, y: coordinate.sy }}
-                    e={{ x: coordinate.ex, y: coordinate.ey }}
+                    s={{
+                      x: coordinate.sx - state.x,
+                      y: coordinate.sy - state.y
+                    }}
+                    e={{
+                      x: coordinate.ex - state.x,
+                      y: coordinate.ey - state.y
+                    }}
                   />
                 ) : null}
               </Layer>

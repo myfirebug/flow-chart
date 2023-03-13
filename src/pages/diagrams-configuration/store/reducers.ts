@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-13 10:40:31
+ * @LastEditTime: 2023-03-13 19:34:26
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -19,7 +19,8 @@ import {
   MODIFY_DIAGRAMS_TITLE,
   ADD_CARD,
   MODIFY_CARD,
-  SELECTS_CARD
+  SELECTS_CARD,
+  MODIFY_DIAGRAMS_COORDINATE
 } from './type'
 import { CARD_STATE } from '@src/types'
 
@@ -43,6 +44,8 @@ export const initialState: ALL_STATE = {
   description: '',
   createTime: '',
   selectedCardsIds: '',
+  x: 0,
+  y: 0,
   cards: []
 }
 
@@ -72,6 +75,8 @@ export const diagrams = (
           ...copy.cards,
           {
             ...action.data,
+            x: action.data.x - copy.x,
+            y: action.data.y - copy.y,
             height: diffHeight(action.data)
           }
         ],
@@ -94,6 +99,12 @@ export const diagrams = (
       return {
         ...copy,
         selectedCardsIds: action.ids
+      }
+    case MODIFY_DIAGRAMS_COORDINATE:
+      console.log(action.coordinate, 'action.coordinate')
+      return {
+        ...copy,
+        ...action.coordinate
       }
     default:
       return state
