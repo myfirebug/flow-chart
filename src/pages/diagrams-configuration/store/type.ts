@@ -35,5 +35,5 @@ export interface ALL_STATE {
   description: string
   createTime?: string
   cards: CARD_STATE[]
-  SelectedCardsIds: string
+  selectedCardsIds: string
 }

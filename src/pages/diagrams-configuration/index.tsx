@@ -64,7 +64,7 @@ const Configuration: FC<IConfigurationProps> = () => {
           id: null,
           title: '未命名流程图',
           description: '',
-          SelectedCardsIds: '',
+          selectedCardsIds: '',
           cards: []
         }
       })
@@ -79,7 +79,7 @@ const Configuration: FC<IConfigurationProps> = () => {
         setType(type)
       }
       // 选中卡片
-      if (type === 'move' && !state.SelectedCardsIds.includes(id)) {
+      if (type === 'move' && !state.selectedCardsIds.includes(id)) {
         dispatch({
           type: 'SELECTS_CARD',
           ids: id
@@ -87,7 +87,7 @@ const Configuration: FC<IConfigurationProps> = () => {
       }
 
       // 取消选中卡片
-      if (type === 'stage' && state.SelectedCardsIds) {
+      if (type === 'stage' && state.selectedCardsIds) {
         dispatch({
           type: 'SELECTS_CARD',
           ids: ''
@@ -102,7 +102,7 @@ const Configuration: FC<IConfigurationProps> = () => {
         distanceY: offsetY - cy
       })
     },
-    [state.SelectedCardsIds]
+    [state.selectedCardsIds]
   )
   const onMouseMove = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
@@ -154,7 +154,7 @@ const Configuration: FC<IConfigurationProps> = () => {
                       <Card
                         config={item}
                         key={item.id}
-                        SelectedCardsIds={state.SelectedCardsIds}
+                        SelectedCardsIds={state.selectedCardsIds}
                       />
                     ))
                   : null}

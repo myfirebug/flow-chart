@@ -17,6 +17,7 @@
     .body {
       .ant-tabs-nav {
         background: #fafafa;
+        margin: 0;
         &:before {
           border-bottom: 1px solid #d9d9d9;
         }
@@ -31,6 +32,46 @@
       }
       .ant-checkbox-wrapper + .ant-checkbox-wrapper {
         margin: 0;
+      }
+      .card-list {
+        overflow: hidden;
+      }
+      .card-item {
+        display: flex;
+        position: relative;
+        height: 36px;
+        width: calc(100% + 90px);
+        padding-left: 10px;
+        line-height: 36px;
+        cursor: pointer;
+        border-bottom: 1px solid #d9d9d9;
+        transition: all 0.25s ease 0s;
+        .title {
+          flex: 1;
+        }
+        .operation {
+          display: flex;
+        }
+        .anticon {
+          padding: 0 15px;
+          height: 100%;
+          line-height: 36px;
+          border-left: 1px solid #d9d9d9;
+          color: #999;
+          transition: all 0.25s ease 0s;
+          &:hover {
+            background: #096dd9;
+            color: #fff;
+          }
+        }
+        &.is-active {
+          color: #096dd9;
+          font-weight: bold;
+        }
+        &:hover {
+          transform: translateX(-90px);
+          background: rgba(0, 0, 0, 0.05);
+        }
       }
     }
   }

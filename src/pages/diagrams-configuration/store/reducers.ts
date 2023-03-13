@@ -42,7 +42,7 @@ export const initialState: ALL_STATE = {
   title: '',
   description: '',
   createTime: '',
-  SelectedCardsIds: '',
+  selectedCardsIds: '',
   cards: []
 }
 
@@ -75,13 +75,13 @@ export const diagrams = (
             height: diffHeight(action.data)
           }
         ],
-        SelectedCardsIds: action.data.id
+        selectedCardsIds: action.data.id
       }
     case MODIFY_CARD:
       return {
         ...copy,
         cards: copy.cards.map((item) => {
-          if (copy.SelectedCardsIds.includes(item.id)) {
+          if (copy.selectedCardsIds.includes(item.id)) {
             return {
               ...item,
               ...action.data
@@ -93,7 +93,7 @@ export const diagrams = (
     case SELECTS_CARD:
       return {
         ...copy,
-        SelectedCardsIds: action.ids
+        selectedCardsIds: action.ids
       }
     default:
       return state
