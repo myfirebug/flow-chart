@@ -47,7 +47,7 @@ const Title = memo<ITitleProp>(
         fontStyle: 'bold',
         lineHeight: TITLE_HEIGHT / TITLE_FONTSIZE
       })
-    }, [config])
+    }, [config.width, config.title])
 
     useEffect(() => {
       let imageObj = new Image()

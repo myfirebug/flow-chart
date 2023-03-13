@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-13 11:24:50
+ * @LastEditTime: 2023-03-13 11:36:28
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -83,6 +83,14 @@ const Configuration: FC<IConfigurationProps> = () => {
         dispatch({
           type: 'SELECTS_CARD',
           ids: id
+        })
+      }
+
+      // 取消选中卡片
+      if (type === 'stage' && state.SelectedCardsIds) {
+        dispatch({
+          type: 'SELECTS_CARD',
+          ids: ''
         })
       }
       setCoordinate({
