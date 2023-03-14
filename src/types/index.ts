@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-08 15:16:49
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-08 15:16:56
+ * @LastEditTime: 2023-03-14 09:11:34
  * @FilePath: \flow-chart\src\types\index.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -49,6 +49,22 @@ export interface IPARAM extends IAnyObject {
 export interface COORDINATE {
   x: number
   y: number
+}
+
+export interface EDGES_STATE {
+  id: string
+  source: {
+    cell: string
+    port: string
+  }
+  target: {
+    cell: string
+    port: string
+  }
+  data: {
+    source: string
+    target: string
+  }
 }
 
 export type CARD_STATE = {

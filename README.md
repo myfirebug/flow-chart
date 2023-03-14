@@ -11,6 +11,8 @@ flow-chart 基于 React+konva+TypeScript 流程图开发，支持新增/编辑�
 ![RUNOOB 图标](https://myfirebug.github.io/example-images/flow-chart/01.png)
 ![RUNOOB 图标](https://myfirebug.github.io/example-images/flow-chart/02.png)
 ![RUNOOB 图标](https://myfirebug.github.io/example-images/flow-chart/03.png)
+**新增/编辑流程图图片**
+![RUNOOB 图标](https://myfirebug.github.io/example-images/flow-chart/04.png)
 
 **主要依赖：**
 

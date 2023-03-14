@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-15 21:38:06
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-13 11:14:03
+ * @LastEditTime: 2023-03-14 20:15:21
  * @FilePath: \flow-chart\src\components\card\components\frame\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -38,7 +38,7 @@ const Frame = memo<IFrameProps>(
         y: -PADDING,
         width: config.width + PADDING * 2,
         height: config.height + PADDING * 2,
-        stroke: '#40a9ff',
+        stroke: '#1890ff',
         strokeWidth: 2,
         cornerRadius: CORNERRADIUS
       })

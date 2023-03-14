@@ -14,10 +14,11 @@ interface IPortProps {
   config: Icard
   cardId: string
   portId: string
+  group: 'left' | 'right'
 }
 
 const Port = memo<IPortProps>(
-  ({ config, cardId, portId }) => {
+  ({ config, cardId, portId, group }) => {
     const [pathConfig, setPathConfig] = useState<Konva.PathConfig>()
     const [rectConfig, setRectConfig] = useState<Konva.PathConfig>()
     useEffect(() => {
@@ -63,6 +64,7 @@ const Port = memo<IPortProps>(
           {...rectConfig}
           portId={portId}
           cardId={cardId}
+          group={group}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         />

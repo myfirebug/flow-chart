@@ -30,7 +30,7 @@ const AuxiliaryWire: FC<IAuxiliaryWireProps> = ({ s, e }) => {
        L ${e.x} ${e.y}
       `
   }, [s, e])
-  return <Path data={data} stroke='#096dd9' strokeWidth={2} />
+  return <Path data={data} stroke='#1890ff' strokeWidth={2} />
 }
 
 export default AuxiliaryWire

@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:28:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-08 22:08:09
- * @FilePath: \flow-chart\src\pages\diagrams-configuration\components\store\type.ts
+ * @LastEditTime: 2023-03-14 09:20:45
+ * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\type.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { CARD_STATE } from '@src/types'
+import { CARD_STATE, EDGES_STATE } from '@src/types'
 
 // 获取流程图数据
 export const DIAGRAMS = 'DIAGRAMS'
@@ -33,6 +33,10 @@ export type MODIFY_CARD_TYPE = typeof MODIFY_CARD
 export const SELECTS_CARD = 'SELECTS_CARD'
 export type SELECTS_CARD_TYPE = typeof SELECTS_CARD
 
+// 增加卡片连接
+export const ADD_EDGE = 'ADD_EDGE'
+export type ADD_EDGE_TYPE = typeof ADD_EDGE
+
 export interface ALL_STATE {
   id: string | null
   title: string
@@ -42,4 +46,5 @@ export interface ALL_STATE {
   createTime?: string
   cards: CARD_STATE[]
   selectedCardsIds: string
+  edges: EDGES_STATE[]
 }

@@ -5,9 +5,10 @@ import {
   ADD_CARD_TYPE,
   MODIFY_CARD_TYPE,
   SELECTS_CARD_TYPE,
-  MODIFY_DIAGRAMS_COORDINATE_TYPE
+  MODIFY_DIAGRAMS_COORDINATE_TYPE,
+  ADD_EDGE_TYPE
 } from './type'
-import { CARD_STATE, COORDINATE } from '@src/types'
+import { CARD_STATE, COORDINATE, EDGES_STATE } from '@src/types'
 
 // 获取流程图数据
 export interface diagramsAction {
@@ -45,6 +46,12 @@ export interface selectsCardAction {
   ids: string
 }
 
+// 增加卡片连接
+export interface addEdgeAction {
+  type: ADD_EDGE_TYPE
+  edge: EDGES_STATE
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
   | diagramsAction
@@ -53,3 +60,4 @@ export type ModifyAction =
   | modifyCardAction
   | selectsCardAction
   | modifyDiagramsCoordinateAction
+  | addEdgeAction

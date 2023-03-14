@@ -80,6 +80,7 @@ const Card = memo<ICardProps>(
                     cardId={config.id}
                     config={{ ...config, x: 0 }}
                     key={item.id}
+                    group='left'
                   />
                 )
               } else if (item.group === 'right' && item.visible) {
@@ -88,6 +89,7 @@ const Card = memo<ICardProps>(
                     portId={item.id}
                     key={item.id}
                     cardId={config.id}
+                    group='right'
                     config={{
                       ...config,
                       x: config.width - PORT_DIMENSION - MARGIN_LEFT * 2
