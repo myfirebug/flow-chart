@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-14 20:33:49
+ * @LastEditTime: 2023-03-15 10:46:20
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -13,6 +13,7 @@ import React, {
   useEffect,
   useMemo,
   useReducer,
+  useRef,
   useState
 } from 'react'
 import { Stage, Layer } from 'react-konva'
@@ -75,7 +76,7 @@ const Configuration: FC<IConfigurationProps> = () => {
   // 卡片连接类型
   const [portType, setPortType] = useState<'left' | 'right' | ''>('')
   // 卡片连接
-  const [, setEdge] = useState<EDGES_STATE>({
+  const edge = useRef<EDGES_STATE>({
     id: '',
     source: {
       cell: '',
@@ -114,7 +115,6 @@ const Configuration: FC<IConfigurationProps> = () => {
 
   const onMouseDown = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
-      console.log(e, 'eee')
       const { offsetX, offsetY } = e.evt
       const { type, cx, cy, id, cardId, portId, group } = e.target.attrs
       if (type) {
@@ -132,7 +132,7 @@ const Configuration: FC<IConfigurationProps> = () => {
           break
         case 'port':
           setPortType(group)
-          setEdge({
+          edge.current = {
             id: guid(),
             source: {
               cell: group === 'right' ? cardId : '',
@@ -146,7 +146,7 @@ const Configuration: FC<IConfigurationProps> = () => {
               source: group === 'right' ? cardId : '',
               target: group === 'left' ? cardId : ''
             }
-          })
+          }
           break
         default:
       }
@@ -155,7 +155,6 @@ const Configuration: FC<IConfigurationProps> = () => {
         type !== 'stage' &&
         (!state.selectedCardsIds || !state.selectedCardsIds.includes(id))
       ) {
-        console.log(id, cardId)
         dispatch({
           type: 'SELECTS_CARD',
           ids: id || cardId
@@ -173,7 +172,7 @@ const Configuration: FC<IConfigurationProps> = () => {
         distanceStageY: offsetY - stageConfig.y
       })
     },
-    [state.selectedCardsIds, stageConfig.x, stageConfig.y]
+    [state.selectedCardsIds, stageConfig.x, stageConfig.y, edge]
   )
   const onMouseMove = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
@@ -227,48 +226,45 @@ const Configuration: FC<IConfigurationProps> = () => {
           })
           break
         case 'port':
+          if (!group) return
           if (portType !== group) {
-            setEdge((edgeState) => {
-              const edge = {
-                ...edgeState,
-                source: {
-                  cell: group === 'right' ? cardId : edgeState.source.cell,
-                  port: group === 'right' ? portId : edgeState.source.port
-                },
-                target: {
-                  cell: group === 'left' ? cardId : edgeState.target.cell,
-                  port: group === 'left' ? portId : edgeState.target.port
-                },
-                data: {
-                  source: group === 'right' ? cardId : edgeState.source.cell,
-                  target: group === 'left' ? cardId : edgeState.target.cell
-                }
+            const edgeStage: EDGES_STATE = {
+              ...edge.current,
+              source: {
+                cell: group === 'right' ? cardId : edge.current.source.cell,
+                port: group === 'right' ? portId : edge.current.source.port
+              },
+              target: {
+                cell: group === 'left' ? cardId : edge.current.target.cell,
+                port: group === 'left' ? portId : edge.current.target.port
+              },
+              data: {
+                source: group === 'right' ? cardId : edge.current.source.cell,
+                target: group === 'left' ? cardId : edge.current.target.cell
               }
-              if (state.edges.length) {
-                const index = state.edges.findIndex(
-                  (item) =>
-                    item.source.cell === edge.source.cell &&
-                    item.source.port === edge.source.port &&
-                    item.target.cell === edge.target.cell &&
-                    item.target.port === edge.target.port
-                )
-                if (index === -1) {
-                  dispatch({
-                    type: 'ADD_EDGE',
-                    edge: edge
-                  })
-                } else {
-                  message.error('不能连接一样的线')
-                }
-              } else {
+            }
+            if (state.edges.length) {
+              const index = state.edges.findIndex(
+                (item) =>
+                  (item.source.cell === edgeStage.source.cell &&
+                    item.source.port === edgeStage.source.port) ||
+                  (item.target.cell === edgeStage.target.cell &&
+                    item.target.port === edgeStage.target.port)
+              )
+              if (index === -1) {
                 dispatch({
                   type: 'ADD_EDGE',
-                  edge: edge
+                  edge: edgeStage
                 })
+              } else {
+                message.error('该节点已经连接了')
               }
-              console.log(edge, 'edge')
-              return edge
-            })
+            } else {
+              dispatch({
+                type: 'ADD_EDGE',
+                edge: edgeStage
+              })
+            }
           } else {
             message.error('只能inPort连接outPort')
           }
@@ -277,7 +273,7 @@ const Configuration: FC<IConfigurationProps> = () => {
       }
       setType('')
     },
-    [type, stageConfig.x, stageConfig.y, portType, state.edges]
+    [type, stageConfig.x, stageConfig.y, portType, state.edges, edge]
   )
 
   const lines = useMemo(() => {
