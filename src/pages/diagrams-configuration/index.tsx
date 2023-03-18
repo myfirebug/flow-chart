@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-15 10:46:20
+ * @LastEditTime: 2023-03-18 10:43:26
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -243,6 +243,11 @@ const Configuration: FC<IConfigurationProps> = () => {
                 target: group === 'left' ? cardId : edge.current.target.cell
               }
             }
+
+            if (edgeStage.source.cell === edgeStage.target.cell) {
+              message.error('同一卡片不能连接')
+              return
+            }
             if (state.edges.length) {
               const index = state.edges.findIndex(
                 (item) =>
@@ -251,6 +256,7 @@ const Configuration: FC<IConfigurationProps> = () => {
                   (item.target.cell === edgeStage.target.cell &&
                     item.target.port === edgeStage.target.port)
               )
+
               if (index === -1) {
                 dispatch({
                   type: 'ADD_EDGE',
