@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 20:32:09
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-09 11:19:54
+ * @LastEditTime: 2023-03-20 19:54:10
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\components\header\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useCallback, useContext, useEffect, useState } from 'react'
 import { Tooltip, Button, Modal, Form, Input, message } from 'antd'
 import { useHistory } from 'react-router-dom'
 import './index.scss'
@@ -22,7 +22,6 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
   const history = useHistory()
 
   useEffect(() => {
-    console.log(form, 'form')
     if (form) {
       const { setFieldValue } = form
       setFieldValue('title', diagramsConfigurationContent.data.title)
@@ -40,6 +39,19 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
       setIsModalOpen(false)
     })
   }
+
+  const shortcutKeyHandler = useCallback(
+    (key: string) => {
+      switch (key) {
+        case 'del':
+          diagramsConfigurationContent.dispatch({
+            type: 'DEL_CARD'
+          })
+          break
+      }
+    },
+    [diagramsConfigurationContent]
+  )
 
   const handleCancel = () => {
     setIsModalOpen(false)
@@ -114,7 +126,13 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
                   <span className='name'>粘贴</span>
                   <span className='value'>Ctrl+V</span>
                 </dd>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('del')}
+                  className={
+                    !diagramsConfigurationContent.data.selectedCardsIds
+                      ? 'is-disabled'
+                      : ''
+                  }>
                   <span className='app-icon'>&#xe7c3;</span>
                   <span className='name'>删除</span>
                   <span className='value'>Delete</span>

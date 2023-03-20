@@ -6,7 +6,8 @@ import {
   MODIFY_CARD_TYPE,
   SELECTS_CARD_TYPE,
   MODIFY_DIAGRAMS_COORDINATE_TYPE,
-  ADD_EDGE_TYPE
+  ADD_EDGE_TYPE,
+  DEL_CARD_TYPE
 } from './type'
 import { CARD_STATE, COORDINATE, EDGES_STATE } from '@src/types'
 
@@ -52,6 +53,11 @@ export interface addEdgeAction {
   edge: EDGES_STATE
 }
 
+// 删除卡片连接
+export interface delCardAction {
+  type: DEL_CARD_TYPE
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
   | diagramsAction
@@ -61,3 +67,4 @@ export type ModifyAction =
   | selectsCardAction
   | modifyDiagramsCoordinateAction
   | addEdgeAction
+  | delCardAction

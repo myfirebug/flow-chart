@@ -37,6 +37,10 @@ export type SELECTS_CARD_TYPE = typeof SELECTS_CARD
 export const ADD_EDGE = 'ADD_EDGE'
 export type ADD_EDGE_TYPE = typeof ADD_EDGE
 
+// 删除卡片连接
+export const DEL_CARD = 'DEL_CARD'
+export type DEL_CARD_TYPE = typeof DEL_CARD
+
 export interface ALL_STATE {
   id: string | null
   title: string

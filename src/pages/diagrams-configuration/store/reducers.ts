@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-14 09:16:05
+ * @LastEditTime: 2023-03-20 19:44:54
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -21,7 +21,8 @@ import {
   MODIFY_CARD,
   SELECTS_CARD,
   MODIFY_DIAGRAMS_COORDINATE,
-  ADD_EDGE
+  ADD_EDGE,
+  DEL_CARD
 } from './type'
 import { CARD_STATE } from '@src/types'
 
@@ -111,6 +112,19 @@ export const diagrams = (
       return {
         ...copy,
         edges: [...copy.edges, action.edge]
+      }
+    case DEL_CARD:
+      return {
+        ...copy,
+        cards: copy.cards.filter(
+          (item) => !copy.selectedCardsIds.includes(item.id)
+        ),
+        edges: copy.edges.filter(
+          (item) =>
+            !copy.selectedCardsIds.includes(item.data.source) ||
+            !copy.selectedCardsIds.includes(item.data.target)
+        ),
+        selectedCardsIds: ''
       }
     default:
       return state

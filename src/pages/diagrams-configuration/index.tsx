@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-18 10:43:26
+ * @LastEditTime: 2023-03-20 19:50:00
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -61,7 +61,7 @@ const Configuration: FC<IConfigurationProps> = () => {
     height: window.innerHeight - 62
   })
   // 鼠标的类型
-  const [type, setType] = useState<IType>()
+  const mouseType = useRef<IType>('')
   // 位置信息
   const [coordinate, setCoordinate] = useState({
     sx: 0,
@@ -118,7 +118,7 @@ const Configuration: FC<IConfigurationProps> = () => {
       const { offsetX, offsetY } = e.evt
       const { type, cx, cy, id, cardId, portId, group } = e.target.attrs
       if (type) {
-        setType(type)
+        mouseType.current = type
       }
       switch (type) {
         case 'stage':
@@ -184,7 +184,7 @@ const Configuration: FC<IConfigurationProps> = () => {
           ey: offsetY
         }
       })
-      switch (type) {
+      switch (mouseType.current) {
         case 'move':
           dispatch({
             type: 'MODIFY_CARD',
@@ -204,7 +204,7 @@ const Configuration: FC<IConfigurationProps> = () => {
       }
     },
     [
-      type,
+      mouseType,
       coordinate.distanceCardX,
       coordinate.distanceCardY,
       coordinate.distanceStageX,
@@ -214,7 +214,7 @@ const Configuration: FC<IConfigurationProps> = () => {
 
   const onMouseUp = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
-      const { cardId, portId, group } = e.target.attrs
+      const { type, cardId, portId, group } = e.target.attrs
       switch (type) {
         case 'stage':
           dispatch({
@@ -277,9 +277,9 @@ const Configuration: FC<IConfigurationProps> = () => {
           break
         default:
       }
-      setType('')
+      mouseType.current = ''
     },
-    [type, stageConfig.x, stageConfig.y, portType, state.edges, edge]
+    [mouseType, stageConfig.x, stageConfig.y, portType, state.edges, edge]
   )
 
   const lines = useMemo(() => {
@@ -373,7 +373,7 @@ const Configuration: FC<IConfigurationProps> = () => {
                   : null}
               </Layer>
               <Layer>
-                {type === 'port' ? (
+                {mouseType.current === 'port' ? (
                   <AuxiliaryWire
                     s={{
                       x: coordinate.sx - state.x,
