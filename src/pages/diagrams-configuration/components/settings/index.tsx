@@ -31,6 +31,12 @@ const Setting: FC<ISettingProps> = () => {
               <ul className='card-list'>
                 {diagramsConfigurationContext.data.cards.map((item) => (
                   <li
+                    onClick={() =>
+                      diagramsConfigurationContext.dispatch({
+                        type: 'SELECTS_CARD',
+                        ids: item.id
+                      })
+                    }
                     className={`card-item ${
                       diagramsConfigurationContext.data.selectedCardsIds &&
                       diagramsConfigurationContext.data.selectedCardsIds.includes(
