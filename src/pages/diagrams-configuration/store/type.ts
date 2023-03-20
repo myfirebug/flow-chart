@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:28:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-14 09:20:45
+ * @LastEditTime: 2023-03-20 20:09:47
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\type.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -40,6 +40,10 @@ export type ADD_EDGE_TYPE = typeof ADD_EDGE
 // 删除卡片连接
 export const DEL_CARD = 'DEL_CARD'
 export type DEL_CARD_TYPE = typeof DEL_CARD
+
+// 复制卡片连接
+export const COPY_CARD = 'COPY_CARD'
+export type COPY_CARD_TYPE = typeof COPY_CARD
 
 export interface ALL_STATE {
   id: string | null

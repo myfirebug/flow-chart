@@ -1,10 +1,9 @@
 import { FC, useContext, useMemo } from 'react'
-import { Tabs, Result, Tooltip } from 'antd'
+import { Tabs, Result } from 'antd'
 import './index.scss'
 import CustomForm from '@src/form'
 import { IPARAM } from '@src/types'
 import { DiagramsConfigurationContext } from '../../index'
-import { DeleteOutlined, CopyOutlined } from '@ant-design/icons'
 
 interface ISettingProps {}
 
@@ -42,14 +41,6 @@ const Setting: FC<ISettingProps> = () => {
                     }`}
                     key={item.id}>
                     <div className='title'>{item.title}</div>
-                    <div className='operation'>
-                      <Tooltip title='复制'>
-                        <CopyOutlined />
-                      </Tooltip>
-                      <Tooltip title='删除'>
-                        <DeleteOutlined />
-                      </Tooltip>
-                    </div>
                   </li>
                 ))}
               </ul>

@@ -40,7 +40,10 @@ const Title = memo<ITitleProp>(
         fillLinearGradientColorStops: [0, '#ddd', 1, '#fff']
       })
       setTextConfig({
-        text: config.title,
+        text:
+          config.title.length > 10
+            ? config.title.slice(0, 10) + '...'
+            : config.title,
         fontSize: TITLE_FONTSIZE,
         fill: '#666',
         x: ICON_DIMENSION + MARGIN_LEFT * 2,

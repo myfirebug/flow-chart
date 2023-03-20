@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 20:32:09
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-20 19:54:10
+ * @LastEditTime: 2023-03-20 20:08:36
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\components\header\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -46,6 +46,11 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
         case 'del':
           diagramsConfigurationContent.dispatch({
             type: 'DEL_CARD'
+          })
+          break
+        case 'copy':
+          diagramsConfigurationContent.dispatch({
+            type: 'COPY_CARD'
           })
           break
       }
@@ -116,7 +121,13 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
                   <span className='name'>剪切</span>
                   <span className='value'>Ctrl+X</span>
                 </dd>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('copy')}
+                  className={
+                    !diagramsConfigurationContent.data.selectedCardsIds
+                      ? 'is-disabled'
+                      : ''
+                  }>
                   <span className='app-icon'>&#xe8b0;</span>
                   <span className='name'>拷贝</span>
                   <span className='value'>Ctrl+C</span>

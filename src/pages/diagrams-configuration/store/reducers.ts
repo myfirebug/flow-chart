@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-20 19:44:54
+ * @LastEditTime: 2023-03-20 20:56:34
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -22,9 +22,11 @@ import {
   SELECTS_CARD,
   MODIFY_DIAGRAMS_COORDINATE,
   ADD_EDGE,
-  DEL_CARD
+  DEL_CARD,
+  COPY_CARD
 } from './type'
 import { CARD_STATE } from '@src/types'
+import { guid } from '@src/utils/tools'
 
 // 计算卡片高度
 const diffHeight = (item: CARD_STATE) => {
@@ -80,6 +82,7 @@ export const diagrams = (
             ...action.data,
             x: action.data.x - copy.x,
             y: action.data.y - copy.y,
+            ports: action.data.ports.map((item) => ({ ...item, id: guid() })),
             height: diffHeight(action.data)
           }
         ],
@@ -121,10 +124,32 @@ export const diagrams = (
         ),
         edges: copy.edges.filter(
           (item) =>
-            !copy.selectedCardsIds.includes(item.data.source) ||
+            !copy.selectedCardsIds.includes(item.data.source) &&
             !copy.selectedCardsIds.includes(item.data.target)
         ),
         selectedCardsIds: ''
+      }
+    case COPY_CARD:
+      let ids: string[] = []
+      let arr = copy.cards
+        .filter((item) => copy.selectedCardsIds.includes(item.id))
+        .map((item) => {
+          let cardId = guid()
+          ids.push(cardId)
+          return {
+            ...item,
+            title: `${item.title}[复制]`,
+            id: cardId,
+            ports: item.ports.map((port) => ({
+              ...port,
+              id: guid()
+            }))
+          }
+        })
+      return {
+        ...copy,
+        cards: [...copy.cards, ...arr],
+        selectedCardsIds: ids.join(',')
       }
     default:
       return state
