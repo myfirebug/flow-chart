@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-20 20:56:34
+ * @LastEditTime: 2023-03-21 13:50:34
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -21,9 +21,11 @@ import {
   MODIFY_CARD,
   SELECTS_CARD,
   MODIFY_DIAGRAMS_COORDINATE,
+  MODIFY_CARDS_COORDINATE,
   ADD_EDGE,
   DEL_CARD,
-  COPY_CARD
+  COPY_CARD,
+  SELECT_ALL
 } from './type'
 import { CARD_STATE } from '@src/types'
 import { guid } from '@src/utils/tools'
@@ -111,6 +113,23 @@ export const diagrams = (
         ...copy,
         ...action.coordinate
       }
+    case MODIFY_CARDS_COORDINATE:
+      return {
+        ...copy,
+        cards: copy.cards.map((item) => {
+          if (
+            copy.selectedCardsIds &&
+            copy.selectedCardsIds.includes(item.id)
+          ) {
+            return {
+              ...item,
+              x: item.x + action.coordinate.x,
+              y: item.y + action.coordinate.y
+            }
+          }
+          return item
+        })
+      }
     case ADD_EDGE:
       return {
         ...copy,
@@ -129,7 +148,7 @@ export const diagrams = (
         ),
         selectedCardsIds: ''
       }
-    case COPY_CARD:
+    case COPY_CARD: {
       let ids: string[] = []
       let arr = copy.cards
         .filter((item) => copy.selectedCardsIds.includes(item.id))
@@ -151,6 +170,17 @@ export const diagrams = (
         cards: [...copy.cards, ...arr],
         selectedCardsIds: ids.join(',')
       }
+    }
+    case SELECT_ALL: {
+      let arr: string[] = []
+      copy.cards.forEach((item) => {
+        arr.push(item.id)
+      })
+      return {
+        ...copy,
+        selectedCardsIds: arr.join(',')
+      }
+    }
     default:
       return state
   }

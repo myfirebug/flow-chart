@@ -6,9 +6,11 @@ import {
   MODIFY_CARD_TYPE,
   SELECTS_CARD_TYPE,
   MODIFY_DIAGRAMS_COORDINATE_TYPE,
+  MODIFY_CARDS_COORDINATE_TYPE,
   ADD_EDGE_TYPE,
   DEL_CARD_TYPE,
-  COPY_CARD_TYPE
+  COPY_CARD_TYPE,
+  SELECT_ALL_TYPE
 } from './type'
 import { CARD_STATE, COORDINATE, EDGES_STATE } from '@src/types'
 
@@ -24,9 +26,15 @@ export interface modifyDiagramsTitleAction {
   title: string
 }
 
-// 获取流程图舞台坐标
+// 修改流程图舞台坐标
 export interface modifyDiagramsCoordinateAction {
   type: MODIFY_DIAGRAMS_COORDINATE_TYPE
+  coordinate: COORDINATE
+}
+
+// 修改卡片位置坐标
+export interface modifyCardsCoordinateAction {
+  type: MODIFY_CARDS_COORDINATE_TYPE
   coordinate: COORDINATE
 }
 
@@ -64,6 +72,11 @@ export interface copyCardAction {
   type: COPY_CARD_TYPE
 }
 
+// 全选
+export interface selectAllCardsAction {
+  type: SELECT_ALL_TYPE
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
   | diagramsAction
@@ -75,3 +88,5 @@ export type ModifyAction =
   | addEdgeAction
   | delCardAction
   | copyCardAction
+  | selectAllCardsAction
+  | modifyCardsCoordinateAction

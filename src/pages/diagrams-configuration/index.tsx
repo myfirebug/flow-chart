@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-20 19:50:00
+ * @LastEditTime: 2023-03-21 16:17:42
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -16,7 +16,7 @@ import React, {
   useRef,
   useState
 } from 'react'
-import { Stage, Layer } from 'react-konva'
+import { Stage, Layer, Group } from 'react-konva'
 import ConfigurationHeader from './components/header'
 import Settings from './components/settings'
 import Menus from './components/menus'
@@ -71,7 +71,9 @@ const Configuration: FC<IConfigurationProps> = () => {
     distanceCardX: 0,
     distanceCardY: 0,
     distanceStageX: 0,
-    distanceStageY: 0
+    distanceStageY: 0,
+    distanceGroupX: 0,
+    distanceGroupY: 0
   })
   // 卡片连接类型
   const [portType, setPortType] = useState<'left' | 'right' | ''>('')
@@ -91,7 +93,6 @@ const Configuration: FC<IConfigurationProps> = () => {
       target: ''
     }
   })
-
   // 获取卡片数据
   useEffect(() => {
     if (getUrl('id')) {
@@ -112,11 +113,10 @@ const Configuration: FC<IConfigurationProps> = () => {
       })
     }
   }, [])
-
   const onMouseDown = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
       const { offsetX, offsetY } = e.evt
-      const { type, cx, cy, id, cardId, portId, group } = e.target.attrs
+      const { type, id, cardId, portId, group } = e.target.attrs
       if (type) {
         mouseType.current = type
       }
@@ -161,16 +161,19 @@ const Configuration: FC<IConfigurationProps> = () => {
         })
       }
 
-      setCoordinate({
+      setCoordinate((state) => ({
+        ...state,
         sx: offsetX,
         sy: offsetY,
         ex: offsetX,
         ey: offsetY,
-        distanceCardX: offsetX - cx,
-        distanceCardY: offsetY - cy,
+        distanceCardX: offsetX - state.distanceGroupX,
+        distanceCardY: offsetY - state.distanceGroupY,
         distanceStageX: offsetX - stageConfig.x,
-        distanceStageY: offsetY - stageConfig.y
-      })
+        distanceStageY: offsetY - stageConfig.y,
+        distanceGroupX: 0,
+        distanceGroupY: 0
+      }))
     },
     [state.selectedCardsIds, stageConfig.x, stageConfig.y, edge]
   )
@@ -186,13 +189,18 @@ const Configuration: FC<IConfigurationProps> = () => {
       })
       switch (mouseType.current) {
         case 'move':
-          dispatch({
-            type: 'MODIFY_CARD',
-            data: {
-              x: offsetX - coordinate.distanceCardX,
-              y: offsetY - coordinate.distanceCardY
-            }
-          })
+          setCoordinate((state) => ({
+            ...state,
+            distanceGroupX: offsetX - state.distanceCardX,
+            distanceGroupY: offsetY - state.distanceCardY
+          }))
+          // dispatch({
+          //   type: 'MODIFY_CARD',
+          //   data: {
+          //     x: offsetX - coordinate.distanceCardX,
+          //     y: offsetY - coordinate.distanceCardY
+          //   }
+          // })
           break
         case 'stage':
           setStageConfig((stage) => ({
@@ -203,15 +211,8 @@ const Configuration: FC<IConfigurationProps> = () => {
           break
       }
     },
-    [
-      mouseType,
-      coordinate.distanceCardX,
-      coordinate.distanceCardY,
-      coordinate.distanceStageX,
-      coordinate.distanceStageY
-    ]
+    [coordinate.distanceStageX, coordinate.distanceStageY]
   )
-
   const onMouseUp = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
       const { type, cardId, portId, group } = e.target.attrs
@@ -275,17 +276,36 @@ const Configuration: FC<IConfigurationProps> = () => {
             message.error('只能inPort连接outPort')
           }
           break
+        case 'move':
+          // 重置Group坐标
+          setCoordinate((state) => {
+            dispatch({
+              type: 'MODIFY_CARDS_COORDINATE',
+              coordinate: {
+                x: state.distanceGroupX,
+                y: state.distanceGroupY
+              }
+            })
+            return {
+              ...state,
+              distanceGroupX: 0,
+              distanceGroupY: 0
+            }
+          })
+
+          break
         default:
       }
+      // 重置类型
       mouseType.current = ''
     },
     [mouseType, stageConfig.x, stageConfig.y, portType, state.edges, edge]
   )
-
   const lines = useMemo(() => {
     let result: ILine[] = []
-    if (state.edges) {
-      state.edges.forEach((item) => {
+    const { edges, cards, selectedCardsIds } = state
+    if (edges) {
+      edges.forEach((item) => {
         const line: ILine = {
           id: item.id,
           target: {
@@ -297,13 +317,26 @@ const Configuration: FC<IConfigurationProps> = () => {
             y: 0
           }
         }
-        let sourceCell = state.cards.find(
-          (card) => card.id === item.data.source
-        )
-        let targetCell = state.cards.find(
-          (card) => card.id === item.data.target
-        )
+        let sourceCell = cards.find((card) => card.id === item.data.source)
+        let targetCell = cards.find((card) => card.id === item.data.target)
         if (sourceCell && targetCell) {
+          // 当前source卡片是否选中
+          const isSourceSelect =
+            selectedCardsIds && selectedCardsIds.includes(sourceCell.id)
+          // 当前target卡片是否选中
+          const isTargetSelect =
+            selectedCardsIds && selectedCardsIds.includes(targetCell.id)
+
+          const distance = {
+            source: {
+              x: isSourceSelect ? coordinate.distanceGroupX : 0,
+              y: isSourceSelect ? coordinate.distanceGroupY : 0
+            },
+            target: {
+              x: isTargetSelect ? coordinate.distanceGroupX : 0,
+              y: isTargetSelect ? coordinate.distanceGroupY : 0
+            }
+          }
           let sourcePort = sourceCell.ports.find(
             (cell) => cell.id === item.source.port
           )
@@ -312,30 +345,56 @@ const Configuration: FC<IConfigurationProps> = () => {
           )
           if (sourcePort && targetPort) {
             if (sourcePort.group === 'left') {
-              line.source.x = sourceCell.x + MARGIN_LEFT + PORT_DIMENSION / 2
+              line.source.x =
+                sourceCell.x +
+                MARGIN_LEFT +
+                PORT_DIMENSION / 2 +
+                distance.source.x
               line.source.y =
-                sourceCell.y + TITLE_HEIGHT + MARGIN_TOP + PORT_DIMENSION / 2
+                sourceCell.y +
+                TITLE_HEIGHT +
+                MARGIN_TOP +
+                PORT_DIMENSION / 2 +
+                +distance.source.y
             } else {
               line.source.x =
                 sourceCell.x +
                 sourceCell.width -
                 MARGIN_LEFT -
-                PORT_DIMENSION / 2
+                PORT_DIMENSION / 2 +
+                +distance.source.x
               line.source.y =
-                sourceCell.y + TITLE_HEIGHT + MARGIN_TOP + PORT_DIMENSION / 2
+                sourceCell.y +
+                TITLE_HEIGHT +
+                MARGIN_TOP +
+                PORT_DIMENSION / 2 +
+                +distance.source.y
             }
             if (targetPort.group === 'left') {
-              line.target.x = targetCell.x + MARGIN_LEFT + PORT_DIMENSION / 2
+              line.target.x =
+                targetCell.x +
+                MARGIN_LEFT +
+                PORT_DIMENSION / 2 +
+                distance.target.x
               line.target.y =
-                targetCell.y + TITLE_HEIGHT + MARGIN_TOP + PORT_DIMENSION / 2
+                targetCell.y +
+                TITLE_HEIGHT +
+                MARGIN_TOP +
+                PORT_DIMENSION / 2 +
+                +distance.target.y
             } else {
               line.target.x =
                 targetCell.x +
                 targetCell.width -
                 MARGIN_LEFT -
-                PORT_DIMENSION / 2
+                PORT_DIMENSION / 2 +
+                +distance.target.x
               line.target.y =
-                targetCell.y + TITLE_HEIGHT + MARGIN_TOP + PORT_DIMENSION / 2
+                targetCell.y +
+                TITLE_HEIGHT +
+                MARGIN_TOP +
+                PORT_DIMENSION / 2 +
+                +distance.target.y
             }
             result.push(line)
           }
@@ -343,7 +402,22 @@ const Configuration: FC<IConfigurationProps> = () => {
       })
     }
     return result
+  }, [state, coordinate.distanceGroupX, coordinate.distanceGroupY])
+
+  // 选中的卡片
+  const selectCards = useMemo(() => {
+    return state.selectedCardsIds
+      ? state.cards.filter((item) => state.selectedCardsIds.includes(item.id))
+      : []
   }, [state])
+
+  // 选中的卡片
+  const noSelectCards = useMemo(() => {
+    return state.selectedCardsIds
+      ? state.cards.filter((item) => !state.selectedCardsIds.includes(item.id))
+      : state.cards
+  }, [state])
+
   return (
     <DiagramsConfigurationContext.Provider
       value={{
@@ -362,8 +436,8 @@ const Configuration: FC<IConfigurationProps> = () => {
               onMouseMove={onMouseMove}
               onMouseUp={onMouseUp}>
               <Layer>
-                {state.cards
-                  ? state.cards.map((item) => (
+                {noSelectCards
+                  ? noSelectCards.map((item) => (
                       <Card
                         config={item}
                         key={item.id}
@@ -371,6 +445,19 @@ const Configuration: FC<IConfigurationProps> = () => {
                       />
                     ))
                   : null}
+                <Group
+                  x={coordinate.distanceGroupX}
+                  y={coordinate.distanceGroupY}>
+                  {selectCards
+                    ? selectCards.map((item) => (
+                        <Card
+                          config={item}
+                          key={item.id}
+                          SelectedCardsIds={state.selectedCardsIds}
+                        />
+                      ))
+                    : null}
+                </Group>
               </Layer>
               <Layer>
                 {mouseType.current === 'port' ? (

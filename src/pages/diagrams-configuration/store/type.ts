@@ -29,6 +29,10 @@ export type ADD_CARD_TYPE = typeof ADD_CARD
 export const MODIFY_CARD = 'MODIFY_CARD'
 export type MODIFY_CARD_TYPE = typeof MODIFY_CARD
 
+// 修改卡片位置坐标
+export const MODIFY_CARDS_COORDINATE = 'MODIFY_CARDS_COORDINATE'
+export type MODIFY_CARDS_COORDINATE_TYPE = typeof MODIFY_CARDS_COORDINATE
+
 // 选中卡片
 export const SELECTS_CARD = 'SELECTS_CARD'
 export type SELECTS_CARD_TYPE = typeof SELECTS_CARD
@@ -44,6 +48,10 @@ export type DEL_CARD_TYPE = typeof DEL_CARD
 // 复制卡片连接
 export const COPY_CARD = 'COPY_CARD'
 export type COPY_CARD_TYPE = typeof COPY_CARD
+
+// 全选
+export const SELECT_ALL = 'SELECT_ALL'
+export type SELECT_ALL_TYPE = typeof SELECT_ALL
 
 export interface ALL_STATE {
   id: string | null

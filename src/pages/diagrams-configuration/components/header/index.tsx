@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 20:32:09
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-20 20:08:36
+ * @LastEditTime: 2023-03-20 21:15:46
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\components\header\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -53,6 +53,11 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
             type: 'COPY_CARD'
           })
           break
+        case 'selectAll':
+          diagramsConfigurationContent.dispatch({
+            type: 'SELECT_ALL'
+          })
+          break
       }
     },
     [diagramsConfigurationContent]
@@ -94,10 +99,6 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
                   <span className='value'>Ctrl+S</span>
                 </dd>
                 <dd>
-                  <span className='app-icon'>&#xe765;</span>
-                  <span className='name'>克隆</span>
-                </dd>
-                <dd>
                   <span className='app-icon'>&#xe8e7;</span>
                   <span className='name'>关闭</span>
                 </dd>
@@ -116,11 +117,6 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
                   <span className='name'>恢复</span>
                   <span className='value'>Ctrl+Y</span>
                 </dd>
-                <dd>
-                  <span className='app-icon'>&#xeb4b;</span>
-                  <span className='name'>剪切</span>
-                  <span className='value'>Ctrl+X</span>
-                </dd>
                 <dd
                   onClick={() => shortcutKeyHandler('copy')}
                   className={
@@ -131,11 +127,6 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
                   <span className='app-icon'>&#xe8b0;</span>
                   <span className='name'>拷贝</span>
                   <span className='value'>Ctrl+C</span>
-                </dd>
-                <dd>
-                  <span className='app-icon'>&#xe677;</span>
-                  <span className='name'>粘贴</span>
-                  <span className='value'>Ctrl+V</span>
                 </dd>
                 <dd
                   onClick={() => shortcutKeyHandler('del')}
@@ -153,7 +144,13 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
             <li className='menu-item'>
               <div className='name'>选择</div>
               <dl className='sub-menu'>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('selectAll')}
+                  className={
+                    !diagramsConfigurationContent.data.cards.length
+                      ? 'is-disabled'
+                      : ''
+                  }>
                   <span className='app-icon'>&#xe9c5;</span>
                   <span className='name'>全选</span>
                   <span className='value'>Ctrl+A</span>
