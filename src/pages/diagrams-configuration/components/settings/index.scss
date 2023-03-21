@@ -34,7 +34,9 @@
         margin: 0;
       }
       .card-list {
+        height: calc(100vh - 100px);
         overflow: hidden;
+        overflow-y: auto;
       }
       .card-item {
         display: flex;

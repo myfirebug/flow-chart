@@ -5,6 +5,8 @@
     border-left: 1px solid #ddd;
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    overflow-y: auto;
     .header {
       height: 36px;
       padding-left: 10px;

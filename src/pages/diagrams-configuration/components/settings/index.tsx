@@ -13,6 +13,9 @@ const Setting: FC<ISettingProps> = () => {
   const list = useMemo(() => {
     const { cards, selectedCardsIds } = diagramsConfigurationContext.data
     let result: IPARAM[] = []
+    if (selectedCardsIds && selectedCardsIds.includes(',')) {
+      return result
+    }
     let index = cards.findIndex(
       (item) => selectedCardsIds && selectedCardsIds.includes(item.id)
     )
@@ -65,7 +68,7 @@ const Setting: FC<ISettingProps> = () => {
               <Result
                 status='404'
                 title='暂无数据'
-                subTitle='需要选中卡片才有数据哦'
+                subTitle='需要选中单个卡片才有数据哦'
               />
             )}
           </Tabs.TabPane>

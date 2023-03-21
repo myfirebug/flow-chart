@@ -15,6 +15,12 @@
       background: #f5f5f5;
       border-bottom: 1px solid #ddd;
     }
+    @include m(list) {
+      height: calc(100vh - 89px);
+      padding-bottom: 20px;
+      overflow: hidden;
+      overflow-y: auto;
+    }
     @include m(item) {
       float: left;
       width: calc(50% - 15px);
@@ -113,6 +119,9 @@
       border-bottom: 1px solid #ddd;
     }
     .body {
+      height: calc(100vh - 89px);
+      overflow: hidden;
+      overflow-y: auto;
       .ant-form-item {
         padding-bottom: 10px;
         border-bottom: 1px solid #eee;
