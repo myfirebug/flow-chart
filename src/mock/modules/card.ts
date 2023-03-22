@@ -45,7 +45,7 @@ export const cardList = {
               label: '用户名',
               placeholder: '请输入用户名',
               required: false,
-              value: ''
+              value: 'hejp'
             },
             {
               field: 'account',
@@ -53,7 +53,7 @@ export const cardList = {
               label: '账号',
               placeholder: '请输入账号',
               required: false,
-              value: ''
+              value: 'myfirebug'
             }
           ]
         }

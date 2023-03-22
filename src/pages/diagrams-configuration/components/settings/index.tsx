@@ -1,4 +1,4 @@
-import { FC, useContext, useMemo } from 'react'
+import { FC, useContext, useMemo, useCallback } from 'react'
 import { Tabs, Result } from 'antd'
 import './index.scss'
 import CustomForm from '@src/form'
@@ -25,10 +25,38 @@ const Setting: FC<ISettingProps> = () => {
 
     return result
   }, [diagramsConfigurationContext])
+
+  // 处理配置项数据
+  const changeHandler = useCallback(
+    (id: string, value: any) => {
+      const { cards, selectedCardsIds } = diagramsConfigurationContext.data
+      if (selectedCardsIds && !selectedCardsIds.includes(',')) {
+        const card = cards.find((item) => item.id === selectedCardsIds)
+        let inParams = card?.inParams
+        if (inParams) {
+          diagramsConfigurationContext.dispatch({
+            type: 'MODIFY_CARD',
+            data: {
+              inParams: inParams.map((item) => {
+                if (item.id === id) {
+                  return {
+                    ...item,
+                    value: value
+                  }
+                }
+                return item
+              })
+            }
+          })
+        }
+      }
+    },
+    [diagramsConfigurationContext]
+  )
   return (
     <div className='app-diagrams-configuration__settings'>
       <div className='body'>
-        <Tabs defaultActiveKey='1' centered>
+        <Tabs defaultActiveKey='1' centered destroyInactiveTabPane>
           <Tabs.TabPane tab='图层' key='1'>
             {diagramsConfigurationContext.data.cards.length ? (
               <ul className='card-list'>
@@ -63,7 +91,7 @@ const Setting: FC<ISettingProps> = () => {
           </Tabs.TabPane>
           <Tabs.TabPane tab='配置' key='2'>
             {list.length ? (
-              <CustomForm list={list} />
+              <CustomForm list={list} changeHandler={changeHandler} />
             ) : (
               <Result
                 status='404'
