@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-21 16:17:42
+ * @LastEditTime: 2023-03-23 19:54:44
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -93,6 +93,20 @@ const Configuration: FC<IConfigurationProps> = () => {
       target: ''
     }
   })
+  //
+  useEffect(() => {
+    const resizeHandler = () => {
+      setStageConfig((state) => ({
+        ...state,
+        width: window.innerWidth - 600,
+        height: window.innerHeight - 62
+      }))
+    }
+    window.addEventListener('resize', resizeHandler)
+    return () => {
+      window.removeEventListener('resize', resizeHandler)
+    }
+  }, [])
   // 获取卡片数据
   useEffect(() => {
     if (getUrl('id')) {
@@ -194,13 +208,6 @@ const Configuration: FC<IConfigurationProps> = () => {
             distanceGroupX: offsetX - state.distanceCardX,
             distanceGroupY: offsetY - state.distanceCardY
           }))
-          // dispatch({
-          //   type: 'MODIFY_CARD',
-          //   data: {
-          //     x: offsetX - coordinate.distanceCardX,
-          //     y: offsetY - coordinate.distanceCardY
-          //   }
-          // })
           break
         case 'stage':
           setStageConfig((stage) => ({

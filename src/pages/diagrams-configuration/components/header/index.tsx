@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 20:32:09
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-20 21:15:46
+ * @LastEditTime: 2023-03-23 17:47:54
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\components\header\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -41,7 +41,7 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
   }
 
   const shortcutKeyHandler = useCallback(
-    (key: string) => {
+    (key: string, subKey?: string) => {
       switch (key) {
         case 'del':
           diagramsConfigurationContent.dispatch({
@@ -56,6 +56,12 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
         case 'selectAll':
           diagramsConfigurationContent.dispatch({
             type: 'SELECT_ALL'
+          })
+          break
+        case 'align':
+          diagramsConfigurationContent.dispatch({
+            type: 'CARDS_ALIGN',
+            align: subKey as string
           })
           break
       }
@@ -158,49 +164,60 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
               </dl>
             </li>
             <li className='menu-item'>
-              <div className='name'>排列</div>
-              <dl className='sub-menu'>
-                <dd>
-                  <span className='app-icon'>&#xe786;</span>
-                  <span className='name'>置于顶层</span>
-                  <span className='value'>Ctrl+↑</span>
-                </dd>
-                <dd>
-                  <span className='app-icon'>&#xe742;</span>
-                  <span className='name'>置于底层</span>
-                  <span className='value'>Ctrl+↓</span>
-                </dd>
-                <dd>
-                  <span className='app-icon'>&#xe7ef;</span>
-                  <span className='name'>上移一层</span>
-                  <span className='value'>Ctrl+Shfit+↑</span>
-                </dd>
-                <dd>
-                  <span className='app-icon'>&#xe7f1;</span>
-                  <span className='name'>下移一层</span>
-                  <span className='value'>Ctrl+Shfit+↓</span>
-                </dd>
-              </dl>
-            </li>
-            <li className='menu-item'>
               <div className='name'>对齐</div>
               <dl className='sub-menu'>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('align', 'left')}
+                  className={
+                    diagramsConfigurationContent.data.selectedCardsIds &&
+                    diagramsConfigurationContent.data.selectedCardsIds.split(
+                      ','
+                    ).length > 1
+                      ? ''
+                      : 'is-disabled'
+                  }>
                   <span className='app-icon'>&#xe602;</span>
                   <span className='name'>左对齐</span>
                   <span className='value'>Ctrl+L</span>
                 </dd>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('align', 'right')}
+                  className={
+                    diagramsConfigurationContent.data.selectedCardsIds &&
+                    diagramsConfigurationContent.data.selectedCardsIds.split(
+                      ','
+                    ).length > 1
+                      ? ''
+                      : 'is-disabled'
+                  }>
                   <span className='app-icon'>&#xe65b;</span>
                   <span className='name'>右对齐</span>
                   <span className='value'>Ctrl+R</span>
                 </dd>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('align', 'top')}
+                  className={
+                    diagramsConfigurationContent.data.selectedCardsIds &&
+                    diagramsConfigurationContent.data.selectedCardsIds.split(
+                      ','
+                    ).length > 1
+                      ? ''
+                      : 'is-disabled'
+                  }>
                   <span className='app-icon'>&#xe603;</span>
                   <span className='name'>顶端对齐</span>
                   <span className='value'>Ctrl+T</span>
                 </dd>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('align', 'bottom')}
+                  className={
+                    diagramsConfigurationContent.data.selectedCardsIds &&
+                    diagramsConfigurationContent.data.selectedCardsIds.split(
+                      ','
+                    ).length > 1
+                      ? ''
+                      : 'is-disabled'
+                  }>
                   <span className='app-icon'>&#xe604;</span>
                   <span className='name'>底端对齐</span>
                   <span className='value'>Ctrl+B</span>

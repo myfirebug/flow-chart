@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-21 13:50:34
+ * @LastEditTime: 2023-03-23 18:24:11
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -25,7 +25,8 @@ import {
   ADD_EDGE,
   DEL_CARD,
   COPY_CARD,
-  SELECT_ALL
+  SELECT_ALL,
+  CARDS_ALIGN
 } from './type'
 import { CARD_STATE } from '@src/types'
 import { guid } from '@src/utils/tools'
@@ -179,6 +180,54 @@ export const diagrams = (
       return {
         ...copy,
         selectedCardsIds: arr.join(',')
+      }
+    }
+    case CARDS_ALIGN: {
+      let selectCards = copy.cards.filter((item) =>
+        copy.selectedCardsIds.includes(item.id)
+      )
+      let l = selectCards[0].x
+      let t = selectCards[0].y
+      let b = selectCards[0].y + selectCards[0].height
+      let r = selectCards[0].x + selectCards[0].width
+      for (let i = 1; i < selectCards.length; i++) {
+        if (l >= selectCards[i].x) {
+          l = selectCards[i].x
+        }
+        if (t >= selectCards[i].y) {
+          t = selectCards[i].y
+        }
+        if (b <= selectCards[i].y + selectCards[i].height) {
+          b = selectCards[i].y + selectCards[i].height
+        }
+        if (r <= selectCards[i].x + selectCards[i].width) {
+          r = selectCards[i].x + selectCards[i].width
+        }
+      }
+      console.log(copy.cards, 'copy.cards')
+      copy.cards = copy.cards.map((item) => {
+        if (copy.selectedCardsIds.includes(item.id)) {
+          return {
+            ...item,
+            x:
+              action.align === 'left'
+                ? l
+                : action.align === 'right'
+                ? r - item.width
+                : item.x,
+            y:
+              action.align === 'top'
+                ? t
+                : action.align === 'bottom'
+                ? b - item.height
+                : item.y
+          }
+        }
+        return item
+      })
+
+      return {
+        ...copy
       }
     }
     default:

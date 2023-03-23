@@ -10,7 +10,8 @@ import {
   ADD_EDGE_TYPE,
   DEL_CARD_TYPE,
   COPY_CARD_TYPE,
-  SELECT_ALL_TYPE
+  SELECT_ALL_TYPE,
+  CARDS_ALIGN_TYPE
 } from './type'
 import { CARD_STATE, COORDINATE, EDGES_STATE } from '@src/types'
 
@@ -77,6 +78,12 @@ export interface selectAllCardsAction {
   type: SELECT_ALL_TYPE
 }
 
+// 卡片对齐
+export interface cardsAlignAction {
+  type: CARDS_ALIGN_TYPE
+  align: string
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
   | diagramsAction
@@ -90,3 +97,4 @@ export type ModifyAction =
   | copyCardAction
   | selectAllCardsAction
   | modifyCardsCoordinateAction
+  | cardsAlignAction

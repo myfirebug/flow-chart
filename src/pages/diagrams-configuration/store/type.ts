@@ -53,6 +53,10 @@ export type COPY_CARD_TYPE = typeof COPY_CARD
 export const SELECT_ALL = 'SELECT_ALL'
 export type SELECT_ALL_TYPE = typeof SELECT_ALL
 
+// 全选
+export const CARDS_ALIGN = 'CARDS_ALIGN'
+export type CARDS_ALIGN_TYPE = typeof CARDS_ALIGN
+
 export interface ALL_STATE {
   id: string | null
   title: string
