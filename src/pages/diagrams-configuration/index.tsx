@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-23 19:54:44
+ * @LastEditTime: 2023-03-23 20:54:24
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -129,7 +129,7 @@ const Configuration: FC<IConfigurationProps> = () => {
   }, [])
   const onMouseDown = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
-      const { offsetX, offsetY } = e.evt
+      const { offsetX, offsetY, ctrlKey } = e.evt
       const { type, id, cardId, portId, group } = e.target.attrs
       if (type) {
         mouseType.current = type
@@ -165,14 +165,21 @@ const Configuration: FC<IConfigurationProps> = () => {
         default:
       }
       // 选中卡片
-      if (
-        type !== 'stage' &&
-        (!state.selectedCardsIds || !state.selectedCardsIds.includes(id))
-      ) {
-        dispatch({
-          type: 'SELECTS_CARD',
-          ids: id || cardId
-        })
+      if (type !== 'stage') {
+        // 单选
+        if (!state.selectedCardsIds || !state.selectedCardsIds.includes(id)) {
+          dispatch({
+            type: 'SELECTS_CARD',
+            ids: id || cardId
+          })
+        }
+        // 多选ctrl+鼠标左键点击
+        if (ctrlKey && !state.selectedCardsIds.includes(id)) {
+          dispatch({
+            type: 'SELECTS_CARD',
+            ids: state.selectedCardsIds ? `${state.selectedCardsIds},${id}` : id
+          })
+        }
       }
 
       setCoordinate((state) => ({

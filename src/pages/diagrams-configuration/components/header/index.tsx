@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 20:32:09
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-23 17:47:54
+ * @LastEditTime: 2023-03-23 20:47:21
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\components\header\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -72,6 +72,40 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
   const handleCancel = () => {
     setIsModalOpen(false)
   }
+
+  useEffect(() => {
+    const keydownHandler = (e: any) => {
+      e.preventDefault()
+      e.stopPropagation()
+      const { ctrlKey, keyCode } = e
+      if (ctrlKey) {
+        switch (keyCode) {
+          case 65:
+            shortcutKeyHandler('selectAll')
+            break
+          case 67:
+            shortcutKeyHandler('copy')
+            break
+          case 76:
+            shortcutKeyHandler('align', 'left')
+            break
+          case 82:
+            shortcutKeyHandler('align', 'right')
+            break
+          case 84:
+            shortcutKeyHandler('align', 'top')
+            break
+          case 66:
+            shortcutKeyHandler('align', 'bottom')
+            break
+        }
+      }
+    }
+    window.addEventListener('keydown', keydownHandler)
+    return () => {
+      window.removeEventListener('keydown', keydownHandler)
+    }
+  }, [shortcutKeyHandler])
 
   return (
     <div className='app-diagrams-configuration__header'>
