@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 20:32:09
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-23 20:47:21
+ * @LastEditTime: 2023-03-24 12:04:16
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\components\header\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -64,6 +64,16 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
             align: subKey as string
           })
           break
+        case 'undo':
+          diagramsConfigurationContent.dispatch({
+            type: 'UNDO'
+          })
+          break
+        case 'redo':
+          diagramsConfigurationContent.dispatch({
+            type: 'REDO'
+          })
+          break
       }
     },
     [diagramsConfigurationContent]
@@ -73,12 +83,11 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
     setIsModalOpen(false)
   }
 
-  useEffect(() => {
-    const keydownHandler = (e: any) => {
-      e.preventDefault()
-      e.stopPropagation()
+  const keydownHandler = useCallback(
+    (e: any) => {
       const { ctrlKey, keyCode } = e
       if (ctrlKey) {
+        e.preventDefault()
         switch (keyCode) {
           case 65:
             shortcutKeyHandler('selectAll')
@@ -98,14 +107,27 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
           case 66:
             shortcutKeyHandler('align', 'bottom')
             break
+          case 83:
+            console.log('保存')
+            break
+          case 90:
+            shortcutKeyHandler('undo')
+            break
+          case 89:
+            shortcutKeyHandler('redo')
+            break
         }
       }
-    }
+    },
+    [shortcutKeyHandler]
+  )
+
+  useEffect(() => {
     window.addEventListener('keydown', keydownHandler)
     return () => {
       window.removeEventListener('keydown', keydownHandler)
     }
-  }, [shortcutKeyHandler])
+  }, [keydownHandler])
 
   return (
     <div className='app-diagrams-configuration__header'>
@@ -147,12 +169,24 @@ const ConfigurationHeader: FC<IConfigurationHeaderProps> = () => {
             <li className='menu-item'>
               <div className='name'>编辑</div>
               <dl className='sub-menu'>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('undo')}
+                  className={
+                    diagramsConfigurationContent.data.undo.length === 0
+                      ? 'is-disabled'
+                      : ''
+                  }>
                   <span className='app-icon'>&#xe61e;</span>
                   <span className='name'>撤销</span>
                   <span className='value'>Ctrl+Z</span>
                 </dd>
-                <dd>
+                <dd
+                  onClick={() => shortcutKeyHandler('redo')}
+                  className={
+                    diagramsConfigurationContent.data.redo.length === 0
+                      ? 'is-disabled'
+                      : ''
+                  }>
                   <span className='app-icon'>&#xe60f;</span>
                   <span className='name'>恢复</span>
                   <span className='value'>Ctrl+Y</span>

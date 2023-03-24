@@ -77,3 +77,12 @@ export type CARD_STATE = {
   ports: IPORT[]
   inParams: IPARAM[]
 }
+
+export type UNDO_OR_REDO_STATE = {
+  x: number
+  y: number
+  title: string
+  cards: CARD_STATE[]
+  selectedCardsIds: string
+  edges: EDGES_STATE[]
+}

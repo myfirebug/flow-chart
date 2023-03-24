@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-23 20:06:29
+ * @LastEditTime: 2023-03-24 10:45:45
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -26,10 +26,15 @@ import {
   DEL_CARD,
   COPY_CARD,
   SELECT_ALL,
-  CARDS_ALIGN
+  CARDS_ALIGN,
+  UNDO,
+  REDO
 } from './type'
-import { CARD_STATE } from '@src/types'
+import { CARD_STATE, UNDO_OR_REDO_STATE } from '@src/types'
 import { guid } from '@src/utils/tools'
+
+// 最多撤销50步
+const MAX = 50
 
 // 计算卡片高度
 const diffHeight = (item: CARD_STATE) => {
@@ -54,7 +59,51 @@ export const initialState: ALL_STATE = {
   x: 0,
   y: 0,
   cards: [],
-  edges: []
+  edges: [],
+  undo: [],
+  redo: []
+}
+
+/**
+ * 获取undo,redo
+ * @param copy 流程图数据
+ * @returns
+ */
+function getUndoAndRedo(copy: ALL_STATE): {
+  undo: UNDO_OR_REDO_STATE[]
+  redo: UNDO_OR_REDO_STATE[]
+} {
+  let undo = [...copy.undo]
+  let redo = [...copy.redo]
+  if (undo.length >= MAX) {
+    const shift = undo.shift()
+    undo.push({
+      x: copy.x,
+      y: copy.y,
+      title: copy.title,
+      cards: copy.cards,
+      edges: copy.edges,
+      selectedCardsIds: copy.selectedCardsIds
+    })
+    if (redo.length !== 0 && shift) {
+      redo.pop()
+      redo.unshift(shift)
+    }
+  } else {
+    undo.push({
+      x: copy.x,
+      y: copy.y,
+      title: copy.title,
+      cards: copy.cards,
+      edges: copy.edges,
+      selectedCardsIds: copy.selectedCardsIds
+    })
+  }
+
+  return {
+    undo: undo,
+    redo: redo
+  }
 }
 
 export const diagrams = (
@@ -74,7 +123,8 @@ export const diagrams = (
     case MODIFY_DIAGRAMS_TITLE:
       return {
         ...copy,
-        title: action.title
+        title: action.title,
+        ...getUndoAndRedo(copy)
       }
     case ADD_CARD:
       return {
@@ -89,7 +139,8 @@ export const diagrams = (
             height: diffHeight(action.data)
           }
         ],
-        selectedCardsIds: action.data.id
+        selectedCardsIds: action.data.id,
+        ...getUndoAndRedo(copy)
       }
     case MODIFY_CARD:
       return {
@@ -102,7 +153,8 @@ export const diagrams = (
             }
           }
           return item
-        })
+        }),
+        ...getUndoAndRedo(copy)
       }
     case SELECTS_CARD:
       return {
@@ -112,7 +164,8 @@ export const diagrams = (
     case MODIFY_DIAGRAMS_COORDINATE:
       return {
         ...copy,
-        ...action.coordinate
+        ...action.coordinate,
+        ...getUndoAndRedo(copy)
       }
     case MODIFY_CARDS_COORDINATE:
       return {
@@ -129,12 +182,14 @@ export const diagrams = (
             }
           }
           return item
-        })
+        }),
+        ...getUndoAndRedo(copy)
       }
     case ADD_EDGE:
       return {
         ...copy,
-        edges: [...copy.edges, action.edge]
+        edges: [...copy.edges, action.edge],
+        ...getUndoAndRedo(copy)
       }
     case DEL_CARD:
       return {
@@ -147,7 +202,8 @@ export const diagrams = (
             !copy.selectedCardsIds.includes(item.data.source) &&
             !copy.selectedCardsIds.includes(item.data.target)
         ),
-        selectedCardsIds: ''
+        selectedCardsIds: '',
+        ...getUndoAndRedo(copy)
       }
     case COPY_CARD: {
       let ids: string[] = []
@@ -169,7 +225,8 @@ export const diagrams = (
       return {
         ...copy,
         cards: [...copy.cards, ...arr],
-        selectedCardsIds: ids.join(',')
+        selectedCardsIds: ids.join(','),
+        ...getUndoAndRedo(copy)
       }
     }
     case SELECT_ALL: {
@@ -179,7 +236,8 @@ export const diagrams = (
       })
       return {
         ...copy,
-        selectedCardsIds: arr.join(',')
+        selectedCardsIds: arr.join(','),
+        ...getUndoAndRedo(copy)
       }
     }
     case CARDS_ALIGN: {
@@ -204,7 +262,6 @@ export const diagrams = (
           r = selectCards[i].x + selectCards[i].width
         }
       }
-      console.log(copy.cards, 'copy.cards')
       copy.cards = copy.cards.map((item) => {
         if (copy.selectedCardsIds.includes(item.id)) {
           return {
@@ -226,6 +283,57 @@ export const diagrams = (
         return item
       })
 
+      return {
+        ...copy,
+        ...getUndoAndRedo(copy)
+      }
+    }
+    case UNDO: {
+      if (copy.undo.length) {
+        const pop = copy.undo.pop()
+        if (pop) {
+          copy = {
+            ...copy,
+            redo: [
+              ...copy.redo,
+              {
+                x: copy.x,
+                y: copy.y,
+                title: copy.title,
+                cards: copy.cards,
+                edges: copy.edges,
+                selectedCardsIds: copy.selectedCardsIds
+              }
+            ],
+            ...pop
+          }
+        }
+      }
+      return {
+        ...copy
+      }
+    }
+    case REDO: {
+      if (copy.redo.length) {
+        const pop = copy.redo.pop()
+        if (pop) {
+          copy = {
+            ...copy,
+            undo: [
+              ...copy.undo,
+              {
+                x: copy.x,
+                y: copy.y,
+                title: copy.title,
+                cards: copy.cards,
+                edges: copy.edges,
+                selectedCardsIds: copy.selectedCardsIds
+              }
+            ],
+            ...pop
+          }
+        }
+      }
       return {
         ...copy
       }

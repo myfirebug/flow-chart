@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useContext } from 'react'
+import { FC, useEffect, useState, useContext, useCallback } from 'react'
 import { Collapse } from 'antd'
 import { CARD_STATE } from '@src/types'
 import { guid } from '@src/utils/tools'
@@ -22,27 +22,30 @@ const Setting: FC<ISettingProps> = () => {
     })
   }, [])
 
-  const addCardHandler = (card: CARD_STATE) => {
-    diagramsConfigurationContent.dispatch({
-      type: 'ADD_CARD',
-      data: {
-        ...card,
-        id: guid(),
-        inParams: card.inParams
-          ? card.inParams.map((item) => ({
-              ...item,
-              id: guid()
-            }))
-          : [],
-        ports: card.ports
-          ? card.ports.map((item) => ({
-              ...item,
-              id: guid()
-            }))
-          : []
-      }
-    })
-  }
+  const addCardHandler = useCallback(
+    (card: CARD_STATE) => {
+      diagramsConfigurationContent.dispatch({
+        type: 'ADD_CARD',
+        data: {
+          ...card,
+          id: guid(),
+          inParams: card.inParams
+            ? card.inParams.map((item) => ({
+                ...item,
+                id: guid()
+              }))
+            : [],
+          ports: card.ports
+            ? card.ports.map((item) => ({
+                ...item,
+                id: guid()
+              }))
+            : []
+        }
+      })
+    },
+    [diagramsConfigurationContent]
+  )
 
   return (
     <div className='app-diagrams-configuration__menus'>

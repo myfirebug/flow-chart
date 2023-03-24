@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-23 20:54:24
+ * @LastEditTime: 2023-03-24 10:54:11
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -93,7 +93,13 @@ const Configuration: FC<IConfigurationProps> = () => {
       target: ''
     }
   })
-  //
+  useEffect(() => {
+    setStageConfig((conf) => ({
+      ...conf,
+      x: state.x,
+      y: state.y
+    }))
+  }, [state.x, state.y])
   useEffect(() => {
     const resizeHandler = () => {
       setStageConfig((state) => ({
@@ -122,7 +128,9 @@ const Configuration: FC<IConfigurationProps> = () => {
           x: 0,
           y: 0,
           cards: [],
-          edges: []
+          edges: [],
+          undo: [],
+          redo: []
         }
       })
     }

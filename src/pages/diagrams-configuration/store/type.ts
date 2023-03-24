@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:28:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-20 20:09:47
+ * @LastEditTime: 2023-03-23 21:10:27
  * @FilePath: \flow-chart\src\pages\diagrams-configuration\store\type.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
-import { CARD_STATE, EDGES_STATE } from '@src/types'
+import { CARD_STATE, EDGES_STATE, UNDO_OR_REDO_STATE } from '@src/types'
 
 // 获取流程图数据
 export const DIAGRAMS = 'DIAGRAMS'
@@ -53,9 +53,17 @@ export type COPY_CARD_TYPE = typeof COPY_CARD
 export const SELECT_ALL = 'SELECT_ALL'
 export type SELECT_ALL_TYPE = typeof SELECT_ALL
 
-// 全选
+// 卡片对齐
 export const CARDS_ALIGN = 'CARDS_ALIGN'
 export type CARDS_ALIGN_TYPE = typeof CARDS_ALIGN
+
+// 撤销
+export const UNDO = 'UNDO'
+export type UNDO_TYPE = typeof UNDO
+
+// 恢复
+export const REDO = 'REDO'
+export type REDO_TYPE = typeof REDO
 
 export interface ALL_STATE {
   id: string | null
@@ -67,4 +75,6 @@ export interface ALL_STATE {
   cards: CARD_STATE[]
   selectedCardsIds: string
   edges: EDGES_STATE[]
+  undo: UNDO_OR_REDO_STATE[]
+  redo: UNDO_OR_REDO_STATE[]
 }

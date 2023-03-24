@@ -11,7 +11,9 @@ import {
   DEL_CARD_TYPE,
   COPY_CARD_TYPE,
   SELECT_ALL_TYPE,
-  CARDS_ALIGN_TYPE
+  CARDS_ALIGN_TYPE,
+  UNDO_TYPE,
+  REDO_TYPE
 } from './type'
 import { CARD_STATE, COORDINATE, EDGES_STATE } from '@src/types'
 
@@ -84,6 +86,16 @@ export interface cardsAlignAction {
   align: string
 }
 
+// 撤销
+export interface undoAction {
+  type: UNDO_TYPE
+}
+
+// 恢复
+export interface redoAction {
+  type: REDO_TYPE
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
   | diagramsAction
@@ -98,3 +110,5 @@ export type ModifyAction =
   | selectAllCardsAction
   | modifyCardsCoordinateAction
   | cardsAlignAction
+  | undoAction
+  | redoAction

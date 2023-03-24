@@ -60,6 +60,21 @@ const Card = memo<ICardProps>(
         <Frame config={config} SelectedCardsIds={SelectedCardsIds} />
         {/* title */}
         <Title config={config} />
+        {/* 入参参数 */}
+        {config.inParams.map((item, index) => (
+          <Text
+            {...textConfig}
+            key={item.id}
+            text={`${item.field}：${item.value || '""'}`}
+            y={
+              TITLE_HEIGHT +
+              (config.ports.some((item) => item.visible)
+                ? PORT_DIMENSION + MARGIN_LEFT * 2
+                : MARGIN_LEFT) +
+              index * PORT_DIMENSION
+            }
+          />
+        ))}
         <Rect
           type='move'
           id={config.id}
@@ -101,21 +116,6 @@ const Card = memo<ICardProps>(
               }
             })
           : null}
-        {/* 入参参数 */}
-        {config.inParams.map((item, index) => (
-          <Text
-            {...textConfig}
-            key={item.id}
-            text={`${item.field}：${item.value || '""'}`}
-            y={
-              TITLE_HEIGHT +
-              (config.ports.some((item) => item.visible)
-                ? PORT_DIMENSION + MARGIN_LEFT * 2
-                : MARGIN_LEFT) +
-              index * PORT_DIMENSION
-            }
-          />
-        ))}
       </Group>
     )
   },
