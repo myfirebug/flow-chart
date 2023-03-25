@@ -1,6 +1,6 @@
 # 基于 React 拖动配置流程图
 
-flow-chart 基于 React+konva+TypeScript 流程图开发，支持新增/编辑卡片，支持动态配置卡片参数表单，支持 GET、POST 接口在线调试等等。
+flow-chart 基于 React+konva+TypeScript 流程图开发，支持新增/编辑卡片，支持动态配置卡片参数表单（即动态配置表单功能），支持 GET、POST 接口在线调试，支持拖动配置流程图，支持拷贝、删除、撤销、恢复、全选、对齐卡片等等。
 
 项目纯前端-Demo 地址：[https://myfirebug.github.io/flow-chart/index.html#/login](https://myfirebug.github.io/flow-chart/index.html#/login)
 
@@ -11,6 +11,7 @@ flow-chart 基于 React+konva+TypeScript 流程图开发，支持新增/编辑�
 ![RUNOOB 图标](https://myfirebug.github.io/example-images/flow-chart/01.png)
 ![RUNOOB 图标](https://myfirebug.github.io/example-images/flow-chart/02.png)
 ![RUNOOB 图标](https://myfirebug.github.io/example-images/flow-chart/03.png)
+
 **新增/编辑流程图图片**
 ![RUNOOB 图标](https://myfirebug.github.io/example-images/flow-chart/04.png)
 
@@ -44,7 +45,7 @@ flow-chart 基于 React+konva+TypeScript 流程图开发，支持新增/编辑�
 | 卡片列表        | 是                                                                                                                                                                                                            |
 | 卡片新增/编辑   | 入参配置（input,textArea, number, pasword, select, checkboxGroup,radioGroup,cascader,switch，date,dateRange,time,timeRange,treeSelect 配置功能开发）置顶、置顶、上移、下移、复制、删除功能开发(正在开发中···) |
 | 流程图列表      | 是                                                                                                                                                                                                            |
-| 流程图新增/编辑 | 否                                                                                                                                                                                                            |
+| 流程图新增/编辑 | 是                                                                                                                                                                                                            |
 
 **已完成的组件**
 
@@ -86,7 +87,7 @@ flow-chart 基于 React+konva+TypeScript 流程图开发，支持新增/编辑�
 # 目录结构
 
 ```
-bigscreen
+flow-chart
 ├── src
 │   ├── assets                       // 静态资源
 │   ├── components                   // 公共组件
@@ -94,6 +95,7 @@ bigscreen
 │   ├── mock                         // 模拟接口
 │   ├── pages                        // 页面
 │   │   ├── card-configuration       // 卡片配置页面
+│   │   ├── diagrams-configuration   // 流程图配置页面
 │   │   ├── frame                    // 框架页面
 │   │   ├── home                     // 首页页面
 │   │   ├── login                    // 登录页面
@@ -106,79 +108,3 @@ bigscreen
 │   ├── utils                        // 工具
 │   └── form                         // 组件及其配置
 ```
-
-# 文件路径依赖引用简写如下
-
-> 如：引入 components/loading 组件方法库路径：import Loading from '@src/components/loading'
-
-```
-'@src': path.resolve(__dirname, 'src'),
-'@assets': path.resolve(__dirname, 'src/assets'),
-'@utils': path.resolve(__dirname, 'src/utils'),
-'@pages': path.resolve(__dirname, 'src/pages'),
-'@service': path.resolve(__dirname, 'src/service'),
-'@types': path.resolve(__dirname, 'src/types'),
-'@store': path.resolve(__dirname, 'src/store')
-```
-
-# 特殊规范
-
-## page 里页面文件夹命名规范
-
-这里必须以`xxx-xxx`方式命令文件夹，每个文件夹里都包含`index.js`,`index.scss`即该文件夹的入口文件
-
-> 比如：`system-management`
-
-```
-├─system-management
-|   ├─dictionary                   // 字典模块
-|   |  └index.tsx                  // 字典模块入口文件
-|   |  └index.scss                 // 字典模块页面样式
-```
-
-## 页面及组件样式规范
-
-- 强制使用`BEM`方式
-  BEM 配置的命名空间统一为后台 简写：app，这里可以在 src/assets/scss/mixin/config.scss 里修改,最好不要修改
-
-## 菜单管理（路由）
-
-> 这里请注意无子路由时，`subResource:[]`,有子路由时`components`麻烦值为空
-
-> 注意这里的`components`找的是 page 文件夹下面的文件
-
-> path 里是必须是一级一级取的，比如系统菜单`/system-management`,订单中心->字典管理`/system-management/├─dictionary`,这主要是为了设置动态面包屑使用
-
-```
-[{
-  "components": "home",
-  "isMemu": 1,
-  "resIcon": "e6fa",
-  "resTitle": "首页",
-  "resUrl": "/home",
-  "status": 1,
-  "subResource": []
-  },
-  {
-  "components": "",
-  "isMemu": 2,
-  "resIcon": "e6fa",
-  "resTitle": "系统管理",
-  "resUrl": "/system-management",
-  "status": 1,
-  "subResource": [{
-    "components": "system-management/dictionary",
-    "isMemu": 1,
-    "resIcon": "",
-    "resTitle": "字典管理",
-    "resUrl": "/system-management/dictionary",
-    "status": 1
-  }]
-}]
-```
-
-## 面包屑
-
-不能自己设置面包屑上的中文
-
-> 直接是根据菜单自动生成的
