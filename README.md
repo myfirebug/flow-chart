@@ -45,7 +45,7 @@ flow-chart 基于 React+konva+TypeScript 流程图开发，支持新增/编辑�
 | 卡片列表        | 是                                                                                                                                                                                                            |
 | 卡片新增/编辑   | 入参配置（input,textArea, number, pasword, select, checkboxGroup,radioGroup,cascader,switch，date,dateRange,time,timeRange,treeSelect 配置功能开发）置顶、置顶、上移、下移、复制、删除功能开发(正在开发中···) |
 | 流程图列表      | 是                                                                                                                                                                                                            |
-| 流程图新增/编辑 | 是                                                                                                                                                                                                            |
+| 流程图新增/编辑 | 支持拷贝、删除、撤销、恢复、全选、对齐卡片、ctrl+单机多选、卡片表参数配置（卡片新增/编辑里的拼入参配置表单使用）                                                                                              |
 
 **已完成的组件**
 
