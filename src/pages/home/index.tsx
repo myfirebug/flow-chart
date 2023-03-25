@@ -3,8 +3,8 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-11 11:11:05
- * @FilePath: \bigscreen\src\pages\home\index.tsx
+ * @LastEditTime: 2023-03-25 10:29:45
+ * @FilePath: \flow-chart\src\pages\home\index.tsx
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
 import { FC, useEffect } from 'react'
@@ -28,7 +28,7 @@ const Home: FC<IHomeProps> = ({ strategy, getStrategy, path }) => {
 
   return (
     <div className='app-screen-home'>
-      <span>欢迎来到大屏后台管理系统</span>
+      <span>欢迎来到流程图后台管理系统</span>
     </div>
   )
 }
