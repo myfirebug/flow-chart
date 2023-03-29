@@ -57,6 +57,10 @@ export type MOVEUP_CARD_FROM_ITEM_TYPE = typeof MOVEUP_CARD_FROM_ITEM
 export const MOVEDOWN_CARD_FROM_ITEM = 'MOVEDOWN_CARD_FROM_ITEM'
 export type MOVEDOWN_CARD_FROM_ITEM_TYPE = typeof MOVEDOWN_CARD_FROM_ITEM
 
+// 修改卡片宽度
+export const MODIFY_CARD_WIDTH = 'MODIFY_CARD_WIDTH'
+export type MODIFY_CARD_WIDTH_TYPE = typeof MODIFY_CARD_WIDTH
+
 export interface ALL_STATE {
   card: CARD_STATE | null
   selectFormItemId: string

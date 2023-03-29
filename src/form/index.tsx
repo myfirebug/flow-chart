@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo } from 'react'
+import { memo, useCallback, useEffect } from 'react'
 import { Form } from 'antd'
 import { IPARAM } from '@src/types'
 // 输入框
@@ -87,6 +87,7 @@ const CustomForm = memo<ICustomFormProps>(
               <CustomInputNumber
                 key={item.id}
                 item={item}
+                changeHandler={changeHandler}
                 selectHandler={selectHandler}
                 selectId={selectId}
               />
@@ -97,6 +98,7 @@ const CustomForm = memo<ICustomFormProps>(
               <CustomSwitch
                 key={item.id}
                 item={item}
+                changeHandler={changeHandler}
                 selectHandler={selectHandler}
                 selectId={selectId}
               />
@@ -110,6 +112,7 @@ const CustomForm = memo<ICustomFormProps>(
                   ...item,
                   params: getParams(item.dependency)
                 }}
+                changeHandler={changeHandler}
                 selectHandler={selectHandler}
                 selectId={selectId}
               />
@@ -123,6 +126,7 @@ const CustomForm = memo<ICustomFormProps>(
                   ...item,
                   params: getParams(item.dependency)
                 }}
+                changeHandler={changeHandler}
                 selectHandler={selectHandler}
                 selectId={selectId}
               />
@@ -136,6 +140,7 @@ const CustomForm = memo<ICustomFormProps>(
                   ...item,
                   params: getParams(item.dependency)
                 }}
+                changeHandler={changeHandler}
                 selectHandler={selectHandler}
                 selectId={selectId}
               />
@@ -149,6 +154,7 @@ const CustomForm = memo<ICustomFormProps>(
                   ...item,
                   params: getParams(item.dependency)
                 }}
+                changeHandler={changeHandler}
                 selectHandler={selectHandler}
                 selectId={selectId}
               />

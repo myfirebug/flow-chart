@@ -19,12 +19,14 @@ interface ICustomInputProps {
     id: string,
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void
+  changeHandler?: (id: string, value: any) => void
   selectId?: string
 }
 
 const CustomInput: FC<ICustomInputProps> = ({
   item,
   selectHandler,
+  changeHandler,
   selectId
 }) => {
   return (
@@ -42,6 +44,9 @@ const CustomInput: FC<ICustomInputProps> = ({
           style={{ width: '100%' }}
           min={item.min}
           max={item.max}
+          onBlur={(e) =>
+            changeHandler && changeHandler(item.id, e.target.value)
+          }
           disabled={item.disabled}
           placeholder={item.placeholder}
         />

@@ -12,12 +12,14 @@ interface ICustomInputProps {
     id: string,
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void
+  changeHandler?: (id: string, value: any) => void
   selectId?: string
 }
 
 const CustomInput: FC<ICustomInputProps> = ({
   item,
   selectHandler,
+  changeHandler,
   selectId
 }) => {
   const data = UseRequest(
@@ -44,7 +46,15 @@ const CustomInput: FC<ICustomInputProps> = ({
         tooltip={item.tooltip}
         required={item.required}
         rules={[{ required: item.require }]}>
-        <Radio.Group disabled={item.disabled}>
+        <Radio.Group
+          disabled={item.disabled}
+          onChange={(e) =>
+            changeHandler &&
+            changeHandler(
+              item.id,
+              data.find((item: any) => item.value === e.target.value)
+            )
+          }>
           {data instanceof Array
             ? data.map((item: any, index) => (
                 <Radio key={index} value={item.value}>

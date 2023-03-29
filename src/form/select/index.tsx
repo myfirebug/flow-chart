@@ -13,12 +13,14 @@ interface ICustomInputProps {
     id: string,
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void
+  changeHandler?: (id: string, value: any) => void
   selectId?: string
 }
 
 const CustomInput: FC<ICustomInputProps> = ({
   item,
   selectHandler,
+  changeHandler,
   selectId
 }) => {
   const data = UseRequest(
@@ -48,6 +50,8 @@ const CustomInput: FC<ICustomInputProps> = ({
         <Select
           allowClear
           disabled={item.disabled}
+          labelInValue
+          onChange={(value) => changeHandler && changeHandler(item.id, value)}
           placeholder={item.placeholder}>
           {data instanceof Array
             ? data.map((item: any, index) => (

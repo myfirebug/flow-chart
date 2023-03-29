@@ -1,3 +1,12 @@
+/*
+ * @Description: 页面描述
+ * @Author: hejp 378540660@qq.com
+ * @Date: 2023-02-28 10:49:44
+ * @LastEditors: hejp 378540660@qq.com
+ * @LastEditTime: 2023-03-29 17:49:00
+ * @FilePath: \flow-chart\src\hooks\useRequest.ts
+ * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
+ */
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { IAnyObject } from '@src/types'
@@ -16,14 +25,12 @@ function UseRequest(props: string) {
         if (confs.isHeader && confs.headerField && confs.headerValue) {
           header[confs.headerField] = confs.headerValue
         }
-        console.log(confs, 'confs')
         axios({
           url: confs.url,
           method: confs.method,
           params: confs.method === 'GET' ? confs.params : null,
           data: confs.method === 'POST' ? confs.params : null
         }).then((res: any) => {
-          console.log(res, '1231')
           if (confs.correspondField && res[confs.correspondField]) {
             setData(res[confs.correspondField])
           } else {

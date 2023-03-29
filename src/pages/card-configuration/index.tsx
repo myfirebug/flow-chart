@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-09 15:22:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-06 19:05:49
+ * @LastEditTime: 2023-03-29 09:14:25
  * @FilePath: \flow-chart\src\pages\card-configuration\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -47,6 +47,7 @@ const stageConfig = {
 
 const Configuration: FC<IConfigurationProps> = () => {
   const [state, dispatch] = useReducer(counter, initialState)
+  console.log(state, 'state')
   // 获取卡片数据
   useEffect(() => {
     // 如果ID存在调用获取卡片详情接口

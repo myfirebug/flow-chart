@@ -43,6 +43,12 @@ const Sittings: FC<ISittingsProps> = () => {
             title: value
           })
           break
+        case 'width':
+          cardConfigurationContent.dispatch({
+            type: 'MODIFY_CARD_WIDTH',
+            width: value
+          })
+          break
         case 'ports':
           cardConfigurationContent.dispatch({
             type: 'MODIFY_CARD_PORTS',
@@ -70,7 +76,7 @@ const Sittings: FC<ISittingsProps> = () => {
             <Input onBlur={(e) => changeHander(e.target.value, 'title')} />
           </Form.Item>
           <Form.Item label='卡片宽度' name='width'>
-            <Input disabled />
+            <Input onBlur={(e) => changeHander(e.target.value, 'width')} />
           </Form.Item>
           <Form.Item name='ports' label='连接点'>
             <Checkbox.Group onChange={(e) => changeHander(e, 'ports')}>

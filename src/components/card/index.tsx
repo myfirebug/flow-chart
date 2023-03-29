@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-15 21:30:33
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-13 15:03:44
+ * @LastEditTime: 2023-03-29 17:46:43
  * @FilePath: \flow-chart\src\components\card\index.tsx
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -65,7 +65,13 @@ const Card = memo<ICardProps>(
           <Text
             {...textConfig}
             key={item.id}
-            text={`${item.field}：${item.value || '""'}`}
+            text={`${item.field}：${
+              typeof item.labelValue !== undefined
+                ? item.labelValue.length > 10
+                  ? `${item.labelValue.slice(0, 10)}...`
+                  : String(item.labelValue) || '""'
+                : '""'
+            }`}
             y={
               TITLE_HEIGHT +
               (config.ports.some((item) => item.visible)

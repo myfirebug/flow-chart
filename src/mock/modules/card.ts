@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-08 19:04:48
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-03-08 21:55:56
+ * @LastEditTime: 2023-03-29 12:12:26
  * @FilePath: \flow-chart\src\mock\modules\card.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -45,7 +45,8 @@ export const cardList = {
               label: '用户名',
               placeholder: '请输入用户名',
               required: false,
-              value: 'hejp'
+              value: 'hejp',
+              labelValue: 'hejp'
             },
             {
               field: 'account',
@@ -53,7 +54,98 @@ export const cardList = {
               label: '账号',
               placeholder: '请输入账号',
               required: false,
-              value: 'myfirebug'
+              value: 'myfirebug',
+              labelValue: 'myfirebug'
+            },
+            {
+              field: 'minor',
+              formType: 'Switch',
+              label: '未成年人',
+              placeholder: '',
+              required: false,
+              value: false,
+              labelValue: false
+            },
+            {
+              field: 'hobby',
+              formType: 'Select',
+              label: '爱好',
+              placeholder: '请选择',
+              required: false,
+              value: '',
+              dataType: 'dynamic',
+              correspondField: 'datas',
+              method: 'GET',
+              mock: [],
+              headerField: '',
+              headerValue: '',
+              url: 'http://localhost:6001/temporary-list',
+              labelValue: ''
+            },
+            {
+              field: 'gender',
+              formType: 'RadioGroup',
+              label: '性别',
+              placeholder: '请选择',
+              required: false,
+              value: 1,
+              dataType: 'mock',
+              correspondField: 'datas',
+              method: 'GET',
+              mock: [
+                { label: '男', value: 1 },
+                { label: '女', value: 2 }
+              ],
+              headerField: '',
+              headerValue: '',
+              url: '',
+              labelValue: '男'
+            },
+            {
+              field: 'subject',
+              formType: 'CheckboxGroup',
+              label: '科目',
+              placeholder: '请选择',
+              required: false,
+              value: [],
+              dataType: 'mock',
+              correspondField: 'datas',
+              method: 'GET',
+              mock: [
+                { label: '语文', value: 1 },
+                { label: '数学', value: 2 },
+                { label: '外语', value: 3 },
+                { label: '政治', value: 4 },
+                { label: '历史', value: 5 },
+                { label: '物理', value: 6 },
+                { label: '化学', value: 7 }
+              ],
+              headerField: '',
+              headerValue: '',
+              url: '',
+              labelValue: ''
+            },
+            {
+              field: 'address',
+              formType: 'Cascader',
+              label: '地址',
+              placeholder: '请选择',
+              required: false,
+              value: [],
+              dataType: 'dynamic',
+              correspondField: 'datas',
+              method: 'GET',
+              mock: [],
+              headerField: '',
+              headerValue: '',
+              url: 'http://localhost:6001//temporary-tree',
+              labelValue: '',
+              fieldNames: {
+                children: 'children',
+                label: 'label',
+                value: 'value'
+              },
+              expandTrigger: 'click'
             }
           ]
         }

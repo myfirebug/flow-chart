@@ -1,3 +1,12 @@
+/*
+ * @Description: 页面描述
+ * @Author: hejp 378540660@qq.com
+ * @Date: 2023-03-04 23:01:05
+ * @LastEditors: hejp 378540660@qq.com
+ * @LastEditTime: 2023-03-29 11:55:02
+ * @FilePath: \flow-chart\src\form\cascader\index.tsx
+ * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
+ */
 import { FC } from 'react'
 import { Cascader, Form } from 'antd'
 import { IPARAM } from '@src/types'
@@ -12,12 +21,14 @@ interface ICustomInputProps {
     id: string,
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void
+  changeHandler?: (id: string, value: any) => void
   selectId?: string
 }
 
 const CustomInput: FC<ICustomInputProps> = ({
   item,
   selectHandler,
+  changeHandler,
   selectId
 }) => {
   const data = UseRequest(
@@ -50,6 +61,14 @@ const CustomInput: FC<ICustomInputProps> = ({
           changeOnSelect={
             item.expandTrigger === 'click' ? item.changeOnSelect : false
           }
+          onChange={(value: any, selectedOptions: any) => {
+            changeHandler &&
+              changeHandler(item.id, {
+                label: selectedOptions.map((item: any) => item.label).join('-'),
+                value: value
+              })
+            console.log(selectedOptions)
+          }}
           fieldNames={item.fieldNames}
           multiple={item.multiple}
           options={data && Array.isArray(data) ? data : []}

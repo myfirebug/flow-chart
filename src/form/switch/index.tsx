@@ -19,12 +19,14 @@ interface ICustomSwitchProps {
     id: string,
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void
+  changeHandler?: (id: string, value: any) => void
   selectId?: string
 }
 
 const CustomSwitch: FC<ICustomSwitchProps> = ({
   item,
   selectHandler,
+  changeHandler,
   selectId
 }) => {
   return (
@@ -39,7 +41,12 @@ const CustomSwitch: FC<ICustomSwitchProps> = ({
         tooltip={item.tooltip}
         required={item.required}
         rules={[{ required: item.require }]}>
-        <Switch disabled={item.disabled} />
+        <Switch
+          disabled={item.disabled}
+          onChange={(value) =>
+            changeHandler && changeHandler(item.id, value)
+          }
+        />
       </Form.Item>
     </FormItemWrap>
   )

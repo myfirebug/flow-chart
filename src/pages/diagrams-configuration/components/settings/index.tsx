@@ -29,6 +29,7 @@ const Setting: FC<ISettingProps> = () => {
   // 处理配置项数据
   const changeHandler = useCallback(
     (id: string, value: any) => {
+      console.log(value, 'value')
       const { cards, selectedCardsIds } = diagramsConfigurationContext.data
       if (selectedCardsIds && !selectedCardsIds.includes(',')) {
         const card = cards.find((item) => item.id === selectedCardsIds)
@@ -41,7 +42,8 @@ const Setting: FC<ISettingProps> = () => {
                 if (item.id === id) {
                   return {
                     ...item,
-                    value: value
+                    value: value.value || value,
+                    labelValue: value.label || value
                   }
                 }
                 return item

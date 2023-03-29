@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2023-02-19 11:29:28
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2023-02-22 10:36:22
+ * @LastEditTime: 2023-03-29 12:02:54
  * @FilePath: \flow-chart\src\pages\card-configuration\store\reducers.ts
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
  */
@@ -27,7 +27,8 @@ import {
   TOP_CARD_FROM_ITEM,
   BOTTOM_CARD_FROM_ITEM,
   MOVEUP_CARD_FROM_ITEM,
-  MOVEDOWN_CARD_FROM_ITEM
+  MOVEDOWN_CARD_FROM_ITEM,
+  MODIFY_CARD_WIDTH
 } from './type'
 import { CARD_STATE, IPORT } from '@src/types'
 
@@ -71,6 +72,9 @@ export const counter = (
       }
     case MODIFY_CARD_TITLE:
       copy.card.title = action.title
+      return copy
+    case MODIFY_CARD_WIDTH:
+      copy.card.width = action.width
       return copy
     case MODIFY_CARD_PORTS:
       copy.card.ports = copy.card.ports.map((item: IPORT) => ({
