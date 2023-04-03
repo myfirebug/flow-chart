@@ -36,7 +36,7 @@ const CustomInput: FC<ICustomInputProps> = ({
     })
   )
 
-  const change = (item: any, checkedValue: CheckboxValueType[]) => {
+  const change = useCallback((item: any, checkedValue: CheckboxValueType[]) => {
     let arr = []
     if (data && item.value) {
       arr = data.filter((sub) => checkedValue.includes(sub.value))
@@ -46,7 +46,7 @@ const CustomInput: FC<ICustomInputProps> = ({
         label: arr.map((item) => item.label).join('，'),
         value: checkedValue
       })
-  }
+  }, [changeHandler, data])
   return (
     <FormItemWrap
       selectHandler={selectHandler}

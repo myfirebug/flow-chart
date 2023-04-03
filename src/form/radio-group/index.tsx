@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Form, Checkbox, Radio } from 'antd'
+import { Form, Radio } from 'antd'
 import { IPARAM } from '@src/types'
 // 自定义表单项盒子
 import FormItemWrap from '../wrap'
